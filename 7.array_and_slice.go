@@ -38,11 +38,11 @@ func main(){
 
 	// intitial style 1
 	var twoDimArray [][]int = [][]int{[]int{1,2,3}, []int{4,5,6}}
-	fmt.Println("intitial style 1:", twoDimArray)
+	fmt.Println("initial style 1:", twoDimArray)
 
 	// intitial style 2
 	twoDimArray_ := [][]int{[]int{1, 2, 3}, []int{4, 5, 6}}
-	fmt.Println("intitial style 2:", twoDimArray_)
+	fmt.Println("initial style 2:", twoDimArray_)
 
 	// 走訪陣列
 	fmt.Println("Basic style:")
