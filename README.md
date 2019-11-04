@@ -4,7 +4,7 @@
 
 今天一早 VSCode 給我推薦安裝了這些包，我要來看他們到底是什麼
 
-```
+```bash
 gocode
   gopkgs
   go-outline
@@ -23,6 +23,15 @@ gocode
   goreturns
   golint
 ```
+
+- 了解 gofmt
+    - 類似於 Python 的 pep
+    - 輸入 $gofmt 會 hang 住
+    - 正確的是 $go fmt *.go 會自動修正 *.go 的格式
+    - 參數 -n -x 沒作用，還沒搞懂問題在哪裡？目前只能透過 git 來觀察 gofmt 到底改了哪些東西
+    - 發現自己不小心加入很多結尾分號，但不影響 go 執行
+    - 這真的是強迫症的懶人好工具
+    
 
 ### 2019.11.1(Fri)
 
