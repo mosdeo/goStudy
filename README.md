@@ -1,6 +1,30 @@
 # LKY's Golang Study
 
-### 2019.11.1
+### 2019.11.5(Mon)
+
+今天一早 VSCode 給我推薦安裝了這些包，我要來看他們到底是什麼
+
+```
+gocode
+  gopkgs
+  go-outline
+  go-symbols
+  guru
+  gorename
+  gotests
+  gomodifytags
+  impl
+  fillstruct
+  goplay
+  godoctor
+  dlv
+  gocode-gomod
+  godef
+  goreturns
+  golint
+```
+
+### 2019.11.1(Fri)
 
 - 編譯語言居然有當直譯用的模式，go run hello.go 就可以用了，太神奇了。這樣不論是在學習或使用都方便很多。
 - Go 語法與 Python 相似的地方很多，寫起來非常像。
