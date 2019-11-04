@@ -24,7 +24,7 @@
     golint
   ```
   
-  ~~結果發現，只要 *.go 存擋，就會自動幫我 gofmt。~~不是 gofmt，因為會沒用到的 import 會被刪除，但我測試一下，發現 gofmt 並不會做這件事。
+  ~~結果發現，只要 *.go 存擋，就會自動幫我 gofmt。~~ 不是 gofmt，因為會沒用到的 import 會被刪除，但我測試一下，發現 gofmt 並不會做這件事。
 
   - 了解 gofmt
     - 類似於 Python 的 pep
