@@ -25,6 +25,6 @@ func Filter(Decider ConditionOfInt, numbers []int) (result []int) {
 func main() {
 	var array = []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-	fmt.Println(Filter(IsEven, array))
-	fmt.Println(Filter(IsOdd, array))
+	fmt.Println(Filter(IsEven, array)) //[0 2 4 6 8]
+	fmt.Println(Filter(IsOdd, array))  //[1 3 5 7 9]
 }
