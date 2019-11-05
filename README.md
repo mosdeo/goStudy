@@ -1,8 +1,12 @@
 # LKY's Golang Study
 
+![](go_learn.png)
+
 ### 2019.11.5(Mon)
 
 - 今天了解 slice 只是單純的 reference，底層依然是 array，所以可以多個 slice 映射到同一個 array 上的任意區段。但不同的 array 就一定是不同的 instance。
+- 了解 定義型態（defined type）與 底層型態（underlying type）
+- function: 函式參考、不定長度參數、自定義函式型與別名
 
 ### 2019.11.5(Mon)
 
