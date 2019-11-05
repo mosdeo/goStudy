@@ -2,7 +2,7 @@
 
 ![](go_learn.png)
 
-### 2019.11.5(Mon)
+### 2019.11.6(Tue))
 
 - 今天了解 slice 只是單純的 reference，底層依然是 array，所以可以多個 slice 映射到同一個 array 上的任意區段。但不同的 array 就一定是不同的 instance。
 - 了解 定義型態（defined type）與 底層型態（underlying type）
