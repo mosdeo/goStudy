@@ -21,4 +21,7 @@ func main() {
 	// assign value at specific index
 	s3 := []int{3: 3, 6: 6, 9: 9}
 	fmt.Println("s3=", s3)
+
+	// see more in「SliceTricks」
+	// https://github.com/golang/go/wiki/SliceTricks
 }
