@@ -8,6 +8,10 @@
 - Closure
   - closure 用過的變數是不是都會變成 static ?
   - 重現「閉包陷阱」
+- LINQ in Golang
+  - LINQ 是在 C# 裡相當好用的東西，可以用簡潔語法避免掉很多又臭又長的迴圈、判斷式，不過 Golang 原生沒有提供類似的好用工具。Github 上有這樣的 Libary，是 Google 員工開發的第三方套件，要來好好的玩一下，順便看作者是如何實作出 Golang 沒有的泛型。
+  - 目前的實現還是不夠完美，可能有點疊床架屋，沒有各種可以直接吐出來的 interface、ToSlice()要傳一個 slice 進去而不是直接吐出來。這裡不知道還沒有讓我提出 Pull Request 的機會？
+  - 熟悉使用需要很熟 Golang interface，這邊我還沒學到，所以用起來蠻卡的。
 
 ### 2019.11.6(Tue)
 
