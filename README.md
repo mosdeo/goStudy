@@ -14,6 +14,7 @@
 - Closure
   - 重現「閉包陷阱」
   - 對閉包(Closure)定義仍不是相當清楚，只是大概知道現象類似 C++ static local variable。
+- 了解外部 import 包使用方法
 - LINQ in Golang
   - LINQ 是在 C# 裡相當好用的東西，可以用簡潔語法避免掉很多又臭又長的迴圈、判斷式，不過 Golang 原生沒有提供類似的好用工具。Github 上有這樣的 Libary，是 Google 員工開發的第三方套件，要來好好的玩一下，順便看作者是如何實作出 Golang 沒有的泛型。
   - 目前的實現還是不夠完美，可能有點疊床架屋，沒有各種可以直接吐出來的 interface、ToSlice()要傳一個 slice 進去而不是直接吐出來。這裡不知道還沒有讓我提出 Pull Request 的機會？
