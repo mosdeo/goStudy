@@ -31,6 +31,7 @@ func main() {
 
 // func foo() {}
 
+// 在函式中建立匿名函式
 func Foo_I_have_an_AnonymousFunction() {
 	var func_ref func() = func() {
 		fmt.Println("This is func_ref()")
