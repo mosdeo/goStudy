@@ -2,6 +2,13 @@
 
 ![](go_learn.png)
 
+### 2019.11.7(Wed)
+
+- 完成 Anonymous Function 練習
+- Closure
+  - closure 用過的變數是不是都會變成 static ?
+  - 重現「閉包陷阱」
+
 ### 2019.11.6(Tue)
 
 - 今天了解 slice 只是單純的 reference，底層依然是 array，所以可以多個 slice 映射到同一個 array 上的任意區段。但不同的 array 就一定是不同的 instance。
