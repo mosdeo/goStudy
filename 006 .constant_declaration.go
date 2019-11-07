@@ -25,6 +25,13 @@ func main() {
 	fmt.Println(c0, c1, c2) //0 1 2
 
 	const (
+		d0 = iota + 1
+		d1
+		d2
+	)
+	fmt.Println(d0, d1, d2) //1 2 3
+
+	const (
 		x0 = 9
 		x1
 		x2
