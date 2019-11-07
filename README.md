@@ -2,6 +2,8 @@
 
 ![](go_learn.png)
 
+---
+
 ### 2019.11.9(Fri)
 
 - 預計到台北參加例行會議
@@ -75,6 +77,8 @@ s3 := make(reflect.TypeOf(s1), len(s1))
 ```
 目前找到的答案看起來很複雜 https://stackoverflow.com/questions/39363798/how-to-create-a-slice-of-variable-type-in-go
     
+
+---
 
 ### 2019.11.1(Fri)
 
