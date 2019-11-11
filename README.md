@@ -2,6 +2,10 @@
 
 ![](go_learn.png)
 
+### Next
+
+- 看 Struct, Interface, Goroutine
+
 ### 2019.11.11(Mon)
 
 - 練習「godoc 註解即文件」
