@@ -9,6 +9,7 @@
 - 心得：
   - 要放在 $GOPATH 或 $GOROOT 底下才有用。要不然放在專案內的 src 底下只是能跟著 main 執行，什麼 go install, go doc 都沒用。
 - 了解 map 基本用法
+- 了解 defer, panic, recover 基本用法，總之就是 golang 的例外處理體系。
 
 ---
 
