@@ -2,6 +2,13 @@
 
 ![](go_learn.png)
 
+### 2019.11.11(Mon)
+
+- 了解「godoc 註解即文件」
+- 了解 go package 管理，順便看如何解決 LeetCode 的 code 放在同一個資料夾底下後出現「found packages ...」的錯誤。
+- 心得：
+  - 要放在 $GOPATH 或 $GOROOT 底下才有用。要不然放在專案內的 src 底下只是能跟著 main 執行，什麼 go install, go doc 都沒用。
+
 ---
 
 ### 2019.11.9(Fri)
@@ -19,7 +26,6 @@
     - 有些題目懂 map 會有比較漂亮的解法
   - Runtime 的部分，同樣程式碼也會經常變來變去，不知道平台有什麼問題？
   - Submission Detail 那邊，不知道怎麼看其他語言的提交結果統計？是要付費版嗎？
-
 
 ### 2019.11.7(Wed)
 
