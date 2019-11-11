@@ -1,3 +1,5 @@
+package myLeetCode
+
 func twoSum(nums []int, target int) []int {
 	var out []int
 	var lengthOfNums = len(nums)
