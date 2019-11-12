@@ -6,6 +6,7 @@ import (
 
 // Go 語言沒有 class，要自定義變數的集合只有 struct，而且方法不能寫在原本的 scope 內，要另外寫。
 type Cat struct {
+	name   string
 	age    int
 	weight int
 	color  string
@@ -41,7 +42,8 @@ func (c Cat) GetColor() string {
 }
 
 func main() {
-	var firstCat Cat = Cat{age: 2, weight: 5, color: "Black"}
+	var firstCat Cat = Cat{name: "firstCat", age: 2, weight: 5, color: "Black"}
+	fmt.Println("I'm", firstCat)
 	fmt.Println(firstCat.Bark())
 	fmt.Printf("I'm %d years old.\n", firstCat.GetAge())
 	fmt.Printf("My skin color is %s .\n", firstCat.GetColor())
@@ -52,4 +54,17 @@ func main() {
 	fmt.Printf("My body weight is %d kg .\n", firstCat.GetWeight())
 	firstCat.SetWeightByPointerMethod(7)
 	fmt.Printf("My body weight is %d kg .\n", firstCat.GetWeight())
+
+	//copy struct
+	copyCat := Cat(firstCat)
+	fmt.Println("firstCat:", firstCat)
+	fmt.Println("copyCat:", copyCat)
+	fmt.Println("Is copyCat == firstCat ?", copyCat == firstCat)
+
+	// Anonymous Struct
+	anonymousStruct := struct {
+		Name string
+		age  int
+	}{Name: "aa", age: -1}
+	fmt.Println(anonymousStruct)
 }
