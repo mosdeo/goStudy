@@ -5,6 +5,7 @@
 ### Next
 
 - 看 Struct, Interface, Goroutine
+- 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
 
 ### 2019.11.11(Mon)
 
