@@ -20,7 +20,7 @@
     - [再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)
     - [Golang method with pointer receiver [duplicate]
 ](https://stackoverflow.com/questions/33936081/golang-method-with-pointer-receiver)
-- A1: 其實 interface method 可以有 pointer receiver，但是呼叫的 struct 本身也要是 pointer type，不可以是 value type。這似乎是 Go 語言設計的防呆防錯安全機制，看[再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)這篇發現的。
+- A1: 其實 interface method 可以有 pointer receiver，但是呼叫的 struct 本身也要是 pointer type，不可以是 value type。這似乎是 Go 語言設計的防呆防錯安全機制，看「[再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)」這篇發現的。
 
 ### 2019.11.12(Tue)
 
