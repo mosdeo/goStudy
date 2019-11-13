@@ -1,6 +1,8 @@
 // Lin Kao Yuan, 2019/11/13(Wed)
-// 以 struct「貓」與「人」分別實現「改變體重」這個 inteface
-// 來練習與示範 interface 的用法
+// 以 struct「貓」與「人」分別實現「改變體重」這個 inteface，
+// 來練習與示範 interface 的用法。
+// 具體效果就是 Cat 與 People 可以被寄託在 type BodyWeightChange 的 reference 上傳遞，傳遞後執行 BodyWeightChange 有的函式。
+// 達成與「繼承」極為相似的效果。
 
 package main
 
