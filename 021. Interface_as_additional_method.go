@@ -36,7 +36,7 @@ type People struct {
 }
 
 //「貓」實現改變體重的 Interface
-func (c Cat) Eat(catFood string) error {
+func (c *Cat) Eat(catFood string) error {
 	if 10 <= c.weight {
 		return fmt.Errorf("已經 %d kg，太胖了不可以再吃", c.weight)
 	}
@@ -45,7 +45,7 @@ func (c Cat) Eat(catFood string) error {
 	return nil
 }
 
-func (c Cat) Excretion() error {
+func (c *Cat) Excretion() error {
 	if 1 >= c.weight {
 		return fmt.Errorf("已經 %d kg，太瘦了不可以再拉", c.weight)
 	}
@@ -55,7 +55,7 @@ func (c Cat) Excretion() error {
 }
 
 //「人」實現改變體重的 Interface
-func (p People) Eat(peopleFood string) error {
+func (p *People) Eat(peopleFood string) error {
 	if 99 <= p.weight {
 		return fmt.Errorf("已經 %d kg，太胖了不可以再吃", p.weight)
 		//這裡若用 fmt.Sprintf() 會被編輯器提醒應該改用 fmt.Errorf()，但硬要用也可以跑。
@@ -67,7 +67,7 @@ func (p People) Eat(peopleFood string) error {
 	return nil
 }
 
-func (p People) Excretion() error {
+func (p *People) Excretion() error {
 	if 1 >= p.weight {
 		return fmt.Errorf("已經 %d kg，太瘦了不可以再上廁所", p.weight)
 	}
@@ -78,14 +78,14 @@ func (p People) Excretion() error {
 
 func main() {
 	fmt.Println("\n========= structs 初始化與狀態展示 =========")
-	var firstCat Cat = Cat{name: "firstCat", weight: 5}
-	var firstPeople People = People{name: "firstPeople", weight: 97}
+	var firstCat *Cat = &Cat{name: "firstCat", weight: 5}
+	var firstPeople *People = &People{name: "firstPeople", weight: 97}
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
 	fmt.Println("\n========= 執行體重增加介面 =========")
-	DoEat(&firstPeople, "肉")
-	DoEat(&firstCat, "肉")
+	DoEat(firstPeople, "肉")
+	DoEat(firstCat, "肉")
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
