@@ -1,4 +1,6 @@
-// 藉由實現
+// Lin Kao Yuan, 2019/11/13(Wed)
+// 藉由實現 sort.Interface 排序中文數字
+// 來練習對現成 library 的擴充
 
 package main
 
