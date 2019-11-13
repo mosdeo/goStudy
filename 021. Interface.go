@@ -1,6 +1,6 @@
+// Lin Kao Yuan, 2019/11/13(Wed)
 // 以 struct「貓」與「人」分別實現「改變體重」這個 inteface
 // 來練習與示範 interface 的用法
-// Lin Kao Yuan, 2019/11/13(Wed)
 
 package main
 
@@ -12,7 +12,7 @@ import (
 type BodyWeightChange interface {
 	Eat() error
 	Excretion() error
-	Test()
+	Test() //沒有實現也不會發生錯誤
 }
 
 // 這是「貓」結構
@@ -69,16 +69,19 @@ func (p *People) Excretion() error {
 }
 
 func main() {
+	fmt.Println("\n========= structs 初始化與狀態展示 =========")
 	var firstCat Cat = Cat{name: "firstCat", weight: 5}
 	var firstPeople People = People{name: "firstPeople", weight: 97}
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
+	fmt.Println("\n========= 執行體重增加介面 =========")
 	firstCat.Eat()
 	firstPeople.Eat()
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
+	fmt.Println("\n========= 執行體重減少介面 =========")
 	firstCat.Excretion()
 	firstCat.Excretion()
 	firstPeople.Excretion()
