@@ -5,22 +5,27 @@
 ### ToDo
 
 - 了解 new 與 make 有哪些不同？
-- 了解 strcut 常出現叫做「receiver」的東西是什麼？
+- 了解 strcut 常出現叫做「receiver」的東西是什麼？似乎是限定的可呼叫型別。
+- 了解關鍵字 fallthrough
 
 ### Next
 
+- type Channel
 - Goroutine
 
 ### 2019.11.13(Wed)
 
-- 練習 Interface 基本用法
+- 練習 Interface 各種用法
   - 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
-- Q1: struct 實現 interface 的型別只能是 func(t T)Foo() 而不是 func(t *T)Foo() 的話，那要怎麼在實現 interface 的方法裡面改變 struct 的自身狀態？
-  - 相關討論：
-    - [再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)
-    - [Golang method with pointer receiver [duplicate]
-](https://stackoverflow.com/questions/33936081/golang-method-with-pointer-receiver)
-- A1: 其實 interface method 可以有 pointer receiver，但是呼叫的 struct 本身也要是 pointer type，不可以是 value type（如果 struct 已經宣告成 value type，那就對 instance 取址再用）。這似乎是 Go 語言設計的防呆防錯安全機制，看「[再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)」這篇發現的。
+  - Q1: struct 實現 interface 的型別只能是 func(t T)Foo() 而不是 func(t *T)Foo() 的話，那要怎麼在實現 interface 的方法裡面改變 struct 的自身狀態？
+    - 相關討論：
+      - [再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)
+      - [Golang method with pointer receiver [duplicate]
+  ](https://stackoverflow.com/questions/33936081/golang-method-with-pointer-receiver)
+  - A1: 其實 interface method 可以有 pointer receiver，但是呼叫的 struct 本身也要是 pointer type，不可以是 value type（如果 struct 已經宣告成 value type，那就對 instance 取址再用）。這似乎是 Go 語言設計的防呆防錯安全機制，看「[再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)」這篇發現的。
+  - 心得：
+    - Go 語言中的 interface 已經取代其他 OO 語言中所有繼承的功能。
+    - type interface{} 相當於 C# 或 Java 中的 type Object，也就是所有型別的頂層型別。
 
 ### 2019.11.12(Tue)
 
