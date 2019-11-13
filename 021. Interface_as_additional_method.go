@@ -78,33 +78,33 @@ func (p *People) Excretion() error {
 
 func main() {
 	fmt.Println("\n========= structs 初始化與狀態展示 =========")
-	var firstCat *Cat = &Cat{name: "firstCat", weight: 5}
+	var firstCat Cat = Cat{name: "firstCat", weight: 5}
 	var firstPeople *People = &People{name: "firstPeople", weight: 97}
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
 	fmt.Println("\n========= 執行體重增加介面 =========")
 	DoEat(firstPeople, "肉")
-	DoEat(firstCat, "肉")
+	DoEat(&firstCat, "肉")
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
 	fmt.Println("\n========= 執行體重減少介面 =========")
-	DoExcretion(firstCat)
-	DoExcretion(firstCat)
+	DoExcretion(&firstCat)
+	DoExcretion(&firstCat)
 	DoExcretion(firstPeople)
 	DoExcretion(firstPeople)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
 	fmt.Println("\n========= 在超過正常體重範圍的邊緣瘋狂試探 =========")
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
-	fmt.Println(DoExcretion(firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
+	fmt.Println(DoExcretion(&firstCat))
 	fmt.Println(DoEat(firstPeople, "肉"))
 	fmt.Println(DoEat(firstPeople, "肉"))
 	fmt.Println(DoEat(firstPeople, "肉"))
