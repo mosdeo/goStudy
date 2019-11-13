@@ -15,6 +15,11 @@
 
 - 練習 Interface 基本用法
   - 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
+- 踩雷：struct 實現 interface 的型別只能是 func(t T)Foo() 而不是 func(t *T)Foo() 的話，那要怎麼在實現 interface 的方法裡面改變 struct 的自身狀態？
+  - 相關討論：
+  - [再议go语言的value receiver和pointer receiver](https://www.jianshu.com/p/d1a9bbd0ae36)
+  - [Golang method with pointer receiver [duplicate]
+](https://stackoverflow.com/questions/33936081/golang-method-with-pointer-receiver)
 
 ### 2019.11.12(Tue)
 
