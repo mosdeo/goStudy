@@ -2,10 +2,23 @@
 
 ![](go_learn.png)
 
+### ToDo
+
+- 了解 new 與 make 有哪些不同？
+- 了解 strcut 常出現叫做「receiver」的東西是什麼？
+
 ### Next
 
-- 看 Struct, Interface, Goroutine
-- 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
+- Goroutine
+
+### 2019.11.13(Wed)
+
+- 練習 Interface 基本用法
+  - 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
+
+### 2019.11.12(Tue)
+
+- 練習 Struct 基本用法
 
 ### 2019.11.11(Mon)
 
