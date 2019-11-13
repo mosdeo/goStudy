@@ -10,7 +10,7 @@ import (
 
 // 這是改變體重的 Interface
 type BodyWeightChange interface {
-	Eat() error
+	Eat(anyFood string) error
 	Excretion() error
 	Test() //沒有實現也不會發生錯誤
 }
@@ -28,11 +28,11 @@ type People struct {
 }
 
 //「貓」實現改變體重的 Interface
-func (c *Cat) Eat() error {
+func (c *Cat) Eat(catFood string) error {
 	if 10 <= c.weight {
 		return fmt.Errorf("已經 %d kg，太胖了不可以再吃", c.weight)
 	}
-	fmt.Printf("%s Eat() 吃了飼料\n", c.name)
+	fmt.Printf("%s Eat() 吃了飼料, 裡面有:%s\n", c.name, catFood)
 	c.weight++
 	return nil
 }
@@ -76,7 +76,7 @@ func main() {
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
 	fmt.Println("\n========= 執行體重增加介面 =========")
-	firstCat.Eat()
+	firstCat.Eat("肉")
 	firstPeople.Eat()
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
