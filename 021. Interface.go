@@ -4,12 +4,15 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 這是改變體重的 Interface
 type BodyWeightChange interface {
-	Eat() int
-	Excretion() int
+	Eat() error
+	Excretion() error
+	Test()
 }
 
 // 這是「貓」結構
@@ -25,34 +28,49 @@ type People struct {
 }
 
 //「貓」實現改變體重的 Interface
-func (c *Cat) Eat() int {
-	fmt.Printf("%s Eat() 吃飼料\n", c.name)
+func (c *Cat) Eat() error {
+	if 10 <= c.weight {
+		return fmt.Errorf("已經 %d kg，太胖了不可以再吃", c.weight)
+	}
+	fmt.Printf("%s Eat() 吃了飼料\n", c.name)
 	c.weight++
-	return c.weight
+	return nil
 }
 
-func (c *Cat) Excretion() int {
-	fmt.Printf("%s Excretion() 拉在貓沙上\n", c.name)
+func (c *Cat) Excretion() error {
+	if 1 >= c.weight {
+		return fmt.Errorf("已經 %d kg，太瘦了不可以再拉", c.weight)
+	}
+	fmt.Printf("%s Excretion() 拉完在貓沙上\n", c.name)
 	c.weight--
-	return c.weight
+	return nil
 }
 
 //「人」實現改變體重的 Interface
-func (p *People) Eat() int {
-	fmt.Printf("%s Eat() 吃便當\n", p.name)
+func (p *People) Eat() error {
+	if 99 <= p.weight {
+		return fmt.Errorf("已經 %d kg，太胖了不可以再吃", p.weight)
+		//這裡若用 fmt.Sprintf() 會被編輯器提醒應該改用 fmt.Errorf()，但硬要用也可以跑。
+		//等等來看看有什麼差別
+		//懂了，原來是 errors.New(fmt.Sprintf()) == fmt.Errorf()
+	}
+	fmt.Printf("%s Eat() 吃了便當\n", p.name)
 	p.weight++
-	return p.weight
+	return nil
 }
 
-func (p *People) Excretion() int {
-	fmt.Printf("%s Excretion() 去上廁所\n", p.name)
+func (p *People) Excretion() error {
+	if 1 >= p.weight {
+		return fmt.Errorf("已經 %d kg，太瘦了不可以再上廁所", p.weight)
+	}
+	fmt.Printf("%s Excretion() 上完廁所\n", p.name)
 	p.weight--
-	return p.weight
+	return nil
 }
 
 func main() {
 	var firstCat Cat = Cat{name: "firstCat", weight: 5}
-	var firstPeople People = People{name: "firstPeople", weight: 20}
+	var firstPeople People = People{name: "firstPeople", weight: 97}
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
 
@@ -67,4 +85,18 @@ func main() {
 	firstPeople.Excretion()
 	fmt.Printf("I'm %s, my body weight is %d\n", firstCat.name, firstCat.weight)
 	fmt.Printf("I'm %s, my body weight is %d\n", firstPeople.name, firstPeople.weight)
+
+	fmt.Println("\n========= 在超過範圍的邊緣瘋狂試探 =========")
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstCat.Excretion())
+	fmt.Println(firstPeople.Eat())
+	fmt.Println(firstPeople.Eat())
+	fmt.Println(firstPeople.Eat())
+	fmt.Println(firstPeople.Eat())
+	fmt.Println(firstPeople.Eat())
 }
