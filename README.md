@@ -5,13 +5,18 @@
 ### ToDo
 
 - 了解 new 與 make 有哪些不同？
+- 了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。
 - 了解 strcut 常出現叫做「receiver」的東西是什麼？似乎是限定的可呼叫型別。
 - 了解關鍵字 fallthrough
 
 ### Next
 
-- type Channel
-- Goroutine
+### 2019.11.14(Thu)
+
+- 練習 Interface 轉換與組合
+- 練習 Goroutine
+  - sync.WaitGroup
+  - Channel，執行結果有點不如預期，應該還有什麼沒搞懂。
 
 ### 2019.11.13(Wed)
 
