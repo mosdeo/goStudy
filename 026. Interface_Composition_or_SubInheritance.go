@@ -2,31 +2,31 @@ package main
 
 import "fmt"
 
-type I父 interface {
-	Func父()
+type IBase interface {
+	FuncBase()
 }
-type I子 interface {
-	I父
-	Func子()
+
+type IDerivative interface {
+	IBase //內嵌基礎介面
+	FuncDerivative()
 }
 
 type Subject struct {
 }
 
-func (s Subject) Func父() {
-	fmt.Println("Func父()")
-}
+// 註解掉這個函式宣告，就會無法通過編譯
+// 出現「*Subject does not implement IDerivative (missing FuncBase method)」
+// 證明 strcut 一但實作衍生介面，就同時受到內嵌的基礎介面約束。
+// 若要滿足這個約束，就必須聯同內嵌的基礎介面一起實作。
+// func (s Subject) FuncBase() {
+// 	fmt.Println("FuncBase()")
+// }
 
-func (s Subject) Func子() {
-	fmt.Println("Func子()")
+func (s Subject) FuncDerivative() {
+	fmt.Println("FuncDerivative()")
 }
 
 func main() {
-
-	//由多入少
-	var obj子 I子 = &Subject{}
-	obj子.Func父()
-
-	var obj父 I父 = obj子
-	obj父.Func父()
+	var refDerivative IDerivative = &Subject{}
+	refDerivative.FuncDerivative()
 }
