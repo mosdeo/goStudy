@@ -11,6 +11,10 @@
 
 ### Next
 
+- Channel
+  - sync.Mutx
+  - close, range, select
+
 ### 2019.11.14(Thu)
 
 - 練習 Interface 轉換與組合
@@ -20,7 +24,7 @@
 
 ### 2019.11.13(Wed)
 
-- 練習 Interface 各種用法
+- 練習 Interface 各種花式用法
   - 這一篇是我覺得把 Interface in golang 解釋得比較清楚的 https://yami.io/golang-interface/ 
   - Q1: struct 實現 interface 的型別只能是 func(t T)Foo() 而不是 func(t *T)Foo() 的話，那要怎麼在實現 interface 的方法裡面改變 struct 的自身狀態？
     - 相關討論：
