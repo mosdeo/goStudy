@@ -14,10 +14,17 @@
 - Channel
   - sync.Mutx
   - close, range, select
+  - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
+- 內建 Testing 模式
+
+### 2019.11.15(Fri)
+
 
 ### 2019.11.14(Thu)
 
 - 練習 Interface 轉換與組合
+  - 轉換：Go 對 interface 採用「鴨子型別」：interface cast 只看方法、不看名稱，只要「新參考方法集合 ∈ 舊參考方法集合」就可以轉換。
+  - 組合：介面的內嵌介面，會與介面本身產生同等約束效果，因此要連帶將內嵌介面一併實作才行。
 - 練習 Goroutine
   - sync.WaitGroup
   - Channel，執行結果有點不如預期，應該還有什麼沒搞懂。
