@@ -14,6 +14,7 @@ type IDerivative interface {
 type Subject struct {
 }
 
+// ==== 組合(類繼承)約束 ====
 // 註解掉這個函式宣告，就會無法通過編譯
 // 出現「*Subject does not implement IDerivative (missing FuncBase method)」
 // 證明 strcut 一但實作衍生介面，就同時受到內嵌的基礎介面約束。
