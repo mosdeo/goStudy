@@ -19,6 +19,10 @@
 
 ### 2019.11.15(Fri)
 
+- 為什麼放了這麼多東西進去 chan 變數，還是 len=0？這樣我測量不到未被消費的元素數量啊
+  - 可能是沒有搞懂 buffered 跟 unbuffered channel 的差異：
+    - [Golang buffered/unbuffer channel and pipeline](https://www.evanlin.com/til-buffered-channel/)
+    - [用五分鐘了解什麼是 unbuffered vs buffered channel](https://blog.wu-boy.com/2019/04/understand-unbuffered-vs-buffered-channel-in-five-minutes/)
 
 ### 2019.11.14(Thu)
 
