@@ -16,6 +16,7 @@
   - close, range, select
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
 - 內建 Testing 模式
+- 了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。
 
 ### 2019.11.15(Fri)
 
@@ -33,6 +34,7 @@
     - Buffered Channel 才有比較大的彈性，不會被一吞接一吐的順序限制卡死。
     - 另外發現1：Buffered 還是有可能會發生 deadlock 的情況：channel 放不下放不完 & 消費者尚未啟動。
     - 另外發現2：沒有平行化的情況下，對 channel 都不用取，光是放就會 deadlock。
+- Channel、Select、defer 混搭使用，還是會有非預期現象，需要繼續搞懂。
 
 ### 2019.11.14(Thu)
 
