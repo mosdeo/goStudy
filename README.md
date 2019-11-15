@@ -19,14 +19,18 @@
 
 ### 2019.11.15(Fri)
 
-- Q1:為什麼放了這麼多東西進去 chan 變數，還是 len=0？這樣我測量不到未被消費的元素數量啊
+- Q1:為什麼放了這麼多東西進去 chan 變數，還是 len=0？這樣我測量不到未被消費的元素數量啊。
 - Q2:是不是使用到 Channel 型別參數的函式，就會被當成 goroutine？我的函式呼叫了 chan 型別，不加上 go 修飾詞就會跑出「all goroutines are asleep - deadlock!」這個錯誤。
 - A1&A2:可能是沒有搞懂 buffered 跟 unbuffered channel 的差異：
   - [Golang buffered/unbuffer channel and pipeline](https://www.evanlin.com/til-buffered-channel/)
   - [用五分鐘了解什麼是 unbuffered vs buffered channel](https://blog.wu-boy.com/2019/04/understand-unbuffered-vs-buffered-channel-in-five-minutes/)
   - 弄懂了 Channel 在 buffered 跟 unbuffered 的差異
     - Unbuffered Channel 只能存放一個元素所以 size = 0（為什麼不能是 1 ?）
-    - Buffered Channel 才有比較大的彈性，不會被一吞接一吐的順序限制卡死。 
+      - TG 群問答：
+        - 孝玠 蔡：「unbuffered channel 不能存放噢」
+        - 我：「如果不能存放的話，那在「放」跟「取」中間的時間差，這一個元素去哪裡了？」
+        - 孝玠 蔡：「沒有放進去噢，取跟放是同時發生的，那個時間差，其實放的程式碼是卡住的」
+    - Buffered Channel 才有比較大的彈性，不會被一吞接一吐的順序限制卡死。
     - 並發現了 Buffered 還是有可能會發生 deadlock 的情況：channel 放不下放不完 & 消費者尚未啟動。
 
 ### 2019.11.14(Thu)
