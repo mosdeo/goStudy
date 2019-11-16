@@ -1,6 +1,6 @@
 # LKY's Golang Study
 
-![](go_learn.png)
+<img align="right" src="go_learn.png">
 
 ### ToDo
 
