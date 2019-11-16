@@ -21,7 +21,7 @@
 
 ### 2019.11.16(Sat)
 
-- ~~抓取空的 channel 並不一定會 deadlock，要 channel 沒有 close 才會。~~（好像不對，需要再釐清）
+- 抓取空的 channel 並不一定會 deadlock，要 「channel 沒有 close」且「佔據 main」 才會。放在 goroutine 裡面怎麼卡都可以，main 一結束就會自然釋放。
 - 了解 Select Case 的行為細節：
   - Closed Channel > default > Open Channel，如果多個 Closed Channel 就隨機分配。
 - 嘗試 goroutine 的 closure trap、race codition、佔用記憶體測量。
