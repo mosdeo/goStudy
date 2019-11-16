@@ -13,10 +13,20 @@
 
 - Channel
   - sync.Mutx
-  - close, range, select
+  - close, range
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
+    - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 模式
-- 了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。
+- ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
+
+### 2019.11.16(Sat)
+
+- ~~抓取空的 channel 並不一定會 deadlock，要 channel 沒有 close 才會。~~（好像不對，需要再釐清）
+- 了解 Select Case 的行為細節：
+  - Closed Channel > default > Open Channel，如果多個 Closed Channel 就隨機分配。
+- 嘗試 goroutine 的 closure trap、race codition、佔用記憶體測量。
+- 了解 Go 語言從傳統 lock-unlock 的 critical section 控制，過渡到 goroutine-channel 的模型演變，中間有一個「M:N 調度器」的實作。
+  - thread 比 goroutine 更輕量嗎？
 
 ### 2019.11.15(Fri)
 
