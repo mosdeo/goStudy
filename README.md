@@ -11,13 +11,19 @@
 
 ### Next
 
+- 了解防止 goroutine 洩漏、or-channel
 - Channel
-  - sync.Mutx
+  - sync.Mutx（應該可以跳過，再看看）
   - close, range
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
+
+### 2019.11.18(Mon)
+
+- 了解 channel 用法中的「特定約束 VS 詞法約束」
+- for-select 優先順序
 
 ### 2019.11.16(Sat)
 
