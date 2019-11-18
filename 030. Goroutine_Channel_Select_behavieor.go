@@ -40,10 +40,12 @@ func DemoSelectIsRandomToEashCase() {
 			// 	// CloseChannels(c1, c2)
 			// }
 		default:
+			// 若其他 channel 都尚未關閉，就會跳到這裡來
 			defaultCount++
 			if 600 == i {
 				CloseChannels(c1, c2)
-				fmt.Printf("c1Count:%d, c2Count:%d, defaultCount:%d\n", c1Count, c2Count, defaultCount)
+				fmt.Printf("c1Count:%d, c2Count:%d, defaultCount:%d. ", c1Count, c2Count, defaultCount)
+				fmt.Printf("c1 and c2 closed\n")
 			}
 		}
 	}
