@@ -13,21 +13,21 @@ func PrintNumGoroutine() {
 }
 
 func main() {
-	var termsNum float64 = 1E99
+	var termsNum float64 = 1E11
 	var startTime, endTime time.Time
 
 	startTime = time.Now()
-	PIbyGoroutine(termsNum)
+	CalcPiByGoroutine(termsNum)
 	endTime = time.Now()
-	fmt.Println("PIbyGoroutine() Spent time:", endTime.Sub(startTime))
+	fmt.Println("CalcPiByGoroutine() Spent time:", endTime.Sub(startTime))
 
 	startTime = time.Now()
-	PI(termsNum)
+	CalcPi(termsNum)
 	endTime = time.Now()
-	fmt.Println("PI()\t Spent time:", endTime.Sub(startTime))
+	fmt.Println("CalcPi()            Spent time:", endTime.Sub(startTime))
 }
 
-func PIbyGoroutine(numOfTrem float64) {
+func CalcPiByGoroutine(numOfTrem float64) {
 	fmt.Println("runtime.NumCPU:", runtime.NumCPU())
 	var SqrtPiDivieBy6 float64
 	partSumStream := make(chan float64, runtime.NumCPU())
@@ -66,7 +66,7 @@ func PIbyGoroutine(numOfTrem float64) {
 	fmt.Printf("Pi=%f\n", pi)
 }
 
-func PI(numOfTrem float64) {
+func CalcPi(numOfTrem float64) {
 	var SqrtPiDivieBy6 float64
 
 	for i := 1.0; i <= numOfTrem; i++ {
