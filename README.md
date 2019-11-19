@@ -6,12 +6,11 @@
 
 - 了解 new 與 make 有哪些不同？
 - 了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。
-- 了解 strcut 常出現叫做「receiver」的東西是什麼？似乎是限定的可呼叫型別。
 - 了解關鍵字 fallthrough
 
 ### Next
 
-- 了解防止 goroutine 洩漏、or-channel
+- or-channel
 - Channel
   - sync.Mutx（應該可以跳過，再看看）
   - close, range
@@ -19,6 +18,16 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
+
+### 2019.11.19(Tue)
+
+- 嘗試 goroutine leak
+- Channel 關閉(close)的原則
+  - 不要在消費者端關閉
+  - 不要在尚存多並行生產者的時候關閉
+  - 應該只在「唯一且最後」的生產者 goroutine 中關閉
+  - [參考資料：如何优雅的关闭Go Channel【译】](https://zhuanlan.zhihu.com/p/32529039)
+- 寫一個計算圓周率的程式，比較單一與多 goroutine 計算所需時間，發現 1 VS 4 最多也只能把時間縮短到 48%
 
 ### 2019.11.18(Mon)
 
