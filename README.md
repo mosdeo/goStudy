@@ -23,6 +23,8 @@
 
 - 感覺目前有點碰壁，先從頭閱讀[官方文件 Goroutine 章節](https://golang.org/doc/effective_go.html#goroutines)，但還是有些地方...有看沒有懂。
   - [Channels of channels](https://golang.org/doc/effective_go.html#chan_of_chan)這部分很難，看不懂在說什麼，程式範例也不完整，有沒宣告的變數不知道怎麼跑。
+- 自己評估目前缺乏遇到 Concurrency 問題的經驗，所以看到進階的 goroutine 才會看不懂在講什麼，目前可能只有 pipeline 我比較看得懂。
+- LeetCode 上面有 Concurrency 的挑戰，我覺得這是一個培養問題經驗很好的切入點，但點進去看發現還沒有 Go 語言的。
 
 ### 2019.11.19(Tue)
 
