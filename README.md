@@ -19,6 +19,11 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.11.20(Wed)
+
+- 感覺目前有點碰壁，先從頭閱讀[官方文件 Goroutine 章節](https://golang.org/doc/effective_go.html#goroutines)，但還是有些地方...有看沒有懂。
+  - [Channels of channels](https://golang.org/doc/effective_go.html#chan_of_chan)這部分很難，看不懂在說什麼，程式範例也不完整，有沒宣告的變數不知道怎麼跑。
+
 ### 2019.11.19(Tue)
 
 - 嘗試 goroutine leak
