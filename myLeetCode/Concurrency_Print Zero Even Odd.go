@@ -14,8 +14,6 @@ type ZeroEvenOdd struct {
 	streamOddToZero  chan interface{}
 	streamZeroToEven chan interface{}
 	streamZeroToOdd  chan interface{}
-	// streamBreakFlag  chan interface{}
-	isZeroReturned bool
 }
 
 func (this *ZeroEvenOdd) SetWaitGroup(wg *sync.WaitGroup) {
@@ -33,19 +31,22 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 			this.streamZeroToOdd <- nil
 		}
 	}
+
+	// fmt.Println("Colsed streamZeroToOdd, streamZeroToOdd")
 	// fmt.Println("Zero() Done")
-	this.isZeroReturned = true
 	this.wg.Done()
 }
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 
 	for i := 2; i <= this.n; i += 2 {
-		<-this.streamZeroToEven
-		printNumber(i)
-		if !this.isZeroReturned {
-			// 確保發送之前消費者還存活著
-			this.streamEvenToZero <- nil
+		select {
+		case <-this.streamZeroToEven:
+			printNumber(i)
+			this.streamEvenToZero <- nil //
+		default:
+			// fmt.Println("default")
+			i -= 2
 		}
 	}
 
@@ -54,18 +55,14 @@ func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 }
 
 func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
-	// defer func() { this.breakFlag = true }() // 通知其他兩個 goroutine 結束
-
 	for i := 1; i <= this.n; i += 2 {
-		<-this.streamZeroToOdd
-		printNumber(i)
-		if !this.isZeroReturned {
-			// 確保發送之前消費者還存活著
-			// 這裡還是有點危險，有可能判斷的時候存活、要寫入 channel 的時候卻已經結束
-			// 需要加上延遲確保流程上萬無一失
-			// time.Sleep(time.Duration(100 * time.Millisecond))
-			// 加上好像也沒差？
+		select {
+		case <-this.streamZeroToOdd:
+			printNumber(i)
 			this.streamOddToZero <- nil
+		default:
+			// fmt.Println("default")
+			i -= 2
 		}
 	}
 
@@ -81,10 +78,10 @@ func main() {
 	testNum, _ := strconv.Atoi(os.Args[1])
 	var zeo = &ZeroEvenOdd{
 		n:                testNum,
-		streamEvenToZero: make(chan interface{}),
-		streamOddToZero:  make(chan interface{}),
-		streamZeroToEven: make(chan interface{}),
-		streamZeroToOdd:  make(chan interface{}),
+		streamEvenToZero: make(chan interface{}, 1),
+		streamOddToZero:  make(chan interface{}, 1),
+		streamZeroToEven: make(chan interface{}, 1),
+		streamZeroToOdd:  make(chan interface{}, 1),
 	}
 
 	//設定同步
@@ -92,9 +89,7 @@ func main() {
 	zeo.SetWaitGroup(wg)
 
 	wg.Add(3)
-	go func() {
-		zeo.streamEvenToZero <- nil
-	}()
+	go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
 	go zeo.Zero(PrintNumber)
 	go zeo.Even(PrintNumber)
 	go zeo.Odd(PrintNumber)
