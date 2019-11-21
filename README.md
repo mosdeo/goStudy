@@ -19,6 +19,12 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.11.21(Thu)
+
+- 嘗試做兩題 LeetCode in Concurrency
+  - 要求是任意順序呼叫多個函式，但是要以相同順序執行。
+  - 要求三個 goroutine 以 1 2 1 3 ...(repeat) 的順序輸出到特定次數。
+
 ### 2019.11.20(Wed)
 
 - 感覺目前有點碰壁，先從頭閱讀[官方文件 Goroutine 章節](https://golang.org/doc/effective_go.html#goroutines)，但還是有些地方...有看沒有懂。
