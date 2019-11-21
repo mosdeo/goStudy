@@ -24,6 +24,7 @@
 - 嘗試做兩題 LeetCode in Concurrency
   - 要求是任意順序呼叫多個函式，但是要以相同順序執行。
   - 要求三個 goroutine 以 1 2 1 3 ...(repeat) 的順序輸出到特定次數。
+    - 這一題有循環交接棒，但是在程式結尾交棒(send to channel)的時候，消費者 goroutine 已經結束造成 deadlock 的問題，最後是把 chan 改成 len=1 的 buffered chan 就解決了 XD 因為這樣就不用面對消費者消失的問題。但這樣也讓我懷疑 unbuffered chan 是否有不可取代性？是不是都可以用 len=1 的 buffered chan 取代？
 
 ### 2019.11.20(Wed)
 
