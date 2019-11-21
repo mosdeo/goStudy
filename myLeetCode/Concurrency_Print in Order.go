@@ -9,21 +9,21 @@ import (
 )
 
 func First(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
-	fmt.Printf("First ")
+	fmt.Printf("Running:First,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
 	streamSync[0] <- nil
 	wg.Done()
 }
 
 func Second(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
 	<-streamSync[0]
-	fmt.Printf("Second ")
+	fmt.Printf("Running:Second,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
 	streamSync[1] <- nil
 	wg.Done()
 }
 
 func Third(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
 	<-streamSync[1]
-	fmt.Printf("Third ")
+	fmt.Printf("Running:Third,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
 	wg.Done()
 }
 
@@ -57,13 +57,12 @@ func PrintInOrde(callOrder [3]int) {
 	//依照輸入順序呼叫 goroutine
 	wg := &sync.WaitGroup{}
 	for _, fNum := range inputCallOrder {
-		fmt.Println("Call:", GetValueName(functionNumTable[fNum]))
 		wg.Add(1)
 		go functionNumTable[fNum](wg, streamSync)
+		fmt.Printf("Called:%v,\tNumber of Goroutine:%v\n", GetValueName(functionNumTable[fNum]), runtime.NumGoroutine())
 	}
 
 	wg.Wait()
-	fmt.Println()
 }
 
 func main() {
