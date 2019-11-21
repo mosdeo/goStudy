@@ -9,21 +9,21 @@ import (
 )
 
 func First(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
-	fmt.Printf("First")
+	fmt.Printf("First ")
 	streamSync[0] <- nil
 	wg.Done()
 }
 
 func Second(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
 	<-streamSync[0]
-	fmt.Printf("Second")
+	fmt.Printf("Second ")
 	streamSync[1] <- nil
 	wg.Done()
 }
 
 func Third(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
 	<-streamSync[1]
-	fmt.Printf("Third")
+	fmt.Printf("Third ")
 	wg.Done()
 }
 
@@ -81,5 +81,6 @@ func main() {
 		PrintInOrde(theCase)
 		endTime := time.Now()
 		fmt.Printf("Case %v Spent time:%v\n", theCase, endTime.Sub(startTime))
+		fmt.Println()
 	}
 }
