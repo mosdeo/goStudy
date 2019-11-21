@@ -14,8 +14,8 @@ type ZeroEvenOdd struct {
 	streamOddToZero  chan interface{}
 	streamZeroToEven chan interface{}
 	streamZeroToOdd  chan interface{}
-	streamBreakFlag  chan interface{}
-	breakFlag        bool
+	// streamBreakFlag  chan interface{}
+	isZeroReturned bool
 }
 
 func (this *ZeroEvenOdd) SetWaitGroup(wg *sync.WaitGroup) {
@@ -23,8 +23,6 @@ func (this *ZeroEvenOdd) SetWaitGroup(wg *sync.WaitGroup) {
 }
 
 func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
-	defer this.wg.Done()
-
 	for i := 0; i < this.n; i++ {
 		select {
 		case <-this.streamOddToZero:
@@ -33,52 +31,45 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 		case <-this.streamEvenToZero:
 			printNumber(0)
 			this.streamZeroToOdd <- nil
-		case <-this.streamBreakFlag:
-			fmt.Println("Zero() Done")
-			goto RETURN
-		default:
-			i--
-			// 	if this.breakFlag {
-			// 		break
-			// 	}
 		}
 	}
-RETURN:
+	// fmt.Println("Zero() Done")
+	this.isZeroReturned = true
+	this.wg.Done()
 }
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
-	// defer func() { this.breakFlag = true }() // 通知其他兩個 goroutine 結束
 
-	for i := 1; i <= this.n; i += 2 {
+	for i := 2; i <= this.n; i += 2 {
 		<-this.streamZeroToEven
-		if this.breakFlag {
-			break
-		}
 		printNumber(i)
-		this.streamEvenToZero <- nil
+		if !this.isZeroReturned {
+			// 確保發送之前消費者還存活著
+			this.streamEvenToZero <- nil
+		}
 	}
 
-	this.streamBreakFlag <- nil
-	this.streamBreakFlag <- nil
-	fmt.Println("Even() Done")
+	// fmt.Println("Even() Done")
 	this.wg.Done()
 }
 
 func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
 	// defer func() { this.breakFlag = true }() // 通知其他兩個 goroutine 結束
 
-	for i := 2; i <= this.n; i += 2 {
+	for i := 1; i <= this.n; i += 2 {
 		<-this.streamZeroToOdd
-		if this.breakFlag {
-			break
-		}
 		printNumber(i)
-		this.streamOddToZero <- nil
+		if !this.isZeroReturned {
+			// 確保發送之前消費者還存活著
+			// 這裡還是有點危險，有可能判斷的時候存活、要寫入 channel 的時候卻已經結束
+			// 需要加上延遲確保流程上萬無一失
+			// time.Sleep(time.Duration(100 * time.Millisecond))
+			// 加上好像也沒差？
+			this.streamOddToZero <- nil
+		}
 	}
 
-	this.streamBreakFlag <- nil
-	this.streamBreakFlag <- nil
-	fmt.Println("Odd() Done")
+	// fmt.Println("Odd() Done")
 	this.wg.Done()
 }
 
@@ -102,7 +93,7 @@ func main() {
 
 	wg.Add(3)
 	go func() {
-		zeo.streamOddToZero <- nil
+		zeo.streamEvenToZero <- nil
 	}()
 	go zeo.Zero(PrintNumber)
 	go zeo.Even(PrintNumber)
