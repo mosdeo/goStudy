@@ -22,12 +22,15 @@
 ### 2019.11.22(Fri)
 
 - 跟 TG 群討論測試前一天  LeetCode in Concurrency 更好的解法
-  - 「Print Zero-Even-Odd」：能不能用 unbuffered chan 解？可能是無解。
-    - 理由：若使用 unbuffered chan，收與送的 goroutine 兩邊都用 select 會導致兩邊都不走 case，只走 default，結果等於 deadlock。
   - 「Print in order」
     - 群友提供更好解法
       1. 所有 goroutine 都是依照一個鍊執行，所以不用設置 syncWatiGroup，多用一個 unbuffered chan recevier 卡住 main goroutine，等待最後一個完成就好。
       2. interface{} 本質上是一個 struct + 2個pointer，所以對於「只在乎收發、不在乎內容」的 channel 傳遞來說，直接使用 chan struct{} 可能會比官方慣用的 interface{} 更輕量。
+  - 「Print Zero-Even-Odd」：能不能用 unbuffered chan 解？可能是無解。
+    - 理由：若使用 unbuffered chan，收與送的 goroutine 兩邊都用 select 會導致兩邊都不走 case，只走 default，結果等於 deadlock。
+    - 有群友說應該要「執行完才開始關閉各個worker，不是每個worker覺得沒事了就自行關閉」，但我還不知道怎麼做？
+
+- 做了一題「Print FooBar Alternately」感覺還是遇到老問題。
 
 ### 2019.11.21(Thu)
 
