@@ -19,6 +19,16 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.11.22(Fri)
+
+- 跟 TG 群討論測試前一天  LeetCode in Concurrency 更好的解法
+  - 「Print Zero-Even-Odd」：能不能用 unbuffered chan 解？可能是無解。
+    - 理由：若使用 unbuffered chan，收與送的 goroutine 兩邊都用 select 會導致兩邊都不走 case，只走 default，結果等於 deadlock。
+  - 「Print in order」
+    - 群友提供更好解法
+      1. 所有 goroutine 都是依照一個鍊執行，所以不用設置 syncWatiGroup，多用一個 unbuffered chan recevier 卡住 main goroutine，等待最後一個完成就好。
+      2. interface{} 本質上是一個 struct + 2個pointer，所以對於「只在乎收發、不在乎內容」的 channel 傳遞來說，直接使用 chan struct{} 可能會比官方慣用的 interface{} 更輕量。
+
 ### 2019.11.21(Thu)
 
 - 嘗試做兩題 LeetCode in Concurrency
