@@ -1,9 +1,10 @@
+// LeetCode in Coucurrency：Print Zero Even Odd
+// Solution by unbuffered chan, without time delay.
+
 package main
 
 import (
 	"fmt"
-	"os"
-	"strconv"
 	"sync"
 )
 
@@ -21,6 +22,9 @@ func (this *ZeroEvenOdd) SetWaitGroup(wg *sync.WaitGroup) {
 }
 
 func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
+	defer this.wg.Done()
+	//defer fmt.Println("Zero() Done")
+
 	for i := 0; i < this.n; i++ {
 		select {
 		case <-this.streamOddToZero:
@@ -29,45 +33,41 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 		case <-this.streamEvenToZero:
 			printNumber(0)
 			this.streamZeroToOdd <- nil
+		default:
+			i--
 		}
 	}
 
-	// fmt.Println("Colsed streamZeroToOdd, streamZeroToOdd")
-	// fmt.Println("Zero() Done")
-	this.wg.Done()
+	if 0 == this.n%2 {
+		<-this.streamEvenToZero //等待 Even() 結束，自己再結束
+	} else {
+		<-this.streamOddToZero //等待 Odd() 結束，自己再結束
+	}
 }
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
+	defer this.wg.Done()
 
-	for i := 2; i <= this.n; i += 2 {
-		select {
-		case <-this.streamZeroToEven:
-			printNumber(i)
-			this.streamEvenToZero <- nil //
-		default:
-			// fmt.Println("default")
-			i -= 2
-		}
+	evenUpper := this.n - this.n%2
+	// fmt.Println("evenUpper:", evenUpper)
+	for i := 2; i <= evenUpper; {
+		<-this.streamZeroToEven
+		printNumber(i)
+		i += 2
+		this.streamEvenToZero <- nil
 	}
-
-	// fmt.Println("Even() Done")
-	this.wg.Done()
 }
 
 func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
-	for i := 1; i <= this.n; i += 2 {
-		select {
-		case <-this.streamZeroToOdd:
-			printNumber(i)
-			this.streamOddToZero <- nil
-		default:
-			// fmt.Println("default")
-			i -= 2
-		}
-	}
+	defer this.wg.Done()
 
-	// fmt.Println("Odd() Done")
-	this.wg.Done()
+	oddUpper := ((this.n + 1) - (this.n+1)%2) - 1
+	// fmt.Println("oddUpper:", oddUpper)
+	for i := 1; i <= oddUpper; i += 2 {
+		<-this.streamZeroToOdd
+		printNumber(i)
+		this.streamOddToZero <- nil
+	}
 }
 
 func PrintNumber(x int) {
@@ -75,24 +75,32 @@ func PrintNumber(x int) {
 }
 
 func main() {
-	testNum, _ := strconv.Atoi(os.Args[1])
-	var zeo = &ZeroEvenOdd{
-		n:                testNum,
-		streamEvenToZero: make(chan interface{}, 1),
-		streamOddToZero:  make(chan interface{}, 1),
-		streamZeroToEven: make(chan interface{}, 1),
-		streamZeroToOdd:  make(chan interface{}, 1),
+	testCases := []int{0, 1, 2, 3, 7, 10, 11, 13, 14}
+
+	var PrintZeroEvenOdd = func(testNum int) {
+		var zeo = &ZeroEvenOdd{
+			n:                testNum,
+			streamEvenToZero: make(chan interface{}),
+			streamOddToZero:  make(chan interface{}),
+			streamZeroToEven: make(chan interface{}),
+			streamZeroToOdd:  make(chan interface{}),
+		}
+
+		//設定同步
+		wg := &sync.WaitGroup{}
+		zeo.SetWaitGroup(wg)
+
+		wg.Add(3)
+		go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
+		go zeo.Zero(PrintNumber)
+		go zeo.Even(PrintNumber)
+		go zeo.Odd(PrintNumber)
+		wg.Wait()
+		fmt.Println()
 	}
 
-	//設定同步
-	wg := &sync.WaitGroup{}
-	zeo.SetWaitGroup(wg)
-
-	wg.Add(3)
-	go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
-	go zeo.Zero(PrintNumber)
-	go zeo.Even(PrintNumber)
-	go zeo.Odd(PrintNumber)
-	wg.Wait()
-	fmt.Println()
+	for _, testNum := range testCases {
+		fmt.Printf("Case %d: ", testNum)
+		PrintZeroEvenOdd(testNum)
+	}
 }
