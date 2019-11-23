@@ -19,9 +19,16 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.11.23(Sat)
+
+- 整理 TG 群友提供「Print Zero-Even-Odd」的 unbuffered 解法：
+  1. 不用 default，用 case <-time.After: 取代，避免收送都在 default 沒有前進。
+  2. 把原本提早結束的 goroutine for-select 多跑一圈，變成最後結束的，並且在 send 之前根據次數判斷是否 return，這個 goroutine 就可以負責殿後，其他先結束的 goroutine 就不會發生消費者消失 send 不出去的 deadlock。
+  3. 自己改寫一版不用 <-time.After 之類的 delay 寫法。不過在 [playgroud](https://play.golang.org/p/eV8IZQk-3gE) 上面會發生「Program exited: process took too long.」
+
 ### 2019.11.22(Fri)
 
-- 跟 TG 群討論測試前一天  LeetCode in Concurrency 更好的解法
+- 跟 TG 群討論測試前一天 LeetCode in Concurrency 更好的解法
   - 「Print in order」
     - 群友提供更好解法
       1. 所有 goroutine 都是依照一個鍊執行，所以不用設置 syncWatiGroup，多用一個 unbuffered chan recevier 卡住 main goroutine，等待最後一個完成就好。
