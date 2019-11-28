@@ -19,6 +19,10 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.11.28(Thu)
+
+- 完成「哲學家吃飯」的 goroutine-channel 實現。
+
 ### 2019.11.23(Sat)
 
 - 整理 TG 群友提供「Print Zero-Even-Odd」的 unbuffered 解法：
