@@ -26,24 +26,24 @@ func (this *DiningPhilosophers) WantToEat(philosopher int, pickLeftFork func(int
 	for {
 		select {
 		case this.streamForks[leftNum] <- philosopher: //嘗試拿起左邊叉子
-			PickLeftFork(philosopher)
+			PickLeftFork(philosopher) //成功拿起左邊叉子
 			select {
 			case this.streamForks[rightNum] <- philosopher: //嘗試拿起右邊叉子
-				PickRightFork(philosopher)
-				Eat(philosopher) //左右邊都拿到了，開始吃
+				PickRightFork(philosopher) //成功拿起又邊叉子
+				Eat(philosopher)           //左右邊都拿到了，開始吃
 				//吃完了，放下左右邊叉子
 				<-this.streamForks[leftNum]
 				PutLeftFork(philosopher)
 				<-this.streamForks[rightNum]
 				PutRightFork(philosopher)
 				return //吃飽離開
-			default:
+			default: //無法拿起右邊叉子
 				fmt.Printf("Philosopher %d can't pick fork %d.\n", philosopher, rightNum)
-				//把拿起來的左邊叉子釋放出去
+				//把已經拿起來的左邊叉子釋放出去
 				<-this.streamForks[leftNum]
 				PutLeftFork(philosopher)
 			}
-		default:
+		default: //無法拿起左邊叉子
 			fmt.Printf("Philosopher %d can't pick fork %d.\n", philosopher, leftNum)
 		}
 		Think()
