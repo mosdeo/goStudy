@@ -33,7 +33,7 @@ func main() {
 	}
 
 	http.HandleFunc("/concurrencyExam", PrintNumGoroutine)
-	err := http.ListenAndServe(":9093", nil)
+	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
