@@ -23,6 +23,7 @@
 
 - 再了解 Server-Client 建立 socket 的 Http Server 通訊架構、不同路由嘗試。
 - 嘗試用 PostMan 打出多個 request，觀察 http server resopnse 是否 concurrency？goroutine 的數量是否如預期變化？
+- 完成表單輸入初步練習
 
 ### 2019.11.29(Fri)
 
