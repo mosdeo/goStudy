@@ -19,6 +19,11 @@
 - 內建 Testing 模式
 - ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
 
+### 2019.12.3(Thu)
+
+- 再了解 Server-Client 建立 socket 的 Http Server 通訊架構、不同路由嘗試。
+- 嘗試用 PostMan 打出多個 request 的 concurrency 測試。
+
 ### 2019.11.29(Fri)
 
 - 初步嘗試 Go 語言的 http server。
