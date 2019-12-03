@@ -42,7 +42,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", sayHelloName) //設定存取的路由
 	http.HandleFunc("/login", Login)   //設定存取的路由
-	err := http.ListenAndServe(":9093", nil)
+	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
