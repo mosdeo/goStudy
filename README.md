@@ -5,11 +5,6 @@
 ### ToDo
 
 - 了解 new 與 make 有哪些不同？
-- 了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。
-- 了解關鍵字 fallthrough
-
-### Next
-
 - or-channel
 - Channel
   - sync.Mutx（應該可以跳過，再看看）
@@ -17,13 +12,20 @@
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 模式
-- ~~了解 https method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。~~
+
+### 2019.12.4(Wed)
+
+- 消化 Todo
+  - 了解 http method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。
+  - fallthrough 是在 go 預設會跳出的 switch-case 中強破網下面的 case 繼續跑，因此不能用在最後一個 case。
+  - A:了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。 Q:有 receiver 的稱 method
 
 ### 2019.12.3(Thu)
 
 - 再了解 Server-Client 建立 socket 的 Http Server 通訊架構、不同路由嘗試。
-- 嘗試用 PostMan 打出多個 request，觀察 http server resopnse 是否 concurrency？goroutine 的數量是否如預期變化？
+- 嘗試用 PostMan 打出多個 request，觀察 http server response 是否 concurrency？goroutine 的數量是否如預期變化？
 - 完成表單輸入初步練習
+- 表單檢查
 
 ### 2019.11.29(Fri)
 
