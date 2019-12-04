@@ -17,10 +17,9 @@
 
 - 消化 Todo
   - 了解 http method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。
-  - fallthrough 是在 go 預設會跳出的 switch-case 中強破網下面的 case 繼續跑，因此不能用在最後一個 case。
+  - fallthrough 是在 go 預設會跳出的 switch-case 中強迫繼續往下面的 case 繼續跑，因此不能用在最後一個 case。
   - A:了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。 Q:有 receiver 的稱 method
 - 完成表單輸入細項檢查練習。
-- 
 
 ### 2019.12.3(Thu)
 
