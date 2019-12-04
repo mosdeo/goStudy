@@ -19,6 +19,8 @@
   - 了解 http method 必需要 goroutine 的一些初步簡單用法，希望能順便加入未來一週的練習中。
   - fallthrough 是在 go 預設會跳出的 switch-case 中強破網下面的 case 繼續跑，因此不能用在最後一個 case。
   - A:了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。 Q:有 receiver 的稱 method
+- 完成表單輸入細項檢查練習。
+- 
 
 ### 2019.12.3(Thu)
 
@@ -26,6 +28,17 @@
 - 嘗試用 PostMan 打出多個 request，觀察 http server response 是否 concurrency？goroutine 的數量是否如預期變化？
 - 完成表單輸入初步練習
 - 表單檢查
+
+### WakaTime Summary in November
+
+```
+golang_study	14 hrs 28 mins
+golang_study	50 hrs 36 mins
+golang_study	62 hrs 7 mins
+golang_study	35 hrs 51 mins
+golang_study	11 hrs 31 mins
+```
+總計 11 月共學習 Go 語言 174 小時
 
 ### 2019.11.29(Fri)
 
