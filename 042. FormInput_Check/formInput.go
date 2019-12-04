@@ -34,11 +34,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		err := r.ParseForm()
 		if nil == err {
 			//開始各項欄位檢查
-			if "" == r.Form.Get("username") {
-				msg := "username欄位不存在"
-				fmt.Println(msg)
-				fmt.Fprintln(w, msg)
-			}
 			if 0 == len(r.Form["username"][0]) {
 				msg := "沒有輸入 username"
 				fmt.Println(msg)
@@ -46,14 +41,20 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			}
 
 			//	檢查年齡欄位
-			getAge, err := strconv.Atoi(r.Form.Get("age"))
-			if nil != err {
-				fmt.Println(err)
-				fmt.Fprintln(w, err)
+			strAge := r.Form.Get("age")
+			if "" == strAge {
+				fmt.Println("沒有輸入年齡")
+				fmt.Fprintln(w, "沒有輸入年齡")
 			} else {
-				msg := fmt.Sprintf("年齡是:%d\n", getAge)
-				fmt.Println(msg)
-				fmt.Fprintln(w, msg)
+				getAge, err := strconv.Atoi(strAge)
+				if nil != err {
+					fmt.Println(err)
+					fmt.Fprintln(w, err)
+				} else {
+					msg := fmt.Sprintf("年齡是:%d\n", getAge)
+					fmt.Println(msg)
+					fmt.Fprintln(w, msg)
+				}
 			}
 
 			// 檢查是否為中文字
@@ -92,16 +93,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				"banana": struct{}{},
 			}
 			MultiSelectionCheck("fruit", "下拉式功能選單-水果", dropDownList)
-			// _, ok := list[r.Form.Get("fruit")]
-			// if ok {
-			// 	msg := fmt.Sprintf("下拉式選單選了 %v\n", r.Form.Get("fruit"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// } else {
-			// 	msg := fmt.Sprintf("選項 %v 不在選單中\n", r.Form.Get("fruit"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// }
 
 			// 必須選項按鈕
 			radioBoxList := map[string]struct{}{
@@ -109,16 +100,6 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				"F": struct{}{},
 			}
 			MultiSelectionCheck("gender", "必須選項按鈕-性別", radioBoxList)
-			// _, ok := list[r.Form.Get("gender")]
-			// if ok {
-			// 	msg := fmt.Sprintf("選項按鈕選了 %v\n", r.Form.Get("gender"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// } else {
-			// 	msg := fmt.Sprintf("選項 %v 不在選單中\n", r.Form.Get("gender"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// }
 
 			// 核取按鈕
 			checkBoxList := map[string]struct{}{
@@ -126,18 +107,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				"interest1": struct{}{},
 				"interest2": struct{}{},
 			}
-			fmt.Fprintf(w, "r.Form[\"interest\"]=%s", r.Form["interest"])
 			MultiSelectionCheck("interest", "核取按鈕-興趣", checkBoxList)
-			// _, ok := list[r.Form.Get("interest")]
-			// if ok {
-			// 	msg := fmt.Sprintf("核取按鈕選了 %v\n", r.Form.Get("interest"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// } else {
-			// 	msg := fmt.Sprintf("選項 %v 不在選單中\n", r.Form.Get("interest"))
-			// 	fmt.Println(msg)
-			// 	fmt.Fprintln(w, msg)
-			// }
 
 			// 日期和時間
 
