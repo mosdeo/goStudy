@@ -11,7 +11,7 @@
   - close, range
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
     - chan return ok 應該是代表 close 與否，待驗證。
-- 內建 Testing 模式
+- 內建 Testing 進階。
 
 ### 2019.12.4(Wed)
 
@@ -20,6 +20,7 @@
   - fallthrough 是在 go 預設會跳出的 switch-case 中強迫繼續往下面的 case 繼續跑，因此不能用在最後一個 case。
   - A:了解 func 與 method 有哪些不同？在 Go 裡面好像分得很清楚。 Q:有 receiver 的稱 method
 - 完成表單輸入細項檢查練習。
+- 入門 Go 內建的單元測試。
 
 ### 2019.12.3(Thu)
 
