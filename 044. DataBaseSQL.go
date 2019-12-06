@@ -82,7 +82,20 @@ func main() {
 	}
 
 	//刪除資料
-	//還沒有打
+	stmt, err = db.Prepare("DELETE FROM users WHERE id=7810")
+	checkErr(err)
+	fmt.Println(stmt)
+	fmt.Println("=NULL:", err)
+
+	res, err = stmt.Exec()
+	checkErr(err)
+
+	affect, err = res.RowsAffected()
+	checkErr(err)
+
+	fmt.Println(affect)
+
+	db.Close()
 }
 
 func checkErr(err error) {
