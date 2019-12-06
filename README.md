@@ -13,6 +13,14 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.6(Fri)
+
+- 記錄一下怎麼解從 MySQL 讀取時間的坑：
+  1. 用 rows.Scan(&v)，從 timestamp(6) 讀進 Go 的型別是 []uint8
+  2. []uint8 強迫轉 string
+  3. t, err := time.Parse("2006-01-02 15:04:05", string([]uint8))
+    - 第一個參數「"2006-01-02 15:04:05"」是格式，不是值。
+
 ### 2019.12.5(Thu)
 
 - trace 書上對 DB CURD 範例的 code，了解每一行的動作、參數。
