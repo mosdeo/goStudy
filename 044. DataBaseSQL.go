@@ -63,6 +63,7 @@ func main() {
 			switch v := iTimeStamp.(type) {
 			case []uint8:
 				t, _ := time.Parse("2006-01-02 15:04:05", string(v))
+				//t, _ := time.Parse("yyyy-MM-dd hh:mm:ss", string(v)) //沒用
 				fmt.Printf("%v, %v, %v, %v, %v, %v\n", id, username, age, sex, t, reflect.TypeOf(v))
 			case time.Time:
 				fmt.Printf("%v, %v, %v, %v, %v, %v\n", id, username, age, sex, v, reflect.TypeOf(v))
