@@ -23,6 +23,7 @@
   - 不好解的問題在於 Go 的 time pkg 有很多時間格式的標準，偏偏「“2006-01-02 15:04:05”」這個格式沒有，也沒有類似 C# 可以丟一個 “yyyy-MM-dd hh:mm:ss” 去解的 Parser。Go 的 time.Parse() 認不出 “yyyy-MM-dd hh:mm:ss” 是一個格式，但是卻可以把 “2006-01-02 15:04:05" 當作是一種格式，匪夷所思。
   - 官方參考說明：https://github.com/go-sql-driver/mysql#timetime-support
 - 了解「NULL=NULL is NULL」，在 SQL 中對 NULL 應該用 IS 或 IS NOT 作為運算子。
+- 完成瀏覽器頁面上對 DB 新增與查詢
 
 ### 2019.12.5(Thu)
 
