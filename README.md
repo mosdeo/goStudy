@@ -13,6 +13,12 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.5(Thu)
+
+- trace 書上對 DB CURD 範例的 code，了解每一行的動作、參數。
+  - 狀況：*Rows.Scan() 發生 converting NULL to string is unsupported
+    - 解法：NULL 在 Go 裡面預設會返回 nil，所以要用 interface{} 去接。
+
 ### 2019.12.4(Wed)
 
 - 消化 Todo
@@ -23,7 +29,7 @@
 - 入門 Go 內建的單元測試。
 - 了解 MySQL 基本安裝、建立表。 
 
-### 2019.12.3(Thu)
+### 2019.12.3(Tue)
 
 - 再了解 Server-Client 建立 socket 的 Http Server 通訊架構、不同路由嘗試。
 - 嘗試用 PostMan 打出多個 request，觀察 http server response 是否 concurrency？goroutine 的數量是否如預期變化？
