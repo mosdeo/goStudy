@@ -37,17 +37,17 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func ShowUI(w http.ResponseWriter, uri string) {
 	// 顯示查詢選項介面
-	t, _ := template.ParseFiles("045. Operator_CURD_on_page/" + uri)
+	t, _ := template.ParseFiles("045. Operator_CURD_on_HTML/" + uri)
 	t.Execute(w, nil)
 }
 
-func query(w http.ResponseWriter, r *http.Request) {
+func Read(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		ShowUI(w, "query.gtpl")
+		ShowUI(w, "read.gtpl")
 	}
 
 	if r.Method == "POST" {
-		ShowUI(w, "query.gtpl")
+		ShowUI(w, "read.gtpl")
 
 		// 若要求查詢，處理查詢的邏輯判斷
 		err := r.ParseForm()
@@ -87,16 +87,17 @@ func query(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func add(w http.ResponseWriter, r *http.Request) {
+func Create(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		ShowUI(w, "add.gtpl")
+		ShowUI(w, "create.gtpl")
 	}
 
 	if r.Method == "POST" {
-		ShowUI(w, "add.gtpl")
+		ShowUI(w, "create.gtpl")
 
 		err := r.ParseForm()
 		if nil == err {
+			//獲取欄位上輸入的資料
 			username := r.Form.Get("username")
 			age, _ := strconv.Atoi(r.Form.Get("age"))
 			sex := r.Form.Get("sex")
@@ -121,11 +122,73 @@ func add(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func Update(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		ShowUI(w, "update.gtpl")
+	}
+
+	if r.Method == "POST" {
+		ShowUI(w, "update.gtpl")
+
+		err := r.ParseForm()
+		if nil == err {
+			var id = r.Form.Get("id")
+			var new_username = r.Form.Get("new_username")
+
+			db, err := sql.Open("mysql", "root:password@/sreetchat?charset=utf8mb4")
+			checkErr(err)
+
+			stmt, err := db.Prepare("Update users SET username=? WHERE id=?")
+			checkErr(err)
+
+			result, err := stmt.Exec(new_username, id)
+			checkErr(err)
+			fmt.Fprintf(w, "Update result=%s\n", result)
+
+			affect, err := result.RowsAffected()
+			checkErr(err)
+
+			fmt.Println(affect)
+		}
+	}
+}
+
+func Delete(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		ShowUI(w, "delete.gtpl")
+	}
+
+	if r.Method == "POST" {
+		ShowUI(w, "delete.gtpl")
+
+		err := r.ParseForm()
+		if nil == err {
+			var id = r.Form.Get("id")
+			db, err := sql.Open("mysql", "root:password@/sreetchat?charset=utf8mb4")
+			checkErr(err)
+
+			stmt, err := db.Prepare("DELETE FROM users WHERE id=" + id)
+			checkErr(err)
+
+			result, err := stmt.Exec()
+			checkErr(err)
+			fmt.Fprintf(w, "Delete result=%s\n", result)
+
+			affect, err := result.RowsAffected()
+			checkErr(err)
+
+			fmt.Println(affect)
+		}
+	}
+}
+
 func main() {
 	//設定存取的路由
 	http.HandleFunc("/", index)
-	http.HandleFunc("/query", query)
-	http.HandleFunc("/add", add)
+	http.HandleFunc("/create", Create)
+	http.HandleFunc("/read", Read)
+	http.HandleFunc("/update", Update)
+	http.HandleFunc("/delete", Delete)
 
 	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
