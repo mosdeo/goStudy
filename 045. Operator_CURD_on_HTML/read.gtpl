@@ -3,7 +3,7 @@
 <title></title>
 </head>
 <body>
-<form action="http://localhost:9090/query" method="post">
+<form action="http://localhost:9090/read" method="post">
     username:<input type="text" name="username">
     age大於:<input type="text" name="ageLower">
     age小於:<input type="text" name="ageUpper">

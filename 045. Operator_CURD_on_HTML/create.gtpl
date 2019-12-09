@@ -3,7 +3,7 @@
 <title></title>
 </head>
 <body>
-<form action="http://localhost:9090/add" method="post">
+<form action="http://localhost:9090/create" method="post">
     username:<input type="text" name="username">
     age:<input type="text" name="age">
     性別:
