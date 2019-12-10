@@ -17,6 +17,24 @@
 
 - 開始使用 Gin 框架，將之前寫的 http server 改用 Gin 框架重做一遍。
 
+基本修改套路：
+
+原生方法:
+```go
+func Read(w http.ResponseWriter, r *http.Request) {
+
+}
+```
+
+Gin 框架:
+```go
+func Read(c *gin.Context) {
+	r := c.Request
+	w := c.Writer
+}
+```
+
+
 ### 2019.12.9(Mon)
 
 - 完成瀏覽器頁面上對 DB 刪除與修改。
