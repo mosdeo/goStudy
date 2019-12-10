@@ -22,15 +22,14 @@
 原生方法:
 ```go
 func Read(w http.ResponseWriter, r *http.Request) {
-
 }
 ```
 
 Gin 框架:
 ```go
 func Read(c *gin.Context) {
-	r := c.Request
-	w := c.Writer
+  w := c.Writer
+  r := c.Request
 }
 ```
 
