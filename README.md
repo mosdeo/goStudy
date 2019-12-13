@@ -17,6 +17,19 @@
 
 - 把 session 的 [hello world 範例](https://gowebexamples.com/sessions/)跑起來了。
 - 接下來把 Gin 的 API Examples 看完，但遇到前端的部分（例如 HTML 或 Bind 相關部分）可跳過。
+  - 今天有 run 起來體驗過的部分條列（「項目名稱」: 我個人的理解）
+    - 「Using GET,POST,PUT,PATCH,DELETE and OPTIONS」: 如何設定常用 http request 的路由。
+    - 「Parameters in path」: 如何將 URI 多層路徑當作變數？像是 shopee.tw/mosdeo 這樣，GET, POST 皆可用。
+    - 「Querystring parameters」: 用 querystring 的格式讀取變數，並且可以設定預設值，GET 限定。
+    - 「Multipart/Urlencoded Form」: 如何寫入 JSON 到 response body。
+    - 「Another example: query + post form」: 同時在 querystring 與 post body 中的 form-data 中取出變數。
+    - 「Map as querystring or postform parameters」: 將 map 格式的 querystring 或 postbody 當作 mapVar[key]=value，直接解析在 server 得到 map 變數。
+    - 「Upload files」:上傳單一檔案、同時上傳多個檔案。
+    - 「Grouping routes」: 將 URI 群組設定成一個物件，再把子路由當成變數傳進去。
+    - 「Using middleware」: 不使用 Gin 預設的 router，使用自訂的 Logger(), Recovery() 等等
+      - [AuthRequired() 的範例](https://github.com/gin-gonic/gin/issues/147#issue-48533347)
+      - 這邊有點看不懂 authorized.Use(AuthRequired()) 如何起驗證作用？
+    - 「How to write log file」: 把 Gin 預設的 log 寫入到 Server 端檔案中。
 
 ### 2019.12.12(Thu)
 
