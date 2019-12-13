@@ -13,11 +13,20 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.13(Fri)
+
+- 把 session 的 [hello world 範例](https://gowebexamples.com/sessions/)跑起來了。
+- 接下來把 Gin 的 API Examples 看完，但遇到前端的部分（例如 HTML 或 Bind 相關部分）可跳過。
+
+### 2019.12.12(Thu)
+
+- 嘗試 session
+
 ### 2019.12.11(Wed)
 
 - 嘗試用 JavaScript 把 form POST 出去，但是一直碰壁沒成功。
 
-### 2019.12.10(Thu)
+### 2019.12.10(Tue)
 
 - 開始使用 Gin 框架，將之前寫的 http server 改用 Gin 框架重做一遍。
 
