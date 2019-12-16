@@ -13,6 +13,16 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.16(Mon)
+
+- 繼續把 Gin 的 API Examples 看完，但遇到前端的部分（例如 HTML 或 Bind 相關部分）可跳過。
+  - 今天有 run 起來體驗過的部分條列（「項目名稱」: 我個人的理解）
+    - 「Custom Log Format」: 自訂 Log 格式，但不用重寫整個 Logger。
+    - 「Controlling Log output coloring」: 取消或啟用 Log 輸出的顏色。
+    - 「Model binding and validation」: 展示用 XML, Form, JSON 三種 POST body 格式登入。
+    - 「Custom Validators」: 透過 Bind 直接把含有日期的 querystring 吃進包有 time.Time 的 struct，並以 Gin 內建的 Bind 驗證引擎 (binding.Validator.Engine) 同時做完日期先後合理性驗證。
+      - 這個範例跑不起來，嘗試修復並[提出一個 Pull Rqeuest](https://github.com/gin-gonic/examples/pull/25)
+
 ### 2019.12.13(Fri)
 
 - 把 session 的 [hello world 範例](https://gowebexamples.com/sessions/)跑起來了。
