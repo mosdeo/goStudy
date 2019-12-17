@@ -13,6 +13,15 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.17(Tue)
+
+- [提出一個 PR](https://github.com/gin-gonic/gin/pull/2186)把昨天修正的例子更新到 README，並修正原本錯誤的測試用日期。
+- 繼續把 Gin 的 API Examples 看完
+  - 今天有 run 起來體驗過的部分條列（「項目名稱」: 我個人的理解）
+  - 「Only Bind Query String」: 看不出 only 的意涵在哪裡？反正就是給一個 function 一次註冊所有 http 路由。
+  - 「Bind Query String or Post Data」：將 querystring 轉換到預先定義好配合的 struct 中。
+- 發現 Gin 大量使用 struct tag 這種語法，但是在 Go 教學文章裡幾乎沒看過，所以先暫停 Gin，來熟悉這個語法。
+
 ### 2019.12.16(Mon)
 
 - 繼續把 Gin 的 API Examples 看完，但遇到前端的部分（例如 HTML 或 Bind 相關部分）可跳過。
