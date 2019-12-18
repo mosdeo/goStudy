@@ -4,7 +4,6 @@
 
 ### ToDo
 
-- 了解 new 與 make 有哪些不同？
 - or-channel
 - Channel
   - sync.Mutx（應該可以跳過，再看看）
@@ -12,6 +11,20 @@
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
+
+### 2019.12.18(Wed)
+
+- 解 TODO: 了解 new 與 make 有哪些不同？
+  - 底層型別使用 new，高階型別使用 make。[參考資料](https://github.com/unknwon/the-way-to-go_ZH_CN/blob/master/eBook/16.4.md)
+- 之前推 Gin 的兩個 PR 都已經合併到 master。
+- 結束 Struct Tag 練習。
+- 繼續把 Gin 的 API Examples 看完
+  - 「Bind Uri」: 透過 struct tag 中的 "uuid" 關鍵字，達成在 binding 同時驗證傳來的變數是否為合格 uuid。
+  - 「Bind Header」: 跟前面是一樣的套路，只是改從 Header 取 key-value pairs。
+  - 「Bind HTML checkboxes」: 跟前面是一樣的套路，只是改從 Form POST checkboxes to Struct。
+  - 「Multipart/Urlencoded binding」: 同時吃變數＆完成檔案上傳。
+  - 「XML, JSON, YAML and ProtoBuf rendering」: 把這些常見資料類型轉換至 http response body。
+- 初步大致了解 Protobuf 格式。因 Ryan 說近期半年不會用到，所以就沒仔細看用法。
 
 ### 2019.12.17(Tue)
 
@@ -21,6 +34,7 @@
   - 「Only Bind Query String」: 看不出 only 的意涵在哪裡？反正就是給一個 function 一次註冊所有 http 路由。
   - 「Bind Query String or Post Data」：將 querystring 轉換到預先定義好配合的 struct 中。
 - 發現 Gin 大量使用 struct tag 這種語法，但是在 Go 教學文章裡幾乎沒看過，所以先暫停 Gin，來熟悉這個語法。
+  - struct tag 看得我有點眼花，摸不清楚規則。剛剛才發現，如何解析 struct tag 好像是各個 package 自行定義，語法本身不做解析？
 
 ### 2019.12.16(Mon)
 
