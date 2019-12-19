@@ -12,6 +12,21 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.19(Thu)
+
+- 繼續把 Gin 的 API Examples 看完
+  - 「Serving static files」: 設定靜態檔案或靜態目錄的對應路由，也就是傳統入門做網頁的那種方式，直接讓瀏覽器去開某個目錄下的網頁。這邊文件或變數命名都不是很清楚，我的理解是 func（URI, 本機路徑）。
+  - 「Serving data from reader」: 將路由指向某個檔案，在瀏覽器就是下載的效果。
+  - 「HTML rendering」: 跳過。
+  - 「Multitemplate」: 看不懂什麼意思？也沒程式碼，跳過。
+  - 「Redirects」: 就是一般講的轉網址，也可以從「路由a」轉到「路由b」
+  - 「Custom Middleware」: 用預先建立的 key-value 產生 log？
+  - 「Using BasicAuth() middleware」: 看很久還是看不懂，官方文件在這項寫得太草率，看[這邊](https://blog.csdn.net/puss0/article/details/81003400)寫得比較清楚。就是那種會跳出一個小灰窗的帳號密碼驗證、或在 URL 明確帶入帳號密碼、也可以在 request head 自帶 base64 編碼過的帳號密碼。
+  - 「Goroutines inside a middleware」: 展示有無 goroutine 處理 request 的差別。並提醒不應該在 goroutine 中使用原本的 Context，應該使用唯讀副本。（要唯讀的原因是？？我直接把程式碼改用原本 context，也沒看出差別。）
+  - 「Custom HTTP configuration」: 就是除了常用的起 Server 起手式之外，還可以自訂 ReadTimeout、WriteTimeout、MaxHeaderBytes 這三項。
+  - 「Support Let's Encrypt」: 這個沒試成功，可能 SSL 的用法我有哪邊沒搞懂。不過 Ryan 說這邊可以跳過。
+- 可能是我對 JavaScript 懂得太少，Gin 有些功能我感受不到作用。
+
 ### 2019.12.18(Wed)
 
 - 解 TODO: 了解 new 與 make 有哪些不同？
