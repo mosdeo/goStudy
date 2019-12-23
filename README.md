@@ -12,6 +12,15 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.23(Mon)
+
+- 繼續把 Gin 的 API Examples 看完
+  - 「Run multiple service using Gin」: 這個範例的重點在於，說明所有 server 的 instance 運作都是一個無限迴圈、是 blocking 的，所以必須要用 go routine 去運作第二個以後的 server instance。
+    - multiple service 會有預設 Logger 看不出每一條 log 是由哪個 service 發出來的問題？目前用一個簡單實作解決這個問題，正在考慮要不要發 PR 到 Gin？
+  - 「」: 
+  - 「」: 
+  - 「」: 
+
 ### 2019.12.19(Thu)
 
 - 繼續把 Gin 的 API Examples 看完
