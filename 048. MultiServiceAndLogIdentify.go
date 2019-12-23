@@ -53,6 +53,13 @@ func (p *LogFormatterWithInstanceIdentify) defaultLogFormatterWithInstanceIdenti
 	)
 }
 
+// gin.defaultLogFormatter() 是 private 叫不出來
+// func (p *LogFormatterWithInstanceIdentify) defaultLogFormatterWithInstanceIdentify2(param gin.LogFormatterParams) string {
+// 	outString := gin.defaultLogFormatter(param)
+// 	strings.Replace(outString, "[GIN]", fmt.Sprintf("[GIN] Service:%s |", p.instanceName), 1)
+// 	return outString
+// }
+
 func main() {
 
 	g.Go(func() error {
