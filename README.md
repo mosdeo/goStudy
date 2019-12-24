@@ -12,14 +12,24 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.24(Thu)
+
+- 繼續把 Gin 的 API Examples 看完
+  - 「Build a single binary with templates」:
+    - 昨天的編譯錯誤是，原來是使用多個檔案時，go run 除了 main.go 還要接 xxx.go
+    - 展示的功能是把一個字串當成 HTML 送出去，還可以在字串中設定可被 router 替換的變數。
+  - 「Bind form-data request with custom struct」: 展示了一種複雜的 Binding 關係，透過 querystring 可以把資料送到特定的曲折 struct 變數，我看得有點迷惑，可能要真的用到才會比較懂。
+  - 「Try to bind body into different structs」: 從 request body 中的 key 對照到 struct 的變數，符合的就動作。
+  - 「http2 server push」: 範例提供檔案不完整，不能編譯，還在找。
+- 閱讀一些文章了解何謂 Server Push。
+
 ### 2019.12.23(Mon)
 
 - 繼續把 Gin 的 API Examples 看完
   - 「Run multiple service using Gin」: 這個範例的重點在於，說明所有 server 的 instance 運作都是一個無限迴圈、是 blocking 的，所以必須要用 go routine 去運作第二個以後的 server instance。
-    - multiple service 會有預設 Logger 看不出每一條 log 是由哪個 service 發出來的問題？目前用一個簡單實作解決這個問題，正在考慮要不要發 PR 到 Gin？
-  - 「」: 
-  - 「」: 
-  - 「」: 
+    - multiple service 會有個問題，就是預設 Logger 看不出每一條 log 是由哪個 service 發出來？目前用一個簡單實作解決這個問題，正在考慮要不要發 PR 到 Gin？將作法融入到框架中得再花一些時間，也不知道實務上是否有此需求。
+  - 「Graceful restart or stop」: 大概看了一下，Ryan 說 nakama 有做所以可以先跳過。
+  - 「Build a single binary with templates」: 很奇怪的編譯錯誤，明天再解決。
 
 ### 2019.12.19(Thu)
 
