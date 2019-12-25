@@ -12,6 +12,11 @@
     - chan return ok 應該是代表 close 與否，待驗證。
 - 內建 Testing 進階。
 
+### 2019.12.25(Wed)
+
+- 昨晚沒睡好，今天比較不能集中精神，所以就刷了 6 題 LeetCode
+  - 太久沒碰 Concurrency 問題，刷 1 題溫習感覺。
+
 ### 2019.12.24(Thu)
 
 - 繼續把 Gin 的 API Examples 看完
