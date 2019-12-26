@@ -28,7 +28,7 @@ func (this *FizzBuzz) PrintFizz() {
 		case <-this.streamExit:
 			return
 		default:
-			<-time.After(time.Duration(20) * time.Millisecond)
+			<-time.After(time.Duration(1) * time.Millisecond)
 		}
 	}
 }
@@ -45,7 +45,7 @@ func (this *FizzBuzz) PrintBuzz() {
 		case <-this.streamExit:
 			return
 		default:
-			<-time.After(time.Duration(20) * time.Millisecond)
+			<-time.After(time.Duration(1) * time.Millisecond)
 		}
 	}
 }
@@ -61,7 +61,8 @@ func (this *FizzBuzz) PrintFizzBuzz() {
 			this.streamToNumber <- struct{}{}
 		case <-this.streamExit:
 			return
-		case <-time.After(time.Duration(20) * time.Millisecond):
+		default:
+			<-time.After(time.Duration(1) * time.Millisecond)
 		}
 	}
 }
@@ -85,9 +86,31 @@ func (this *FizzBuzz) PrintNumber() {
 				this.streamToNumber <- struct{}{}
 			}
 			i++
-		case <-time.After(time.Duration(20) * time.Millisecond):
+		case <-time.After(time.Duration(1) * time.Millisecond):
 		}
 	}
+
+	// for i := 1; i <= this.n; {
+
+	// 	if 0 != i%3 && 0 != i%5 {
+	// 		fmt.Printf("%d, ", i)
+	// 		i++
+	// 		continue
+	// 	}
+
+	// 	select {
+	// 	case <-this.streamToNumber:
+	// 		if 0 == i%3 && 0 == i%5 {
+	// 			this.streamToFizzBuzz <- struct{}{}
+	// 		} else if 0 == i%3 {
+	// 			this.streamToFizz <- struct{}{}
+	// 		} else if 0 == i%5 {
+	// 			this.streamToBuzz <- struct{}{}
+	// 		}
+	// 		i++
+	// 		//case <-time.After(time.Duration(10) * time.Millisecond):
+	// 	}
+	// }
 
 	// 有三個 thread 要接收訊號，訊號會被消費，所以要發三次
 	this.streamExit <- struct{}{}
@@ -96,6 +119,9 @@ func (this *FizzBuzz) PrintNumber() {
 }
 
 func main() {
+
+	start := time.Now()
+
 	for i := 0; i <= 25; i++ {
 		fizzbuzz := &FizzBuzz{
 			n:                i,
@@ -116,4 +142,7 @@ func main() {
 		fizzbuzz.wg.Wait()
 		fmt.Println()
 	}
+
+	spentTime := time.Now().Sub(start)
+	fmt.Println("Spent time:", spentTime)
 }
