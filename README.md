@@ -6,18 +6,27 @@
 
 - or-channel
 - Channel
-  - sync.Mutx（應該可以跳過，再看看）
   - close, range
   - Channel 消耗到空的時候取值不如預期中得到 false，這個現象還要花時間搞清楚
     - chan return ok 應該是代表 close 與否，待驗證。
-- 內建 Testing 進階。
+- LeetCode Concurrency Go語言詳解
+- Go語言 testing, benchmark, example 三位一體介紹
+
+### 2019.12.26(Thu)
+
+- 終於把 Gin 的 API Examples 看完
+  - 「Define format for the log of routes」: 自訂啟動時的路由註冊訊息。
+  - 「Set and get a cookie」: 展示如何設置、取得 cookie
+  - 「Testing」:展示如何用「go test + httptest 套件」測試 http request
+- 解 ToDo：內建 Testing 進階
+  - 玩過 go 原生套件的 benchmark，與 test 是同一組的，使用方法大部分相同。
 
 ### 2019.12.25(Wed)
 
 - 昨晚沒睡好，今天比較不能集中精神，所以就刷了 6 題 LeetCode
   - 太久沒碰 Concurrency 問題，刷 1 題溫習感覺。
 
-### 2019.12.24(Thu)
+### 2019.12.24(Tue)
 
 - 繼續把 Gin 的 API Examples 看完
   - 「Build a single binary with templates」:
