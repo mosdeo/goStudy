@@ -14,9 +14,9 @@
   - 「Define format for the log of routes」: 自訂啟動時的路由註冊訊息。
   - 「Set and get a cookie」: 展示如何設置、取得 cookie
   - 「Testing」:展示如何用「go test + httptest 套件」測試 http request
-  
-- 解 ToDo：內建 Testing 進階
-  1. 玩過 go 原生套件的 benchmark，與 test 是同一組的，使用方法大部分相同。「go test -test.bench=".*"」測試所有已經寫的 benchmark 方法。
+
+- 解 ToDo
+  1. 內建 Testing 進階：玩過 go 原生套件的 benchmark，與 test 是同一組的，使用方法大部分相同。「go test -test.bench=".*"」測試所有已經寫的 benchmark 方法。
   2. chan return ok 是代表 close 與否，關閉後會 return false，無是否消耗完應該無關。
 
 ### 2019.12.25(Wed)
