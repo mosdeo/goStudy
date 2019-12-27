@@ -8,6 +8,10 @@
 - LeetCode Concurrency Go語言詳解
 - Go語言 testing, benchmark, example 三位一體介紹
 
+### 2019.12.27(Fri)
+
+- 安裝並閱讀 Nakama 文件與程式碼
+
 ### 2019.12.26(Thu)
 
 - 終於把 Gin 的 API Examples 看完
