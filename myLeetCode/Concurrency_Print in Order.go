@@ -2,42 +2,26 @@ package main
 
 import (
 	"fmt"
-	"reflect"
-	"runtime"
-	"sync"
-	"time"
 )
 
-func First(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
-	fmt.Printf("Running:First,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
+func First(streamSync [3]chan interface{}) {
+	fmt.Print("First")
 	streamSync[0] <- nil
-	wg.Done()
 }
 
-func Second(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
+func Second(streamSync [3]chan interface{}) {
 	<-streamSync[0]
-	fmt.Printf("Running:Second,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
+	fmt.Print("Second")
 	streamSync[1] <- nil
-	wg.Done()
 }
 
-func Third(wg *sync.WaitGroup, streamSync [3]chan interface{}) {
+func Third(streamSync [3]chan interface{}) {
 	<-streamSync[1]
-	fmt.Printf("Running:Third,\tNumber of Goroutine:%v\n", runtime.NumGoroutine())
-	wg.Done()
-}
-
-func GetValueName(v interface{}) string {
-	return runtime.FuncForPC(reflect.ValueOf(v).Pointer()).Name()
+	fmt.Print("Third")
+	streamSync[2] <- nil
 }
 
 func PrintInOrde(callOrder [3]int) {
-	// 取得輸入順序
-	// var inputCallOrder []int
-	// for _, arg := range os.Args[1:] {
-	// 	num, _ := strconv.Atoi(arg)
-	// 	inputCallOrder = append(inputCallOrder, num)
-	// }
 	inputCallOrder := callOrder
 	fmt.Println("[]inputCallOrder:", inputCallOrder)
 
@@ -48,21 +32,18 @@ func PrintInOrde(callOrder [3]int) {
 	}
 
 	// 建立 [int:func] 對應表
-	var functionNumTable = map[int]func(*sync.WaitGroup, [3]chan interface{}){
+	var functionNumTable = map[int]func([3]chan interface{}){
 		1: First,
 		2: Second,
 		3: Third,
 	}
 
 	//依照輸入順序呼叫 goroutine
-	wg := &sync.WaitGroup{}
 	for _, fNum := range inputCallOrder {
-		wg.Add(1)
-		go functionNumTable[fNum](wg, streamSync)
-		fmt.Printf("Called:%v,\tNumber of Goroutine:%v\n", GetValueName(functionNumTable[fNum]), runtime.NumGoroutine())
+		go functionNumTable[fNum](streamSync)
 	}
 
-	wg.Wait()
+	<-streamSync[2]
 }
 
 func main() {
@@ -76,10 +57,8 @@ func main() {
 	}
 
 	for _, theCase := range testCases {
-		startTime := time.Now()
 		PrintInOrde(theCase)
-		endTime := time.Now()
-		fmt.Printf("Case %v Spent time:%v\n", theCase, endTime.Sub(startTime))
+		fmt.Println()
 		fmt.Println()
 	}
 }
