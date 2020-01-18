@@ -21,7 +21,7 @@ func Third(streamSync [3]chan interface{}) {
 	streamSync[2] <- nil
 }
 
-func PrintInOrde(callOrder [3]int) {
+func PrintInOrder(callOrder [3]int) {
 	inputCallOrder := callOrder
 	fmt.Println("[]inputCallOrder:", inputCallOrder)
 
@@ -57,7 +57,7 @@ func main() {
 	}
 
 	for _, theCase := range testCases {
-		PrintInOrde(theCase)
+		PrintInOrder(theCase)
 		fmt.Println()
 		fmt.Println()
 	}
