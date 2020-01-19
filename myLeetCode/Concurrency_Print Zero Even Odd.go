@@ -100,7 +100,7 @@ func main() {
 	}
 
 	for _, testNum := range testCases {
-		fmt.Printf("Case %d: ", testNum)
+		fmt.Printf("Case %2d: ", testNum)
 		PrintZeroEvenOdd(testNum)
 	}
 }
