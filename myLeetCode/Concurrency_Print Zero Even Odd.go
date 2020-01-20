@@ -78,8 +78,6 @@ func PrintNumber(x int) {
 }
 
 func main() {
-	testCases := []int{0, 1, 2, 3, 7, 10, 11, 13, 14}
-
 	var PrintZeroEvenOdd = func(testNum int) {
 		var zeo = &ZeroEvenOdd{
 			n:                testNum,
@@ -104,7 +102,7 @@ func main() {
 		fmt.Println()
 	}
 
-	for _, testNum := range testCases {
+	for testNum := range [14]int{} {
 		fmt.Printf("Case %2d: ", testNum)
 		PrintZeroEvenOdd(testNum)
 	}
