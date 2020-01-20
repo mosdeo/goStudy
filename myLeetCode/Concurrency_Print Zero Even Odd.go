@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"runtime"
 	"sync"
-	"time"
 )
 
 type ZeroEvenOdd struct {
@@ -37,6 +36,7 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 			this.streamZeroToOdd <- nil
 		default:
 			runtime.Gosched()
+			//<-time.After(time.Microsecond)
 			i--
 		}
 	}
@@ -92,12 +92,10 @@ func main() {
 		zeo.SetWaitGroup(wg)
 
 		wg.Add(3)
-		//go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
+		go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
 		go zeo.Zero(PrintNumber)
 		go zeo.Even(PrintNumber)
 		go zeo.Odd(PrintNumber)
-		<-time.After(time.Microsecond)
-		zeo.streamEvenToZero <- nil
 		wg.Wait()
 		fmt.Println()
 	}
