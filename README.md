@@ -5,8 +5,12 @@
 ### ToDo
 
 - Channel: range, or-channel
-- LeetCode Concurrency Go語言詳解
+- ~~LeetCode Concurrency Go語言詳解~~ 開始寫了兩篇，還沒寫完。
 - Go語言 testing, benchmark, example 三位一體介紹
+
+### 2020.01.20(Mon)
+
+- 了解 runtime.Gosched()，以及在 select-default 不做 time-delay or  runtime.Gosched() 可能會發生（或不發生）的卡死現象。
 
 ### 2019.12.27(Fri)
 
