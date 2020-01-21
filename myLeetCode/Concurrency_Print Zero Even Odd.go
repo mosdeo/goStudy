@@ -6,26 +6,18 @@ package main
 import (
 	"fmt"
 	"runtime"
-	"sync"
 )
 
 type ZeroEvenOdd struct {
 	n                int
-	wg               *sync.WaitGroup
 	streamEvenToZero chan interface{}
 	streamOddToZero  chan interface{}
 	streamZeroToEven chan interface{}
 	streamZeroToOdd  chan interface{}
-}
-
-func (this *ZeroEvenOdd) SetWaitGroup(wg *sync.WaitGroup) {
-	this.wg = wg
+	streamZeroToEnd  chan interface{}
 }
 
 func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
-	defer this.wg.Done()
-	//defer fmt.Println("Zero() Done")
-
 	for i := 0; i < this.n; i++ {
 		select {
 		case <-this.streamOddToZero:
@@ -46,11 +38,11 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 	} else {
 		<-this.streamOddToZero //等待 Odd() 結束，自己再結束
 	}
+
+	this.streamZeroToEnd <- nil
 }
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
-	defer this.wg.Done()
-
 	evenUpper := this.n - this.n%2
 	// fmt.Println("evenUpper:", evenUpper)
 	for i := 2; i <= evenUpper; {
@@ -62,10 +54,7 @@ func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 }
 
 func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
-	defer this.wg.Done()
-
 	oddUpper := ((this.n + 1) - (this.n+1)%2) - 1
-	// fmt.Println("oddUpper:", oddUpper)
 	for i := 1; i <= oddUpper; i += 2 {
 		<-this.streamZeroToOdd
 		printNumber(i)
@@ -85,18 +74,14 @@ func main() {
 			streamOddToZero:  make(chan interface{}),
 			streamZeroToEven: make(chan interface{}),
 			streamZeroToOdd:  make(chan interface{}),
+			streamZeroToEnd:  make(chan interface{}),
 		}
 
-		//設定同步
-		wg := &sync.WaitGroup{}
-		zeo.SetWaitGroup(wg)
-
-		wg.Add(3)
 		go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
 		go zeo.Zero(PrintNumber)
 		go zeo.Even(PrintNumber)
 		go zeo.Odd(PrintNumber)
-		wg.Wait()
+		<-zeo.streamZeroToEnd //等待 Zero() 送出結束訊號
 		fmt.Println()
 	}
 
