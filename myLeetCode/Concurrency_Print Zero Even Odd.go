@@ -10,11 +10,11 @@ import (
 
 type ZeroEvenOdd struct {
 	n                int
-	streamEvenToZero chan interface{}
-	streamOddToZero  chan interface{}
-	streamZeroToEven chan interface{}
-	streamZeroToOdd  chan interface{}
-	streamZeroToEnd  chan interface{}
+	streamEvenToZero chan struct{}
+	streamOddToZero  chan struct{}
+	streamZeroToEven chan struct{}
+	streamZeroToOdd  chan struct{}
+	streamZeroToEnd  chan struct{}
 }
 
 func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
@@ -22,10 +22,10 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 		select {
 		case <-this.streamOddToZero:
 			printNumber(0)
-			this.streamZeroToEven <- nil
+			this.streamZeroToEven <- struct{}{}
 		case <-this.streamEvenToZero:
 			printNumber(0)
-			this.streamZeroToOdd <- nil
+			this.streamZeroToOdd <- struct{}{}
 		default:
 			runtime.Gosched()
 			//<-time.After(time.Microsecond)
@@ -39,7 +39,7 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 		<-this.streamOddToZero //等待 Odd() 結束，自己再結束
 	}
 
-	this.streamZeroToEnd <- nil
+	this.streamZeroToEnd <- struct{}{}
 }
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
@@ -49,7 +49,7 @@ func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 		<-this.streamZeroToEven
 		printNumber(i)
 		i += 2
-		this.streamEvenToZero <- nil
+		this.streamEvenToZero <- struct{}{}
 	}
 }
 
@@ -58,7 +58,7 @@ func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
 	for i := 1; i <= oddUpper; i += 2 {
 		<-this.streamZeroToOdd
 		printNumber(i)
-		this.streamOddToZero <- nil
+		this.streamOddToZero <- struct{}{}
 	}
 }
 
@@ -70,14 +70,14 @@ func main() {
 	var PrintZeroEvenOdd = func(testNum int) {
 		var zeo = &ZeroEvenOdd{
 			n:                testNum,
-			streamEvenToZero: make(chan interface{}),
-			streamOddToZero:  make(chan interface{}),
-			streamZeroToEven: make(chan interface{}),
-			streamZeroToOdd:  make(chan interface{}),
-			streamZeroToEnd:  make(chan interface{}),
+			streamEvenToZero: make(chan struct{}),
+			streamOddToZero:  make(chan struct{}),
+			streamZeroToEven: make(chan struct{}),
+			streamZeroToOdd:  make(chan struct{}),
+			streamZeroToEnd:  make(chan struct{}),
 		}
 
-		go func() { zeo.streamEvenToZero <- nil }() //給起頭的火種
+		go func() { zeo.streamEvenToZero <- struct{}{} }() //給起頭的火種
 		go zeo.Zero(PrintNumber)
 		go zeo.Even(PrintNumber)
 		go zeo.Odd(PrintNumber)
