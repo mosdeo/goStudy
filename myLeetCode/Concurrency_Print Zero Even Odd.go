@@ -44,7 +44,6 @@ func (this *ZeroEvenOdd) Zero(printNumber func(int)) {
 
 func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 	evenUpper := this.n - this.n%2
-	// fmt.Println("evenUpper:", evenUpper)
 	for i := 2; i <= evenUpper; {
 		<-this.streamZeroToEven
 		printNumber(i)
@@ -55,6 +54,7 @@ func (this *ZeroEvenOdd) Even(printNumber func(int)) {
 
 func (this *ZeroEvenOdd) Odd(printNumber func(int)) {
 	oddUpper := ((this.n + 1) - (this.n+1)%2) - 1
+
 	for i := 1; i <= oddUpper; i += 2 {
 		<-this.streamZeroToOdd
 		printNumber(i)
