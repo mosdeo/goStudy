@@ -13,7 +13,8 @@ func main() {
 
 		// 寫一個匿名函式
 		refToPrintInt = append(refToPrintInt, func() {
-			fmt.Println(num)
+			localNum := num
+			fmt.Println(localNum)
 		})
 		refToPrintInt[len(refToPrintInt)-1]()
 	}
