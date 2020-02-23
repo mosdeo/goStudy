@@ -1,5 +1,3 @@
-// 交接棒不指定對象的版本
-
 package main
 
 import (
@@ -15,14 +13,14 @@ type FizzBuzz struct {
 	streamBaton chan int
 }
 
-func (this *FizzBuzz) PrintFizz() {
+func (this *FizzBuzz) PrintLoop(passCondition func(int) bool, printString func(int)) {
 	defer this.wg.Done()
 
 	for i := 0; i <= this.n; i++ {
-		if (0 == i%3) && (0 != i%5) {
+		if passCondition(i) {
 			nextNum := <-this.streamBaton //接棒
 			if i == nextNum {
-				fmt.Printf("Fizz(%d), ", i)
+				printString(i)
 				this.streamBaton <- i + 1 //交棒
 			} else {
 				this.streamBaton <- nextNum //把數字還回去
@@ -31,60 +29,34 @@ func (this *FizzBuzz) PrintFizz() {
 			runtime.Gosched()
 		}
 	}
+}
+
+func (this *FizzBuzz) PrintFizz() {
+	PassCondition := func(i int) bool { return (0 == i%3) && (0 != i%5) }
+	PrintString := func(i int) { fmt.Printf("Fizz(%d), ", i) }
+
+	this.PrintLoop(PassCondition, PrintString)
 }
 
 func (this *FizzBuzz) PrintBuzz() {
-	defer this.wg.Done()
+	PassCondition := func(i int) bool { return (0 != i%3) && (0 == i%5) }
+	PrintString := func(i int) { fmt.Printf("Buzz(%d), ", i) }
 
-	for i := 0; i <= this.n; i++ {
-		if (0 != i%3) && (0 == i%5) {
-			nextNum := <-this.streamBaton //接棒
-			if i == nextNum {
-				fmt.Printf("Buzz(%d), ", i)
-				this.streamBaton <- i + 1 //交棒
-			} else {
-				this.streamBaton <- nextNum //把數字還回去
-				i--
-			}
-			runtime.Gosched()
-		}
-	}
+	this.PrintLoop(PassCondition, PrintString)
 }
 
 func (this *FizzBuzz) PrintFizzBuzz() {
-	defer this.wg.Done()
+	PassCondition := func(i int) bool { return 0 == i%(3*5) }
+	PrintString := func(i int) { fmt.Printf("FizzBuzz(%d), ", i) }
 
-	for i := 0; i <= this.n; i++ {
-		if 0 == i%(3*5) {
-			nextNum := <-this.streamBaton //接棒
-			if i == nextNum {
-				fmt.Printf("FizzBuzz(%d), ", i)
-				this.streamBaton <- i + 1 //交棒
-			} else {
-				this.streamBaton <- nextNum //把數字還回去
-				i--
-			}
-			runtime.Gosched()
-		}
-	}
+	this.PrintLoop(PassCondition, PrintString)
 }
 
 func (this *FizzBuzz) PrintNumber() {
-	defer this.wg.Done()
+	PassCondition := func(i int) bool { return (0 != i%3) && (0 != i%5) }
+	PrintString := func(i int) { fmt.Printf("%d, ", i) }
 
-	for i := 0; i <= this.n; i++ {
-		if (0 != i%3) && (0 != i%5) {
-			nextNum := <-this.streamBaton //接棒
-			if i == nextNum {
-				fmt.Printf("%d, ", i)
-				this.streamBaton <- i + 1 //交棒
-			} else {
-				this.streamBaton <- nextNum //把數字還回去
-				i--
-			}
-			runtime.Gosched()
-		}
-	}
+	this.PrintLoop(PassCondition, PrintString)
 }
 
 func main() {
