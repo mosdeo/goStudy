@@ -8,20 +8,16 @@ import (
 )
 
 type DiningPhilosophers struct {
-	wg          *sync.WaitGroup
-	streamForks [5]chan interface{}
-}
-
-func (this *DiningPhilosophers) SetWaitGroup(wg *sync.WaitGroup) {
-	this.wg = wg
+	wg                     *sync.WaitGroup
+	streamForks            [5]chan interface{}
+	missingDoubleForkTimes int
 }
 
 func (this *DiningPhilosophers) WantToEat(philosopher int, pickLeftFork func(int), pickRightFork func(int), eat func(int), putLeftFork func(int), putRightFork func(int)) {
 	defer this.wg.Done()
 
-	//取得該哲學家左右邊的號碼
-	var leftNum = (philosopher + 4) % 5
-	var rightNum = (philosopher + 6) % 5
+	var leftNum = (philosopher + 4) % 5  //取得該哲學家左邊的號碼
+	var rightNum = (philosopher + 6) % 5 //取得該哲學家右邊的號碼
 
 	for {
 		select {
@@ -29,37 +25,37 @@ func (this *DiningPhilosophers) WantToEat(philosopher int, pickLeftFork func(int
 			PickLeftFork(philosopher) //成功拿起左邊叉子
 			select {
 			case this.streamForks[rightNum] <- philosopher: //嘗試拿起右邊叉子
-				PickRightFork(philosopher) //成功拿起又邊叉子
-				Eat(philosopher)           //左右邊都拿到了，開始吃
-				//吃完了，放下左右邊叉子
-				<-this.streamForks[leftNum]
+				PickRightFork(philosopher)  //成功拿起又邊叉子
+				Eat(philosopher)            //左右邊都拿到了，開始吃
+				<-this.streamForks[leftNum] //吃完了，放下左邊叉子
 				PutLeftFork(philosopher)
-				<-this.streamForks[rightNum]
+				<-this.streamForks[rightNum] //吃完了，放下右邊叉子
 				PutRightFork(philosopher)
 				return //吃飽離開
 			default: //無法拿起右邊叉子
 				fmt.Printf("Philosopher %d can't pick fork %d.\n", philosopher, rightNum)
-				//把已經拿起來的左邊叉子釋放出去
-				<-this.streamForks[leftNum]
+				<-this.streamForks[leftNum] //把已經拿起來的左邊叉子釋放出去
 				PutLeftFork(philosopher)
 			}
 		default: //無法拿起左邊叉子
 			fmt.Printf("Philosopher %d can't pick fork %d.\n", philosopher, leftNum)
 		}
+		this.missingDoubleForkTimes++
 		Think()
 	}
 }
 
-func RandTime(maxMillisecond int) {
-	rand.Seed(time.Now().Unix())
-	<-time.After(time.Duration(rand.Int()%maxMillisecond) * time.Millisecond)
-}
-
 func Eat(philosopher int) {
-	RandTime(100)
 	fmt.Printf("===== Philosopher %d have eaten. =====\n", philosopher)
 }
-func Think() { RandTime(100) }
+
+func Think() {
+	Random := func(max int) int {
+		rand.Seed(time.Now().Unix())
+		return rand.Int() % (max + 1)
+	}
+	<-time.After(time.Millisecond * time.Duration(Random(50)))
+}
 
 func PickLeftFork(philosopher int) {
 	var leftNum = (philosopher + 4) % 5
@@ -84,16 +80,17 @@ func PutRightFork(philosopher int) {
 }
 
 func main() {
-	diningPhilosophers := DiningPhilosophers{}
+	diningPhilosophers := DiningPhilosophers{
+		wg: &sync.WaitGroup{},
+	}
 
 	// Channel 初始化
 	for i := range diningPhilosophers.streamForks {
 		diningPhilosophers.streamForks[i] = make(chan interface{}, 1)
 	}
 
-	diningPhilosophers.SetWaitGroup(&sync.WaitGroup{})
-
 	// 叫所有哲學家開始動作
+	start := time.Now()
 	for i := range diningPhilosophers.streamForks {
 		diningPhilosophers.wg.Add(1)
 		go diningPhilosophers.WantToEat(i, PickLeftFork, PickRightFork, Eat, PutLeftFork, PutRightFork)
@@ -101,4 +98,6 @@ func main() {
 
 	//等待每一位哲學家都吃過
 	diningPhilosophers.wg.Wait()
+	fmt.Println("Spent time:", time.Now().Sub(start))
+	fmt.Printf("Missing double forks %d times", diningPhilosophers.missingDoubleForkTimes)
 }
