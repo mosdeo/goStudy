@@ -60,16 +60,15 @@ func (this *FizzBuzz) PrintNumber() {
 }
 
 func main() {
-
 	start := time.Now()
 
-	fizzbuzz := &FizzBuzz{
-		wg:          &sync.WaitGroup{},
-		streamBaton: make(chan int, 1),
-	}
-
 	for testCase := 0; testCase <= 20; testCase++ {
-		fizzbuzz.n = testCase
+
+		fizzbuzz := &FizzBuzz{
+			n:           testCase,
+			wg:          &sync.WaitGroup{},
+			streamBaton: make(chan int, 1),
+		}
 
 		fizzbuzz.wg.Add(4)
 		go fizzbuzz.PrintFizz()
@@ -79,8 +78,7 @@ func main() {
 
 		fizzbuzz.streamBaton <- 0 //啟動交棒
 		fizzbuzz.wg.Wait()
-		<-fizzbuzz.streamBaton
-
+		close(fizzbuzz.streamBaton)
 		fmt.Println() //這個 Test Case 結束了，換行。
 	}
 
