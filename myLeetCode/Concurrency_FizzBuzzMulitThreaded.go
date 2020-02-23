@@ -75,10 +75,10 @@ func main() {
 		go fizzbuzz.PrintBuzz()
 		go fizzbuzz.PrintFizzBuzz()
 		go fizzbuzz.PrintNumber()
-
 		fizzbuzz.streamBaton <- 0 //啟動交棒
 		fizzbuzz.wg.Wait()
 		close(fizzbuzz.streamBaton)
+
 		fmt.Println() //這個 Test Case 結束了，換行。
 	}
 
