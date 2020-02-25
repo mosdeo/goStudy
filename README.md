@@ -4,8 +4,8 @@
 
 ### ToDo
 
-- Channel: range, or-channel
-- ~~LeetCode Concurrency Go語言詳解~~ 開始寫了兩篇，還沒寫完。
+- Channel: [range](https://colobu.com/2016/04/14/Golang-Channels/#Range), or-channel
+- ~~LeetCode Concurrency Go語言詳解~~ 寫了 5 篇，還沒寫完。目前有寫的已經放上 Blog(繁中)、知乎(簡中)、刊登在 WeChat 公眾號(簡中)。
 - Go語言 testing, benchmark, example 三位一體介紹
 
 ### 2020.01.20(Mon)
