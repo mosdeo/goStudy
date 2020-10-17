@@ -99,5 +99,5 @@ func main() {
 	//等待每一位哲學家都吃過
 	diningPhilosophers.wg.Wait()
 	fmt.Println("Spent time:", time.Now().Sub(start))
-	fmt.Printf("Missing double forks %d times", diningPhilosophers.missingDoubleForkTimes)
+	fmt.Printf("Missing double forks %d times.", diningPhilosophers.missingDoubleForkTimes)
 }
