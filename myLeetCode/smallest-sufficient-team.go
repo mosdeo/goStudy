@@ -39,16 +39,18 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 	SufficientExam(myCandidates, len(req_skills))
 
-	//窮舉檢查
-	var keySet []int
-	for k, _ := range tableComputed {
-		intkey, _ := strconv.Atoi(k)
-		keySet = append(keySet, intkey)
-	}
-	return keySet
+	// //窮舉組合檢查
+	// var keySet []int
+	// for k, _ := range tableComputed {
+	// 	intkey, _ := strconv.Atoi(k)
+	// 	keySet = append(keySet, intkey)
+	// }
+	// fmt.Print("窮舉組合檢查:")
+	// return keySet
 
 	samllestKey := "---------------------------------------------------------------"
 	for k, v := range tableComputed {
+		fmt.Println(k, v)
 		if IsNonZero(v) {
 			if len(samllestKey) > len(k) {
 				samllestKey = k
@@ -64,55 +66,72 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return outputNums
 }
 
+func R(nums []int){
+	fmt.Println(nums)
+	if (1!=len(nums)){
+		for skip_i := range nums {
+			new_nums := make([]int, len(nums))
+			copy(new_nums, nums)
+			new_nums = append(new_nums[:skip_i], new_nums[skip_i+1:]...)
+			R(new_nums)
+		}
+	}
+}
+	
 func main() {
-
-	fmt.Println(IntSliceToString([]int{0,1,2,3,4}))
-	fmt.Println(IntStringToIntSlice("01234"))
+	//nums := []int{0, 1, 2}
+	//R(nums)
 
 	req_skills := []string{"java", "nodejs", "reactjs"}
-	people := [][]string{{"java"}, {"nodejs"}, {"reactjs"}, {"nodejs", "reactjs"}}
+	people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
 	fmt.Print(smallestSufficientTeam(req_skills, people))
 }
 
-func SufficientExam(myCandidates candidates, len_req_skills int) {
+func SufficientExam(myCandidates candidates, len_req_skills int) []int{
+	//生成ID
+	var temp []int
+	for _, c := range myCandidates {
+		temp = append(temp, c.Uid)
+	}
+	sort.Sort(sort.Reverse(sort.IntSlice(temp)))
+	strID := IntSliceToString(temp)
+	fmt.Println("ID=",strID)
 
 	//如果遞迴到只剩下一個
 	if 1 == len(myCandidates) {
 		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
-		return
+		return myCandidates[0].MatchIndex
 	}
 
-	//建立候選人清單單一index
-	current_candidates_idx := []int{}
-	for _, c := range myCandidates {
-		current_candidates_idx = append(current_candidates_idx, c.Uid)
-	}
-	sort.Reverse(sort.IntSlice(current_candidates_idx))
-	str_current_candidates_idx := ""
-	for i := range current_candidates_idx {
-		str_current_candidates_idx += strconv.Itoa(i)
-	}
-
-	//檢查這組合是否被計算過
-	if _, ok := tableComputed[str_current_candidates_idx]; ok {
-
-	} else {
-		//找尋有被計算過的各種-1子集
-		for i := 0; i < len(str_current_candidates_idx); i++ {
-			//產生-1子集 key
-			str_subset_candidates_idx := str_current_candidates_idx[:i] + str_current_candidates_idx[i+1:]
-
-			if subset_v, ok := tableComputed[str_subset_candidates_idx]; ok {
-				// 有現成子集
-				tableComputed[str_current_candidates_idx] = Or(myCandidates[i].MatchIndex, subset_v)
-			} else {
-				//無現成子集
-				subset_myCandidates := append(myCandidates[:i], myCandidates[i+1:]...)
-				SufficientExam(subset_myCandidates, len_req_skills)
-				tableComputed[str_current_candidates_idx] = Or(myCandidates[i].MatchIndex, tableComputed[str_subset_candidates_idx])
+	var output []int
+	for skip_i, c := range(myCandidates){
+		//生成子集ID
+		var temp []int
+		for i, c := range myCandidates {
+			if i!=skip_i {
+				temp = append(temp, c.Uid)
 			}
 		}
+		sort.Sort(sort.Reverse(sort.IntSlice(temp)))
+		str_subset_ID := IntSliceToString(temp)
+
+		if _, ok := tableComputed[str_subset_ID];!ok{
+			//安全複製子集
+			subset_myCandidates := make([]People, len(myCandidates))
+			copy(subset_myCandidates, myCandidates)
+			subset_myCandidates = append(subset_myCandidates[:skip_i], subset_myCandidates[skip_i+1:]...)
+			
+			//計算子集
+			//為子集建立key, value
+			tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
+		}
+		
+		if (0==skip_i){
+			output = Or(c.MatchIndex, tableComputed[str_subset_ID])
+		}
 	}
+
+	return output
 }
 
 func MatchSkills(req_skills []string, peopleHaveSkills []string) People {
@@ -137,6 +156,25 @@ func MatchSkills(req_skills []string, peopleHaveSkills []string) People {
 
 	return p
 }
+
+func IsSubslice (mainSlice []string, subSlice []string) bool {
+    if len(mainSlice) > len(subSlice) { return false }
+    for _, e := range mainSlice {
+        if ! contains(subSlice,e) {
+            return false
+        }
+    }
+    return true
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		 if a == e {
+			 return true
+		 }
+	 }
+	 return false
+ }
 
 func IsNonZero(nums []int) bool {
 	for _, num := range nums {
@@ -174,7 +212,7 @@ func Equal(a, b []int) bool {
 
 func IntSliceToString(nums []int) string{
 	var outStr string
-	for i := range nums{
+	for _, i := range nums{
 		outStr = outStr + strconv.Itoa(i)
 	}
 	return outStr
@@ -182,8 +220,8 @@ func IntSliceToString(nums []int) string{
 
 func IntStringToIntSlice(strOfInt string) []int{
 	var intSlice []int
-	for s := range strOfInt{
-		intSlice = append(intSlice, s)
+	for _, s := range strOfInt{
+		intSlice = append(intSlice, int(s)-0x30)
 	}
 	return intSlice
 }
