@@ -32,7 +32,6 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	//建立對候選人技能對應列清單
 	var myCandidates candidates
 	for i, p := range people {
-
 		theCandidate := MatchSkills(req_skills, p)
 		theCandidate.Uid = i
 		myCandidates = append(myCandidates, theCandidate)
@@ -66,6 +65,10 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 }
 
 func main() {
+
+	fmt.Println(IntSliceToString([]int{0,1,2,3,4}))
+	fmt.Println(IntStringToIntSlice("01234"))
+
 	req_skills := []string{"java", "nodejs", "reactjs"}
 	people := [][]string{{"java"}, {"nodejs"}, {"reactjs"}, {"nodejs", "reactjs"}}
 	fmt.Print(smallestSufficientTeam(req_skills, people))
@@ -167,4 +170,20 @@ func Equal(a, b []int) bool {
 		}
 	}
 	return true
+}
+
+func IntSliceToString(nums []int) string{
+	var outStr string
+	for i := range nums{
+		outStr = outStr + strconv.Itoa(i)
+	}
+	return outStr
+}
+
+func IntStringToIntSlice(strOfInt string) []int{
+	var intSlice []int
+	for s := range strOfInt{
+		intSlice = append(intSlice, s)
+	}
+	return intSlice
 }
