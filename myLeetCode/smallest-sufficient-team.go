@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"sort"
+	"strconv"
+	"strings"
 )
 
 type People struct {
@@ -58,17 +59,14 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 		}
 	}
 
-	var outputNums []int
-	for _, s := range samllestKey {
-		outputNums = append(outputNums, int(s)-48)
-	}
-
-	return outputNums
+	fmt.Println("samllestKey=", samllestKey)
+	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
+	return IntStringToIntSlice(samllestKey)
 }
 
-func R(nums []int){
+func R(nums []int) {
 	fmt.Println(nums)
-	if (1!=len(nums)){
+	if 1 != len(nums) {
 		for skip_i := range nums {
 			new_nums := make([]int, len(nums))
 			copy(new_nums, nums)
@@ -77,17 +75,20 @@ func R(nums []int){
 		}
 	}
 }
-	
+
 func main() {
 	//nums := []int{0, 1, 2}
 	//R(nums)
 
-	req_skills := []string{"java", "nodejs", "reactjs"}
-	people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
+	// req_skills := []string{"java", "nodejs", "reactjs"}
+	// people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
+
+	req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
+	people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
 	fmt.Print(smallestSufficientTeam(req_skills, people))
 }
 
-func SufficientExam(myCandidates candidates, len_req_skills int) []int{
+func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 	//生成ID
 	var temp []int
 	for _, c := range myCandidates {
@@ -95,7 +96,7 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int{
 	}
 	sort.Sort(sort.Reverse(sort.IntSlice(temp)))
 	strID := IntSliceToString(temp)
-	fmt.Println("ID=",strID)
+	fmt.Println("ID=", strID)
 
 	//如果遞迴到只剩下一個
 	if 1 == len(myCandidates) {
@@ -104,29 +105,29 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int{
 	}
 
 	var output []int
-	for skip_i, c := range(myCandidates){
+	for skip_i, c := range myCandidates {
 		//生成子集ID
 		var temp []int
 		for i, c := range myCandidates {
-			if i!=skip_i {
+			if i != skip_i {
 				temp = append(temp, c.Uid)
 			}
 		}
 		sort.Sort(sort.Reverse(sort.IntSlice(temp)))
 		str_subset_ID := IntSliceToString(temp)
 
-		if _, ok := tableComputed[str_subset_ID];!ok{
+		if _, ok := tableComputed[str_subset_ID]; !ok {
 			//安全複製子集
 			subset_myCandidates := make([]People, len(myCandidates))
 			copy(subset_myCandidates, myCandidates)
 			subset_myCandidates = append(subset_myCandidates[:skip_i], subset_myCandidates[skip_i+1:]...)
-			
+
 			//計算子集
 			//為子集建立key, value
 			tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
 		}
-		
-		if (0==skip_i){
+
+		if 0 == skip_i {
 			output = Or(c.MatchIndex, tableComputed[str_subset_ID])
 		}
 	}
@@ -157,24 +158,26 @@ func MatchSkills(req_skills []string, peopleHaveSkills []string) People {
 	return p
 }
 
-func IsSubslice (mainSlice []string, subSlice []string) bool {
-    if len(mainSlice) > len(subSlice) { return false }
-    for _, e := range mainSlice {
-        if ! contains(subSlice,e) {
-            return false
-        }
-    }
-    return true
+func IsSubslice(mainSlice []string, subSlice []string) bool {
+	if len(mainSlice) > len(subSlice) {
+		return false
+	}
+	for _, e := range mainSlice {
+		if !contains(subSlice, e) {
+			return false
+		}
+	}
+	return true
 }
 
 func contains(s []string, e string) bool {
 	for _, a := range s {
-		 if a == e {
-			 return true
-		 }
-	 }
-	 return false
- }
+		if a == e {
+			return true
+		}
+	}
+	return false
+}
 
 func IsNonZero(nums []int) bool {
 	for _, num := range nums {
@@ -210,18 +213,25 @@ func Equal(a, b []int) bool {
 	return true
 }
 
-func IntSliceToString(nums []int) string{
+func IntSliceToString(nums []int) string {
 	var outStr string
-	for _, i := range nums{
-		outStr = outStr + strconv.Itoa(i)
+	for i, num := range nums {
+		if 0==i {
+			outStr = strconv.Itoa(num)
+		} else {
+			outStr = outStr + "-" + strconv.Itoa(num)
+		}
 	}
 	return outStr
 }
 
-func IntStringToIntSlice(strOfInt string) []int{
+func IntStringToIntSlice(strOfInt string) []int {
 	var intSlice []int
-	for _, s := range strOfInt{
-		intSlice = append(intSlice, int(s)-0x30)
+	_strOfInt := strings.Split(strOfInt, "-")
+
+	for _, s := range _strOfInt {
+		num, _ := strconv.Atoi(s)
+		intSlice = append(intSlice, num)
 	}
 	return intSlice
 }
