@@ -135,7 +135,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
-	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 0))
+	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills)))
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
@@ -144,20 +144,21 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return IntStringToIntSlice(samllestKey)
 }
 
-func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
+func DFS_Match(myCandidates candidates, depth int) []int {
 
 	// 只要還沒到最底層，就去看更深一層
-	if depth == len_req_skills{
+	if 1 == depth{
 		for _, c := range myCandidates {
 			//存入計算結果，滿足解答就 return
 			tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
+			//fmt.Println("strKey=",strconv.Itoa(c.Uid))
 			if IsNonZero(c.MatchIndex) {
 				return []int{c.Uid}
 			}
 		}
 		return nil //代表這一層沒有答案出現
 	} else {
-		result := DFS_Match(myCandidates, len_req_skills, depth+1)
+		result := DFS_Match(myCandidates, depth-1)
 		// // 更深的層有結果了，此層免算
 		if nil != result {
 			return result
@@ -173,6 +174,11 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 				continue //key 重複了，此圈免算
 			}
 
+			//是否為這層要計算的長度？
+			if len(prevKey)+1 != depth{
+				continue
+			}
+
 			//生成合併排序key
 			strKey := func(prevKey []int, currKey int) string {
 				prevKey = append(prevKey, currKey)
@@ -186,6 +192,8 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 				continue //算過，此圈免算
 			}
 
+			//fmt.Printf("len(strKey)=%d, strkey=%v\n",len(IntStringToIntSlice(strKey)), strKey)
+			
 			//存入計算結果，滿足解答就 return
 			spentComputeTimes++
 			tableComputed[strKey] = Or(v, c.MatchIndex)
