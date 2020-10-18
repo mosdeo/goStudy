@@ -113,7 +113,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 		}
 	}
 
-	//剔除能力可以被其他人覆蓋的候選人
+	//剔除能力可以被其他人覆蓋的候選人，確保留下的候選人具有直觀上的不可取代性
 	for i := 0; i < len(myCandidates); i++ {
 		for j := i; j < len(myCandidates); j++ {
 			OrResult := Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
@@ -196,15 +196,6 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 				//這一步會向下延伸 key 更短的可能性，要走遍，不可以剪枝
 				//還沒湊滿1的計算結果不能剪掉，要留給其他計算走捷徑
 				tableComputed[str_subset_ID] = Recursive(subset_myCandidates, len_req_skills)
-
-				//下面這段一定有明顯錯誤
-				//檢驗是否為 key 更短的合格子集？是的話更新最佳 key 長度
-				// len_currentKey := len(strings.Split(str_subset_ID, "-"))
-				// if len_bestKey > len_currentKey{
-				// 	if IsNonZero(tableComputed[str_subset_ID]) {
-				// 		len_bestKey = len_currentKey
-				// 	}
-				// }
 			} else {
 				savedComputeTimes++
 			}
@@ -216,6 +207,9 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 		}
 	}
 
+	if(0==spentComputeTimes%1000000){
+		fmt.Println("spentComputeTimes=",spentComputeTimes)
+	}
 	return tableComputed[strID]
 }
 
