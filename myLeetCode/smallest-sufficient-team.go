@@ -179,10 +179,18 @@ func coreDFS2(myCandidates candidates, len_req_skills int)[]int{
 
 	for i:=0;i<len(myCandidates);i++{	
 		for k, v := range(tableComputed){
-			//生成合併key //生成ID
+			//生成合併排序key(ID)
+			prevKey := IntStringToIntSlice(k)
+			currKey := myCandidates[i].Uid
+			if containsInt(prevKey, currKey){
+				continue //key 重複了，此圈免算
+			}
+
 			strID := func(prevKey []int, currKey int) string {
-				return IntSliceToString((sort.IntSlice(append(prevKey, currKey))))
-			}(IntStringToIntSlice(k), myCandidates[i].Uid)	
+				temp := sort.IntSlice(append(prevKey, currKey))
+				sort.Sort(temp)
+				return IntSliceToString(temp)
+			}(prevKey, currKey)	
 
 			//存入計算結果，滿足解答就 return
 			tableComputed[strID] = Or(v, myCandidates[i].MatchIndex)
@@ -316,6 +324,15 @@ func IsSubslice(mainSlice []string, subSlice []string) bool {
 }
 
 func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
+}
+
+func containsInt(s []int, e int) bool {
 	for _, a := range s {
 		if a == e {
 			return true
