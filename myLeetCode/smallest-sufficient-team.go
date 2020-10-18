@@ -70,6 +70,7 @@ func main() {
 	}
 
 	for _, testCase := range testCases {
+		fmt.Printf("len(testCase.Req_skills)=%d, len(testCase.People)=%d\n", len(testCase.Req_skills), len(testCase.People))
 		fmt.Println(smallestSufficientTeam(testCase.Req_skills, testCase.People))
 	}
 }
@@ -157,13 +158,15 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 	}
 
 	//生成ID
-	var temp []int
-	for _, c := range myCandidates {
-		temp = append(temp, c.Uid)
-	}
-	sort.Sort(sort.IntSlice(temp))
-	strID := IntSliceToString(temp)
-
+	strID := func()string{
+		var temp []int
+		for _, c := range myCandidates {
+			temp = append(temp, c.Uid)
+		}
+		sort.Sort(sort.IntSlice(temp))
+		return IntSliceToString(temp)
+	}()
+	
 	if v, ok := tableComputed[strID]; ok {
 		return v
 	} else {
