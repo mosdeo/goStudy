@@ -74,6 +74,23 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 			myCandidates = append(myCandidates, theCandidate)
 		}
 	}
+
+	//剔除能力可以被其他人覆蓋的候選人
+	for i:=0;i<len(myCandidates);i++{
+		for j:=i;j<len(myCandidates);j++{
+			OrResult := Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
+			i_EqRes := Equal(OrResult, myCandidates[i].MatchIndex)
+			j_EqRes := Equal(OrResult, myCandidates[j].MatchIndex)
+			
+			//剔除不能改變結果的那一邊
+			if (i_EqRes && !j_EqRes){
+				myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
+			} else if (j_EqRes && !i_EqRes){
+				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
+			}
+		}	
+	}
+	
 	fmt.Println("len(myCandidates)=",len(myCandidates))
 
 	SufficientExam(myCandidates, len(req_skills))
@@ -118,7 +135,7 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 	}
 	sort.Sort(sort.Reverse(sort.IntSlice(temp)))
 	strID := IntSliceToString(temp)
-	fmt.Println("ID=", strID)
+	//fmt.Println("ID=", strID)
 
 	if v, ok := tableComputed[strID]; ok {
 		return v
