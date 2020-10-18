@@ -139,6 +139,9 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
+	//將候選人按照命中機率排序，高的優先
+	sort.Sort(sort.Reverse(myCandidates))
+
 	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills)))
 
 	fmt.Println("samllestKey=", samllestKey)
@@ -172,15 +175,18 @@ func DFS_Match(myCandidates candidates, depth int) []int {
 	//更深的層都沒有答案，所以要把這一層算完
 	for _, c := range myCandidates {
 		for k, v := range tableComputed {
-			//檢驗是否有重複key？
+			
 			prevKey, currKey := IntStringToIntSlice(k), c.Uid
-			if containsInt(prevKey, currKey) {
-				continue //key 重複了，此圈免算
-			}
-
+			
 			//是否為這層要計算的長度？
 			if len(prevKey)+1 != depth{
 				continue
+			}
+
+			//檢驗是否有重複key？
+			if containsInt(prevKey, currKey) {
+				savedComputeTimes++
+				continue //key 重複了，此圈免算
 			}
 
 			//生成合併排序key
