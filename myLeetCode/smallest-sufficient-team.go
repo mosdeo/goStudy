@@ -35,38 +35,38 @@ func main() {
 			People:     [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}},
 			Answer:     []int{0, 2},
 		},
-		// TestCase{
-		// 	Req_skills: []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"},
-		// 	People:     [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
-		// 	Answer:     []int{12, 17, 18},
-		// },
+		TestCase{
+			Req_skills: []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"},
+			People:     [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
+			Answer:     []int{12, 17, 18},
+		},
 		TestCase{
 			Req_skills: []string{"mmcmnwacnhhdd", "vza", "mrxyc"},
 			People:     [][]string{{"mmcmnwacnhhdd"}, {}, {}, {"vza", "mrxyc"}},
 			Answer:     []int{0, 3},
 		},
-		// TestCase{
-		// 	Req_skills: []string{"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"},
-		// 	People:     [][]string{{"hdbxcuzyzhliwv", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "sdi", "ylopoifzkacuwp", "dzsgleocfpl"}, {"bztg", "ylopoifzkacuwp"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "bztg"}, {"dzsgleocfpl"}, {"uvwlzkmzgis"}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "sdi"}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"}, {"dzsgleocfpl"}, {"sdi", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi"}, {}, {}, {"ylopoifzkacuwp"}, {}, {"sdi", "bztg"}, {"bztg", "dzsgleocfpl"}, {"sdi", "bztg"}},
-		// },
-		// TestCase{
-		// 	Req_skills: []string{"algorithms", "math", "java", "reactjs", "csharp", "aws"},
-		// 	People:     [][]string{{"algorithms", "math", "java"}, {"algorithms", "math", "reactjs"}, {"java", "csharp", "aws"}, {"reactjs", "csharp"}, {"csharp", "math"}, {"aws", "java"}},
-		// 	Answer:     []int{1, 2},
-		// },
-		// TestCase{
-		// 	Req_skills: []string{"wmycibrjxh", "wicacrldwneag", "ndutqtjuzu", "pgo", "gxsskiz", "rbrymc", "erpevpmu", "jboexi", "vpfdcjwngzuf", "w"},
-		// 	People:     [][]string{{}, {"ndutqtjuzu", "pgo"}, {"ndutqtjuzu"}, {"pgo", "rbrymc"}, {"wicacrldwneag", "ndutqtjuzu"}, {}, {"wicacrldwneag", "rbrymc", "erpevpmu"}, {"w"}, {"wmycibrjxh", "wicacrldwneag", "pgo", "w"}, {}, {"w"}, {"gxsskiz", "erpevpmu", "vpfdcjwngzuf"}, {"wicacrldwneag"}, {"vpfdcjwngzuf"}, {"wmycibrjxh", "erpevpmu"}, {"ndutqtjuzu", "pgo"}, {"ndutqtjuzu", "pgo"}, {"wmycibrjxh", "erpevpmu", "jboexi"}, {"wmycibrjxh", "wicacrldwneag", "jboexi"}, {"wmycibrjxh", "wicacrldwneag", "rbrymc"}, {"wicacrldwneag"}, {"erpevpmu", "vpfdcjwngzuf"}, {"wmycibrjxh"}, {"jboexi", "w"}, {"erpevpmu", "jboexi", "w"}, {"w"}, {"erpevpmu", "jboexi"}, {"jboexi"}, {"wicacrldwneag"}, {}, {"jboexi", "vpfdcjwngzuf"}, {"wmycibrjxh", "jboexi"}, {"wicacrldwneag"}, {}, {"pgo"}, {"wicacrldwneag"}, {}, {"wmycibrjxh", "vpfdcjwngzuf"}, {"wmycibrjxh"}, {"pgo", "vpfdcjwngzuf", "w"}, {"wicacrldwneag", "jboexi"}, {"wicacrldwneag", "erpevpmu", "vpfdcjwngzuf"}, {"wicacrldwneag"}, {"wmycibrjxh", "pgo", "erpevpmu", "vpfdcjwngzuf"}, {"w"}, {"vpfdcjwngzuf", "w"}, {"wmycibrjxh", "erpevpmu"}, {"wicacrldwneag", "pgo", "jboexi"}, {"wmycibrjxh", "erpevpmu", "vpfdcjwngzuf"}, {"w"}, {}, {}, {}, {"pgo", "jboexi"}, {"wicacrldwneag"}, {"wicacrldwneag", "erpevpmu", "jboexi"}, {"wmycibrjxh", "pgo"}, {"wmycibrjxh", "wicacrldwneag", "gxsskiz"}, {"erpevpmu"}, {"pgo", "rbrymc", "erpevpmu", "w"}},
-		// 	Answer:     []int{},
-		// },
-		// TestCase{
-		// 	Req_skills: []string{"hkyodbbhr", "p", "biflxurxdvb", "x", "qq", "yhiwcn"},
-		// 	People:     [][]string{{"yhiwcn"}, {}, {}, {}, {"biflxurxdvb", "yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {"hkyodbbhr", "qq"}, {"qq"}, {"hkyodbbhr"}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {"hkyodbbhr"}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {}, {}, {"hkyodbbhr"}, {"biflxurxdvb"}, {"qq", "yhiwcn"}, {"hkyodbbhr", "yhiwcn"}, {"hkyodbbhr"}, {}, {}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {}, {"hkyodbbhr"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {}, {"yhiwcn"}, {}, {"yhiwcn"}, {"x"}, {"hkyodbbhr"}, {}, {}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {}, {"hkyodbbhr", "biflxurxdvb", "yhiwcn"}, {}},
-		// },
-		// TestCase{
-		// 	Req_skills: []string{"hfkbcrslcdjq", "jmhobexvmmlyyzk", "fjubadocdwaygs", "peaqbonzgl", "brgjopmm", "x", "mf", "pcfpppaxsxtpixd", "ccwfthnjt", "xtadkauiqwravo", "zezdb", "a", "rahimgtlopffbwdg", "ulqocaijhezwfr", "zshbwqdhx", "hyxnrujrqykzhizm"},
-		// 	People:     [][]string{{"peaqbonzgl", "xtadkauiqwravo"}, {"peaqbonzgl", "pcfpppaxsxtpixd", "zshbwqdhx"}, {"x", "a"}, {"a"}, {"jmhobexvmmlyyzk", "fjubadocdwaygs", "xtadkauiqwravo", "zshbwqdhx"}, {"fjubadocdwaygs", "x", "zshbwqdhx"}, {"x", "xtadkauiqwravo"}, {"x", "hyxnrujrqykzhizm"}, {"peaqbonzgl", "x", "pcfpppaxsxtpixd", "a"}, {"peaqbonzgl", "pcfpppaxsxtpixd"}, {"a"}, {"hyxnrujrqykzhizm"}, {"jmhobexvmmlyyzk"}, {"hfkbcrslcdjq", "xtadkauiqwravo", "a", "zshbwqdhx"}, {"peaqbonzgl", "mf", "a", "rahimgtlopffbwdg", "zshbwqdhx"}, {"xtadkauiqwravo"}, {"fjubadocdwaygs"}, {"x", "a", "ulqocaijhezwfr", "zshbwqdhx"}, {"peaqbonzgl"}, {"pcfpppaxsxtpixd", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"a", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"a", "rahimgtlopffbwdg"}, {"zshbwqdhx"}, {"fjubadocdwaygs", "peaqbonzgl", "brgjopmm", "x"}, {"hyxnrujrqykzhizm"}, {"jmhobexvmmlyyzk", "a", "ulqocaijhezwfr"}, {"peaqbonzgl", "x", "a", "ulqocaijhezwfr", "zshbwqdhx"}, {"mf", "pcfpppaxsxtpixd"}, {"fjubadocdwaygs", "ulqocaijhezwfr"}, {"fjubadocdwaygs", "x", "a"}, {"zezdb", "hyxnrujrqykzhizm"}, {"ccwfthnjt", "a"}, {"fjubadocdwaygs", "zezdb", "a"}, {}, {"peaqbonzgl", "ccwfthnjt", "hyxnrujrqykzhizm"}, {"xtadkauiqwravo", "hyxnrujrqykzhizm"}, {"peaqbonzgl", "a"}, {"x", "a", "hyxnrujrqykzhizm"}, {"zshbwqdhx"}, {}, {"fjubadocdwaygs", "mf", "pcfpppaxsxtpixd", "zshbwqdhx"}, {"pcfpppaxsxtpixd", "a", "zshbwqdhx"}, {"peaqbonzgl"}, {"peaqbonzgl", "x", "ulqocaijhezwfr"}, {"ulqocaijhezwfr"}, {"x"}, {"fjubadocdwaygs", "peaqbonzgl"}, {"fjubadocdwaygs", "xtadkauiqwravo"}, {"pcfpppaxsxtpixd", "zshbwqdhx"}, {"peaqbonzgl", "brgjopmm", "pcfpppaxsxtpixd", "a"}, {"fjubadocdwaygs", "x", "mf", "ulqocaijhezwfr"}, {"jmhobexvmmlyyzk", "brgjopmm", "rahimgtlopffbwdg", "hyxnrujrqykzhizm"}, {"x", "ccwfthnjt", "hyxnrujrqykzhizm"}, {"hyxnrujrqykzhizm"}, {"peaqbonzgl", "x", "xtadkauiqwravo", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"brgjopmm", "ulqocaijhezwfr", "zshbwqdhx"}, {"peaqbonzgl", "pcfpppaxsxtpixd"}, {"fjubadocdwaygs", "x", "a", "zshbwqdhx"}, {"fjubadocdwaygs", "peaqbonzgl", "x"}, {"ccwfthnjt"}},
-		// },
+		TestCase{
+			Req_skills: []string{"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"},
+			People:     [][]string{{"hdbxcuzyzhliwv", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "sdi", "ylopoifzkacuwp", "dzsgleocfpl"}, {"bztg", "ylopoifzkacuwp"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "bztg"}, {"dzsgleocfpl"}, {"uvwlzkmzgis"}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "sdi"}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"}, {"dzsgleocfpl"}, {"sdi", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi"}, {}, {}, {"ylopoifzkacuwp"}, {}, {"sdi", "bztg"}, {"bztg", "dzsgleocfpl"}, {"sdi", "bztg"}},
+		},
+		TestCase{
+			Req_skills: []string{"algorithms", "math", "java", "reactjs", "csharp", "aws"},
+			People:     [][]string{{"algorithms", "math", "java"}, {"algorithms", "math", "reactjs"}, {"java", "csharp", "aws"}, {"reactjs", "csharp"}, {"csharp", "math"}, {"aws", "java"}},
+			Answer:     []int{1, 2},
+		},
+		TestCase{
+			Req_skills: []string{"wmycibrjxh", "wicacrldwneag", "ndutqtjuzu", "pgo", "gxsskiz", "rbrymc", "erpevpmu", "jboexi", "vpfdcjwngzuf", "w"},
+			People:     [][]string{{}, {"ndutqtjuzu", "pgo"}, {"ndutqtjuzu"}, {"pgo", "rbrymc"}, {"wicacrldwneag", "ndutqtjuzu"}, {}, {"wicacrldwneag", "rbrymc", "erpevpmu"}, {"w"}, {"wmycibrjxh", "wicacrldwneag", "pgo", "w"}, {}, {"w"}, {"gxsskiz", "erpevpmu", "vpfdcjwngzuf"}, {"wicacrldwneag"}, {"vpfdcjwngzuf"}, {"wmycibrjxh", "erpevpmu"}, {"ndutqtjuzu", "pgo"}, {"ndutqtjuzu", "pgo"}, {"wmycibrjxh", "erpevpmu", "jboexi"}, {"wmycibrjxh", "wicacrldwneag", "jboexi"}, {"wmycibrjxh", "wicacrldwneag", "rbrymc"}, {"wicacrldwneag"}, {"erpevpmu", "vpfdcjwngzuf"}, {"wmycibrjxh"}, {"jboexi", "w"}, {"erpevpmu", "jboexi", "w"}, {"w"}, {"erpevpmu", "jboexi"}, {"jboexi"}, {"wicacrldwneag"}, {}, {"jboexi", "vpfdcjwngzuf"}, {"wmycibrjxh", "jboexi"}, {"wicacrldwneag"}, {}, {"pgo"}, {"wicacrldwneag"}, {}, {"wmycibrjxh", "vpfdcjwngzuf"}, {"wmycibrjxh"}, {"pgo", "vpfdcjwngzuf", "w"}, {"wicacrldwneag", "jboexi"}, {"wicacrldwneag", "erpevpmu", "vpfdcjwngzuf"}, {"wicacrldwneag"}, {"wmycibrjxh", "pgo", "erpevpmu", "vpfdcjwngzuf"}, {"w"}, {"vpfdcjwngzuf", "w"}, {"wmycibrjxh", "erpevpmu"}, {"wicacrldwneag", "pgo", "jboexi"}, {"wmycibrjxh", "erpevpmu", "vpfdcjwngzuf"}, {"w"}, {}, {}, {}, {"pgo", "jboexi"}, {"wicacrldwneag"}, {"wicacrldwneag", "erpevpmu", "jboexi"}, {"wmycibrjxh", "pgo"}, {"wmycibrjxh", "wicacrldwneag", "gxsskiz"}, {"erpevpmu"}, {"pgo", "rbrymc", "erpevpmu", "w"}},
+			Answer:     []int{},
+		},
+		TestCase{
+			Req_skills: []string{"hkyodbbhr", "p", "biflxurxdvb", "x", "qq", "yhiwcn"},
+			People:     [][]string{{"yhiwcn"}, {}, {}, {}, {"biflxurxdvb", "yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {"hkyodbbhr", "qq"}, {"qq"}, {"hkyodbbhr"}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {"hkyodbbhr"}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {}, {}, {"hkyodbbhr"}, {"biflxurxdvb"}, {"qq", "yhiwcn"}, {"hkyodbbhr", "yhiwcn"}, {"hkyodbbhr"}, {}, {}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {}, {"hkyodbbhr"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {}, {"yhiwcn"}, {}, {"yhiwcn"}, {"x"}, {"hkyodbbhr"}, {}, {}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {}, {"hkyodbbhr", "biflxurxdvb", "yhiwcn"}, {}},
+		},
+		TestCase{
+			Req_skills: []string{"hfkbcrslcdjq", "jmhobexvmmlyyzk", "fjubadocdwaygs", "peaqbonzgl", "brgjopmm", "x", "mf", "pcfpppaxsxtpixd", "ccwfthnjt", "xtadkauiqwravo", "zezdb", "a", "rahimgtlopffbwdg", "ulqocaijhezwfr", "zshbwqdhx", "hyxnrujrqykzhizm"},
+			People:     [][]string{{"peaqbonzgl", "xtadkauiqwravo"}, {"peaqbonzgl", "pcfpppaxsxtpixd", "zshbwqdhx"}, {"x", "a"}, {"a"}, {"jmhobexvmmlyyzk", "fjubadocdwaygs", "xtadkauiqwravo", "zshbwqdhx"}, {"fjubadocdwaygs", "x", "zshbwqdhx"}, {"x", "xtadkauiqwravo"}, {"x", "hyxnrujrqykzhizm"}, {"peaqbonzgl", "x", "pcfpppaxsxtpixd", "a"}, {"peaqbonzgl", "pcfpppaxsxtpixd"}, {"a"}, {"hyxnrujrqykzhizm"}, {"jmhobexvmmlyyzk"}, {"hfkbcrslcdjq", "xtadkauiqwravo", "a", "zshbwqdhx"}, {"peaqbonzgl", "mf", "a", "rahimgtlopffbwdg", "zshbwqdhx"}, {"xtadkauiqwravo"}, {"fjubadocdwaygs"}, {"x", "a", "ulqocaijhezwfr", "zshbwqdhx"}, {"peaqbonzgl"}, {"pcfpppaxsxtpixd", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"a", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"a", "rahimgtlopffbwdg"}, {"zshbwqdhx"}, {"fjubadocdwaygs", "peaqbonzgl", "brgjopmm", "x"}, {"hyxnrujrqykzhizm"}, {"jmhobexvmmlyyzk", "a", "ulqocaijhezwfr"}, {"peaqbonzgl", "x", "a", "ulqocaijhezwfr", "zshbwqdhx"}, {"mf", "pcfpppaxsxtpixd"}, {"fjubadocdwaygs", "ulqocaijhezwfr"}, {"fjubadocdwaygs", "x", "a"}, {"zezdb", "hyxnrujrqykzhizm"}, {"ccwfthnjt", "a"}, {"fjubadocdwaygs", "zezdb", "a"}, {}, {"peaqbonzgl", "ccwfthnjt", "hyxnrujrqykzhizm"}, {"xtadkauiqwravo", "hyxnrujrqykzhizm"}, {"peaqbonzgl", "a"}, {"x", "a", "hyxnrujrqykzhizm"}, {"zshbwqdhx"}, {}, {"fjubadocdwaygs", "mf", "pcfpppaxsxtpixd", "zshbwqdhx"}, {"pcfpppaxsxtpixd", "a", "zshbwqdhx"}, {"peaqbonzgl"}, {"peaqbonzgl", "x", "ulqocaijhezwfr"}, {"ulqocaijhezwfr"}, {"x"}, {"fjubadocdwaygs", "peaqbonzgl"}, {"fjubadocdwaygs", "xtadkauiqwravo"}, {"pcfpppaxsxtpixd", "zshbwqdhx"}, {"peaqbonzgl", "brgjopmm", "pcfpppaxsxtpixd", "a"}, {"fjubadocdwaygs", "x", "mf", "ulqocaijhezwfr"}, {"jmhobexvmmlyyzk", "brgjopmm", "rahimgtlopffbwdg", "hyxnrujrqykzhizm"}, {"x", "ccwfthnjt", "hyxnrujrqykzhizm"}, {"hyxnrujrqykzhizm"}, {"peaqbonzgl", "x", "xtadkauiqwravo", "ulqocaijhezwfr", "hyxnrujrqykzhizm"}, {"brgjopmm", "ulqocaijhezwfr", "zshbwqdhx"}, {"peaqbonzgl", "pcfpppaxsxtpixd"}, {"fjubadocdwaygs", "x", "a", "zshbwqdhx"}, {"fjubadocdwaygs", "peaqbonzgl", "x"}, {"ccwfthnjt"}},
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -76,8 +76,6 @@ func main() {
 }
 
 // 以上不進 LeetCode
-
-var savedComputeTimes = 0
 var spentComputeTimes = 0
 
 type People struct {
@@ -134,45 +132,30 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
-	coreDFS2(myCandidates, len(req_skills))
-
-	len_samllestKey := 0xFFFFFFF
-	samllestKey := ""
-	for k, v := range tableComputed {
-		fmt.Printf("k=%v, v=%v\n", k, v)
-		if IsNonZero(v) {
-			//比較key的長度，短的代表湊齊成員少，選短的保存
-			len_currentKey := len(strings.Split(k, "-"))
-			if len_samllestKey > len_currentKey {
-				len_samllestKey = len_currentKey
-				samllestKey = k
-			}
-		}
-	}
+	samllestKey := IntSliceToString(coreDFS2(myCandidates, len(req_skills), 0))
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
-	fmt.Println("savedComputeTimes=", savedComputeTimes)
 	fmt.Println("spentComputeTimes=", spentComputeTimes)
 	return IntStringToIntSlice(samllestKey)
 }
 
-func coreDFS1(myCandidates candidates, len_req_skills int)[]int{
-	for i:=0;i<len(myCandidates);i++{	
-		//存入計算結果，滿足解答就 return
-		tableComputed[strconv.Itoa(myCandidates[i].Uid)] = myCandidates[i].MatchIndex
-		if IsNonZero(myCandidates[i].MatchIndex) {
-			return []int{myCandidates[i].Uid}
+func coreDFS2(myCandidates candidates, len_req_skills int, depth int)[]int{
+
+	var result []int
+	if(depth == len_req_skills){
+		for i:=0;i<len(myCandidates);i++{	
+			//存入計算結果，滿足解答就 return
+			tableComputed[strconv.Itoa(myCandidates[i].Uid)] = myCandidates[i].MatchIndex
+			if IsNonZero(myCandidates[i].MatchIndex) {
+				return []int{myCandidates[i].Uid}
+			}
 		}
+		result = nil
+	} else {
+		result = coreDFS2(myCandidates, len_req_skills, depth+1)
 	}
-
-	return nil //代表這一層沒有答案出現
-}
-
-func coreDFS2(myCandidates candidates, len_req_skills int)[]int{
-
-	result := coreDFS1(myCandidates, len_req_skills)
-
+	
 	if (nil != result){
 		return result
 	}
@@ -193,6 +176,7 @@ func coreDFS2(myCandidates candidates, len_req_skills int)[]int{
 			}(prevKey, currKey)	
 
 			//存入計算結果，滿足解答就 return
+			spentComputeTimes++
 			tableComputed[strID] = Or(v, myCandidates[i].MatchIndex)
 			if IsNonZero(tableComputed[strID]) {
 				return IntStringToIntSlice(strID)
@@ -201,91 +185,6 @@ func coreDFS2(myCandidates candidates, len_req_skills int)[]int{
 	}
 
 	return nil //代表這一層沒有答案出現
-}
-
-func RecursiveDFS(myCandidates candidates, len_req_skills int) []int {
-	for i:=0;i<len(myCandidates);i++{	
-				
-		//存入計算結果，滿足解答就 return
-		tableComputed[strconv.Itoa(myCandidates[i].Uid)] = myCandidates[i].MatchIndex
-		if IsNonZero(myCandidates[i].MatchIndex) {
-			return []int{myCandidates[i].Uid}
-		}
-
-		// for j:=i;j<len(myCandidates);j++{
-		// 	if(i==j){ continue } 
-
-		// 	//生成合併key //生成ID
-		// 	strID := func(prevKey int, currKey int) string {
-		// 		return IntSliceToString([]int{prevKey, currKey})
-		// 	}(myCandidates[i].Uid, myCandidates[j].Uid)
-
-		// 	//存入計算結果，滿足解答就 return
-		// 	tableComputed[strID] = Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
-		// 	if IsNonZero(tableComputed[strID]) {
-		// 		return IntStringToIntSlice(strID)
-		// 	}
-		// }
-
-		
-	}
-	return []int{}
-}
-
-func Recursive(myCandidates candidates, len_req_skills int) []int {
-	//如果遞迴到只剩下一個
-	if 1 == len(myCandidates) {
-		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
-		return myCandidates[0].MatchIndex
-	}
-
-	//生成ID
-	strID := func() string {
-		var temp []int
-		for _, c := range myCandidates {
-			temp = append(temp, c.Uid)
-		}
-		sort.Sort(sort.IntSlice(temp))
-		return IntSliceToString(temp)
-	}()
-
-	if v, ok := tableComputed[strID]; ok {
-		savedComputeTimes++
-		return v
-	} else {
-		for skip_i, c := range myCandidates {
-			//生成子集ID
-			splited_strID := strings.Split(strID, "-")
-			splited_strID = append(splited_strID[:skip_i], splited_strID[skip_i+1:]...)
-			str_subset_ID := strings.Join(splited_strID, "-")
-
-			if _, ok := tableComputed[str_subset_ID]; !ok {
-				spentComputeTimes++
-
-				//安全複製子集
-				subset_myCandidates := make([]People, len(myCandidates))
-				copy(subset_myCandidates, myCandidates)
-				subset_myCandidates = append(subset_myCandidates[:skip_i], subset_myCandidates[skip_i+1:]...)
-
-				//計算子集，並為子集建立 key, value
-				//這一步會向下延伸 key 更短的可能性，要走遍，不可以剪枝
-				//還沒湊滿1的計算結果不能剪掉，要留給其他計算走捷徑
-				tableComputed[str_subset_ID] = Recursive(subset_myCandidates, len_req_skills)
-			} else {
-				savedComputeTimes++
-			}
-
-			if 0 == skip_i {
-				//還沒湊滿1的計算結果不能剪掉，要留給其他計算走捷徑
-				tableComputed[strID] = Or(c.MatchIndex, tableComputed[str_subset_ID])
-			}
-		}
-	}
-
-	if(0==spentComputeTimes%1000000){
-		fmt.Println("spentComputeTimes=",spentComputeTimes)
-	}
-	return tableComputed[strID]
 }
 
 func MatchSkills(req_skills []string, peopleHaveSkills []string) People {
