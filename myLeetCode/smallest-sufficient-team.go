@@ -62,6 +62,7 @@ func main() {
 		TestCase{
 			Req_skills: []string{"hkyodbbhr", "p", "biflxurxdvb", "x", "qq", "yhiwcn"},
 			People:     [][]string{{"yhiwcn"}, {}, {}, {}, {"biflxurxdvb", "yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {"hkyodbbhr", "qq"}, {"qq"}, {"hkyodbbhr"}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {"hkyodbbhr"}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"hkyodbbhr"}, {"hkyodbbhr", "p"}, {}, {}, {"hkyodbbhr"}, {"biflxurxdvb"}, {"qq", "yhiwcn"}, {"hkyodbbhr", "yhiwcn"}, {"hkyodbbhr"}, {}, {}, {"hkyodbbhr"}, {}, {"yhiwcn"}, {}, {"hkyodbbhr"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {"hkyodbbhr", "yhiwcn"}, {"yhiwcn"}, {"yhiwcn"}, {}, {}, {}, {"yhiwcn"}, {}, {"yhiwcn"}, {"x"}, {"hkyodbbhr"}, {}, {}, {"yhiwcn"}, {}, {"biflxurxdvb"}, {}, {}, {"hkyodbbhr", "biflxurxdvb", "yhiwcn"}, {}},
+			Answer:     []int{21, 26, 49, 58},
 		},
 		TestCase{
 			Req_skills: []string{"hfkbcrslcdjq", "jmhobexvmmlyyzk", "fjubadocdwaygs", "peaqbonzgl", "brgjopmm", "x", "mf", "pcfpppaxsxtpixd", "ccwfthnjt", "xtadkauiqwravo", "zezdb", "a", "rahimgtlopffbwdg", "ulqocaijhezwfr", "zshbwqdhx", "hyxnrujrqykzhizm"},
@@ -132,7 +133,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
-	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 0))
+	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 2))
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
@@ -160,23 +161,23 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 		return result
 	}
 
-	for i := 0; i < len(myCandidates); i++ {
+	for _, c := range myCandidates {
 		for k, v := range tableComputed {
 			//生成合併排序key
-			prevKey, currKey := IntStringToIntSlice(k), myCandidates[i].Uid
+			prevKey, currKey := IntStringToIntSlice(k), c.Uid
 			if containsInt(prevKey, currKey) {
 				continue //key 重複了，此圈免算
 			}
 
 			strKey := func(prevKey []int, currKey int) string {
-				temp := sort.IntSlice(append(prevKey, currKey))
-				sort.Sort(temp)
-				return IntSliceToString(temp)
+				prevKey = append(prevKey, currKey)
+				sort.Sort(sort.IntSlice(prevKey))
+				return IntSliceToString(prevKey)
 			}(prevKey, currKey)
 
 			//存入計算結果，滿足解答就 return
 			spentComputeTimes++
-			tableComputed[strKey] = Or(v, myCandidates[i].MatchIndex)
+			tableComputed[strKey] = Or(v, c.MatchIndex)
 			if IsNonZero(tableComputed[strKey]) {
 				return IntStringToIntSlice(strKey)
 			}
