@@ -140,11 +140,11 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return IntStringToIntSlice(samllestKey)
 }
 
-func DFS_Match(myCandidates candidates, len_req_skills int, depth int)[]int{
+func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 
 	var result []int
-	if(depth == len_req_skills){
-		for _, c := range(myCandidates){	
+	if depth == len_req_skills {
+		for _, c := range myCandidates {
 			//存入計算結果，滿足解答就 return
 			tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
 			if IsNonZero(c.MatchIndex) {
@@ -155,16 +155,16 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int)[]int{
 	} else {
 		result = DFS_Match(myCandidates, len_req_skills, depth+1)
 	}
-	
-	if (nil != result){
+
+	if nil != result {
 		return result
 	}
 
-	for i:=0;i<len(myCandidates);i++{	
-		for k, v := range(tableComputed){
+	for i := 0; i < len(myCandidates); i++ {
+		for k, v := range tableComputed {
 			//生成合併排序key
 			prevKey, currKey := IntStringToIntSlice(k), myCandidates[i].Uid
-			if containsInt(prevKey, currKey){
+			if containsInt(prevKey, currKey) {
 				continue //key 重複了，此圈免算
 			}
 
@@ -172,7 +172,7 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int)[]int{
 				temp := sort.IntSlice(append(prevKey, currKey))
 				sort.Sort(temp)
 				return IntSliceToString(temp)
-			}(prevKey, currKey)	
+			}(prevKey, currKey)
 
 			//存入計算結果，滿足解答就 return
 			spentComputeTimes++
