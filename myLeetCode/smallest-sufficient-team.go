@@ -132,7 +132,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
-	samllestKey := IntSliceToString(coreDFS2(myCandidates, len(req_skills), 0))
+	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 0))
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
@@ -140,20 +140,20 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return IntStringToIntSlice(samllestKey)
 }
 
-func coreDFS2(myCandidates candidates, len_req_skills int, depth int)[]int{
+func DFS_Match(myCandidates candidates, len_req_skills int, depth int)[]int{
 
 	var result []int
 	if(depth == len_req_skills){
-		for i:=0;i<len(myCandidates);i++{	
+		for _, c := range(myCandidates){	
 			//存入計算結果，滿足解答就 return
-			tableComputed[strconv.Itoa(myCandidates[i].Uid)] = myCandidates[i].MatchIndex
-			if IsNonZero(myCandidates[i].MatchIndex) {
-				return []int{myCandidates[i].Uid}
+			tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
+			if IsNonZero(c.MatchIndex) {
+				return []int{c.Uid}
 			}
 		}
-		result = nil
+		result = nil //代表這一層沒有答案出現
 	} else {
-		result = coreDFS2(myCandidates, len_req_skills, depth+1)
+		result = DFS_Match(myCandidates, len_req_skills, depth+1)
 	}
 	
 	if (nil != result){
@@ -163,8 +163,7 @@ func coreDFS2(myCandidates candidates, len_req_skills int, depth int)[]int{
 	for i:=0;i<len(myCandidates);i++{	
 		for k, v := range(tableComputed){
 			//生成合併排序key
-			prevKey := IntStringToIntSlice(k)
-			currKey := myCandidates[i].Uid
+			prevKey, currKey := IntStringToIntSlice(k), myCandidates[i].Uid
 			if containsInt(prevKey, currKey){
 				continue //key 重複了，此圈免算
 			}
