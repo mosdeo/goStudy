@@ -146,27 +146,25 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 
-	result :=
-		func() []int {
-			if depth == len_req_skills {
-				for _, c := range myCandidates {
-					//存入計算結果，滿足解答就 return
-					tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
-					if IsNonZero(c.MatchIndex) {
-						return []int{c.Uid}
-					}
-				}
-				return nil //代表這一層沒有答案出現
+	// 只要還沒到最底層，就去看更深一層
+	if depth == len_req_skills{
+		for _, c := range myCandidates {
+			//存入計算結果，滿足解答就 return
+			tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
+			if IsNonZero(c.MatchIndex) {
+				return []int{c.Uid}
 			}
-
-			return DFS_Match(myCandidates, len_req_skills, depth+1)
-		}()
-
-	// 更深的層有結果了，此層免算
-	if nil != result {
-		return result
+		}
+		return nil //代表這一層沒有答案出現
+	} else {
+		result := DFS_Match(myCandidates, len_req_skills, depth+1)
+		// // 更深的層有結果了，此層免算
+		if nil != result {
+			return result
+		}
 	}
-
+	
+	//更深的層都沒有答案，所以要把這一層算完
 	for _, c := range myCandidates {
 		for k, v := range tableComputed {
 			//檢驗是否有重複key？
