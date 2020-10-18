@@ -114,18 +114,9 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 	SufficientExam(myCandidates, len(req_skills))
 
-	// //窮舉組合檢查
-	// var keySet []int
-	// for k, _ := range tableComputed {
-	// 	intkey, _ := strconv.Atoi(k)
-	// 	keySet = append(keySet, intkey)
-	// }
-	// fmt.Print("窮舉組合檢查:")
-	// return keySet
-
 	samllestKey := "---------------------------------------------------------------"
 	for k, v := range tableComputed {
-		fmt.Println(k, v)
+		// fmt.Println(k, v)
 		if IsNonZero(v) {
 			if len(samllestKey) > len(k) {
 				samllestKey = k
