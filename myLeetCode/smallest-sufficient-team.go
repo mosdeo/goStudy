@@ -121,12 +121,14 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 			j_EqRes := Equal(OrResult, myCandidates[j].MatchIndex)
 
 			//剔除不能改變結果的那一邊
-			if i_EqRes && !j_EqRes {
-				myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
-				j = i // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
-			} else if j_EqRes && !i_EqRes {
-				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
-				j = i // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
+			if i_EqRes != j_EqRes {
+				if i_EqRes {
+					myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
+				}
+				if j_EqRes {
+					myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
+				}
+				j, i = 0, 0 // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
 			}
 		}
 	}
