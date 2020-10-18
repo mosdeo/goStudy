@@ -162,14 +162,14 @@ func coreDFS2(myCandidates candidates, len_req_skills int, depth int)[]int{
 
 	for i:=0;i<len(myCandidates);i++{	
 		for k, v := range(tableComputed){
-			//生成合併排序key(ID)
+			//生成合併排序key
 			prevKey := IntStringToIntSlice(k)
 			currKey := myCandidates[i].Uid
 			if containsInt(prevKey, currKey){
 				continue //key 重複了，此圈免算
 			}
 
-			strID := func(prevKey []int, currKey int) string {
+			strKey := func(prevKey []int, currKey int) string {
 				temp := sort.IntSlice(append(prevKey, currKey))
 				sort.Sort(temp)
 				return IntSliceToString(temp)
@@ -177,9 +177,9 @@ func coreDFS2(myCandidates candidates, len_req_skills int, depth int)[]int{
 
 			//存入計算結果，滿足解答就 return
 			spentComputeTimes++
-			tableComputed[strID] = Or(v, myCandidates[i].MatchIndex)
-			if IsNonZero(tableComputed[strID]) {
-				return IntStringToIntSlice(strID)
+			tableComputed[strKey] = Or(v, myCandidates[i].MatchIndex)
+			if IsNonZero(tableComputed[strKey]) {
+				return IntStringToIntSlice(strKey)
 			}
 		}
 	}
