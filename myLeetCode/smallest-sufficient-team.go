@@ -7,11 +7,18 @@ import (
 	"strings"
 )
 
+type TestCase struct {
+	Req_skills []string
+	People [][]string
+	Asnwer []int
+}
+
 type People struct {
 	Uid         int
 	MatchIndex  []int
 	NumOfMatchs int
 }
+
 
 type candidates []People
 
@@ -46,20 +53,32 @@ func main() {
 	//nums := []int{0, 1, 2}
 	//R(nums)
 
-	// req_skills := []string{"java", "nodejs", "reactjs"}
-	// people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
+	var testCases = []TestCase{
+		TestCase{
+			Req_skills: []string{"java", "nodejs", "reactjs"},
+			People: [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}},
+		},
+		TestCase{
+			Req_skills: []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"},
+			People: [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
+		},
+		TestCase{
+			Req_skills: []string{"mmcmnwacnhhdd","vza","mrxyc"},
+			People: [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}},
+		},
+		TestCase{
+			Req_skills: []string{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},
+			People: [][]string{{"hdbxcuzyzhliwv","dzsgleocfpl"},{"hdbxcuzyzhliwv","sdi","ylopoifzkacuwp","dzsgleocfpl"},{"bztg","ylopoifzkacuwp"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","bztg"},{"dzsgleocfpl"},{"uvwlzkmzgis"},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","sdi"},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},{"dzsgleocfpl"},{"sdi","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi"},{},{},{"ylopoifzkacuwp"},{},{"sdi","bztg"},{"bztg","dzsgleocfpl"},{"sdi","bztg"}},
+		},
+		TestCase{
+			Req_skills: []string{"algorithms","math","java","reactjs","csharp","aws"},
+			People: [][]string{{"algorithms","math","java"},{"algorithms","math","reactjs"},{"java","csharp","aws"},{"reactjs","csharp"},{"csharp","math"},{"aws","java"}},
+		},
+	}
 
-	req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
-	people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
-	
-	// req_skills := []string{"mmcmnwacnhhdd","vza","mrxyc"}
-	// people := [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}}
-	
-	//req_skills := []string{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"}
-	//people := [][]string{{"hdbxcuzyzhliwv","dzsgleocfpl"},{"hdbxcuzyzhliwv","sdi","ylopoifzkacuwp","dzsgleocfpl"},{"bztg","ylopoifzkacuwp"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","bztg"},{"dzsgleocfpl"},{"uvwlzkmzgis"},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","sdi"},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},{"dzsgleocfpl"},{"sdi","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi"},{},{},{"ylopoifzkacuwp"},{},{"sdi","bztg"},{"bztg","dzsgleocfpl"},{"sdi","bztg"}}
-
-
-	fmt.Print(smallestSufficientTeam(req_skills, people))
+	for _, testCase := range(testCases){
+		fmt.Print(smallestSufficientTeam(testCase.Req_skills, testCase.People))
+	}
 }
 
 func smallestSufficientTeam(req_skills []string, people [][]string) []int {
