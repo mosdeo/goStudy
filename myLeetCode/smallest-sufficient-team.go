@@ -27,6 +27,37 @@ func (c candidates) Less(i, j int) bool {
 
 var tableComputed map[string]([]int)
 
+func R(nums []int) {
+	fmt.Println(nums)
+	if 1 != len(nums) {
+		for skip_i := range nums {
+			new_nums := make([]int, len(nums))
+			copy(new_nums, nums)
+			new_nums = append(new_nums[:skip_i], new_nums[skip_i+1:]...)
+			R(new_nums)
+		}
+	}
+}
+
+var savedComputeTimes = 0
+var spentComputeTimes = 0
+
+func main() {
+	//nums := []int{0, 1, 2}
+	//R(nums)
+
+	// req_skills := []string{"java", "nodejs", "reactjs"}
+	// people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
+
+	// req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
+	// people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
+	
+	req_skills := []string{"mmcmnwacnhhdd","vza","mrxyc"}
+	people := [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}}
+	
+	fmt.Print(smallestSufficientTeam(req_skills, people))
+}
+
 func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	tableComputed = make(map[string][]int)
 
@@ -39,6 +70,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 			myCandidates = append(myCandidates, theCandidate)
 		}
 	}
+	fmt.Println("len(myCandidates)=",len(myCandidates))
 
 	SufficientExam(myCandidates, len(req_skills))
 
@@ -68,34 +100,13 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return IntStringToIntSlice(samllestKey)
 }
 
-func R(nums []int) {
-	fmt.Println(nums)
-	if 1 != len(nums) {
-		for skip_i := range nums {
-			new_nums := make([]int, len(nums))
-			copy(new_nums, nums)
-			new_nums = append(new_nums[:skip_i], new_nums[skip_i+1:]...)
-			R(new_nums)
-		}
-	}
-}
-
-var savedComputeTimes = 0
-var spentComputeTimes = 0
-
-func main() {
-	//nums := []int{0, 1, 2}
-	//R(nums)
-
-	// req_skills := []string{"java", "nodejs", "reactjs"}
-	// people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
-
-	req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
-	people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
-	fmt.Print(smallestSufficientTeam(req_skills, people))
-}
-
 func SufficientExam(myCandidates candidates, len_req_skills int) []int {
+	//如果遞迴到只剩下一個
+	if 1 == len(myCandidates) {
+		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
+		return myCandidates[0].MatchIndex
+	}
+	
 	//生成ID
 	var temp []int
 	for _, c := range myCandidates {
@@ -105,45 +116,42 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 	strID := IntSliceToString(temp)
 	fmt.Println("ID=", strID)
 
-	//如果遞迴到只剩下一個
-	if 1 == len(myCandidates) {
-		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
-		return myCandidates[0].MatchIndex
-	}
+	if v, ok := tableComputed[strID]; ok {
+		return v
+	} else {
+		for skip_i, c := range myCandidates {
+			//生成子集ID
+			var temp []int
+			for i, c := range myCandidates {
+				if i != skip_i {
+					temp = append(temp, c.Uid)
+				}
+			}
+			sort.Sort(sort.Reverse(sort.IntSlice(temp)))
+			str_subset_ID := IntSliceToString(temp)
 
-	var output []int
-	for skip_i, c := range myCandidates {
-		//生成子集ID
-		var temp []int
-		for i, c := range myCandidates {
-			if i != skip_i {
-				temp = append(temp, c.Uid)
+			if _, ok := tableComputed[str_subset_ID]; !ok {
+				spentComputeTimes++
+
+				//安全複製子集
+				subset_myCandidates := make([]People, len(myCandidates))
+				copy(subset_myCandidates, myCandidates)
+				subset_myCandidates = append(subset_myCandidates[:skip_i], subset_myCandidates[skip_i+1:]...)
+
+				//計算子集
+				//為子集建立key, value
+				tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
+			} else {
+				savedComputeTimes++
+			}
+
+			if 0 == skip_i {
+				tableComputed[strID] = Or(c.MatchIndex, tableComputed[str_subset_ID])
 			}
 		}
-		sort.Sort(sort.Reverse(sort.IntSlice(temp)))
-		str_subset_ID := IntSliceToString(temp)
-
-		if _, ok := tableComputed[str_subset_ID]; !ok {
-			spentComputeTimes++
-
-			//安全複製子集
-			subset_myCandidates := make([]People, len(myCandidates))
-			copy(subset_myCandidates, myCandidates)
-			subset_myCandidates = append(subset_myCandidates[:skip_i], subset_myCandidates[skip_i+1:]...)
-
-			//計算子集
-			//為子集建立key, value
-			tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
-		} else {
-			savedComputeTimes++
-		}
-
-		if 0 == skip_i {
-			output = Or(c.MatchIndex, tableComputed[str_subset_ID])
-		}
 	}
 
-	return output
+	return tableComputed[strID]
 }
 
 func MatchSkills(req_skills []string, peopleHaveSkills []string) People {
