@@ -10,7 +10,7 @@ import (
 type TestCase struct {
 	Req_skills []string
 	People [][]string
-	Asnwer []int
+	Answer []int
 }
 
 func R(nums []int) {
@@ -33,14 +33,17 @@ func main() {
 		TestCase{
 			Req_skills: []string{"java", "nodejs", "reactjs"},
 			People: [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}},
+			Answer: []int{0, 2},
 		},
 		TestCase{
 			Req_skills: []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"},
 			People: [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
+			Answer: []int{12, 17, 18},
 		},
 		TestCase{
 			Req_skills: []string{"mmcmnwacnhhdd","vza","mrxyc"},
 			People: [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}},
+			Answer: []int{0, 3},
 		},
 		TestCase{
 			Req_skills: []string{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},
@@ -144,7 +147,8 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 	for _, c := range myCandidates {
 		temp = append(temp, c.Uid)
 	}
-	sort.Sort(sort.Reverse(sort.IntSlice(temp)))
+	//sort.Sort(sort.Reverse(sort.IntSlice(temp)))
+	sort.Sort(sort.IntSlice(temp))
 	strID := IntSliceToString(temp)
 	//fmt.Println("ID=", strID)
 
