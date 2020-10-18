@@ -9,8 +9,8 @@ import (
 
 type TestCase struct {
 	Req_skills []string
-	People [][]string
-	Answer []int
+	People     [][]string
+	Answer     []int
 }
 
 func R(nums []int) {
@@ -32,30 +32,30 @@ func main() {
 	var testCases = []TestCase{
 		TestCase{
 			Req_skills: []string{"java", "nodejs", "reactjs"},
-			People: [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}},
-			Answer: []int{0, 2},
+			People:     [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}},
+			Answer:     []int{0, 2},
 		},
 		TestCase{
 			Req_skills: []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"},
-			People: [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
-			Answer: []int{12, 17, 18},
+			People:     [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}},
+			Answer:     []int{12, 17, 18},
 		},
 		TestCase{
-			Req_skills: []string{"mmcmnwacnhhdd","vza","mrxyc"},
-			People: [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}},
-			Answer: []int{0, 3},
+			Req_skills: []string{"mmcmnwacnhhdd", "vza", "mrxyc"},
+			People:     [][]string{{"mmcmnwacnhhdd"}, {}, {}, {"vza", "mrxyc"}},
+			Answer:     []int{0, 3},
 		},
 		TestCase{
-			Req_skills: []string{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},
-			People: [][]string{{"hdbxcuzyzhliwv","dzsgleocfpl"},{"hdbxcuzyzhliwv","sdi","ylopoifzkacuwp","dzsgleocfpl"},{"bztg","ylopoifzkacuwp"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","bztg"},{"dzsgleocfpl"},{"uvwlzkmzgis"},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","sdi"},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},{"dzsgleocfpl"},{"sdi","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi"},{},{},{"ylopoifzkacuwp"},{},{"sdi","bztg"},{"bztg","dzsgleocfpl"},{"sdi","bztg"}},
+			Req_skills: []string{"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"},
+			People:     [][]string{{"hdbxcuzyzhliwv", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "sdi", "ylopoifzkacuwp", "dzsgleocfpl"}, {"bztg", "ylopoifzkacuwp"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "bztg"}, {"dzsgleocfpl"}, {"uvwlzkmzgis"}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"dzsgleocfpl"}, {"hdbxcuzyzhliwv"}, {}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi"}, {"bztg", "dzsgleocfpl"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi", "bztg", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "sdi"}, {"hdbxcuzyzhliwv", "ylopoifzkacuwp"}, {"sdi", "bztg", "ylopoifzkacuwp", "dzsgleocfpl"}, {"dzsgleocfpl"}, {"sdi", "ylopoifzkacuwp"}, {"hdbxcuzyzhliwv", "uvwlzkmzgis", "sdi"}, {}, {}, {"ylopoifzkacuwp"}, {}, {"sdi", "bztg"}, {"bztg", "dzsgleocfpl"}, {"sdi", "bztg"}},
 		},
 		TestCase{
-			Req_skills: []string{"algorithms","math","java","reactjs","csharp","aws"},
-			People: [][]string{{"algorithms","math","java"},{"algorithms","math","reactjs"},{"java","csharp","aws"},{"reactjs","csharp"},{"csharp","math"},{"aws","java"}},
+			Req_skills: []string{"algorithms", "math", "java", "reactjs", "csharp", "aws"},
+			People:     [][]string{{"algorithms", "math", "java"}, {"algorithms", "math", "reactjs"}, {"java", "csharp", "aws"}, {"reactjs", "csharp"}, {"csharp", "math"}, {"aws", "java"}},
 		},
 	}
 
-	for _, testCase := range(testCases){
+	for _, testCase := range testCases {
 		fmt.Println(smallestSufficientTeam(testCase.Req_skills, testCase.People))
 	}
 }
@@ -92,29 +92,40 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	var myCandidates candidates
 	for i, p := range people {
 		theCandidate := MatchSkills(req_skills, p)
-		if (0<theCandidate.NumOfMatchs){
+		if 0 < theCandidate.NumOfMatchs {
 			theCandidate.Uid = i
 			myCandidates = append(myCandidates, theCandidate)
 		}
 	}
 
 	//剔除能力可以被其他人覆蓋的候選人
-	for i:=0;i<len(myCandidates);i++{
-		for j:=i;j<len(myCandidates);j++{
+	for i := 0; i < len(myCandidates); i++ {
+		for j := i; j < len(myCandidates); j++ {
 			OrResult := Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
 			i_EqRes := Equal(OrResult, myCandidates[i].MatchIndex)
 			j_EqRes := Equal(OrResult, myCandidates[j].MatchIndex)
-			
+
 			//剔除不能改變結果的那一邊
-			if (i_EqRes && !j_EqRes){
+			if i_EqRes && !j_EqRes {
+				fmt.Println("")
+				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
+				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
+				fmt.Println("OrResult                   = ", OrResult)
+				fmt.Printf("Delete myCandidates[%2d]\n", j)
 				myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
-			} else if (j_EqRes && !i_EqRes){
+			} else if j_EqRes && !i_EqRes {
+				fmt.Println("")
+				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
+				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
+				fmt.Println("OrResult                   = ", OrResult)
+				fmt.Printf("Delete myCandidates[%2d]\n", i)
 				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
 			}
-		}	
+			fmt.Println("")
+		}
 	}
-	
-	fmt.Println("len(myCandidates)=",len(myCandidates))
+
+	fmt.Println("len(myCandidates)=", len(myCandidates))
 
 	Recursive(myCandidates, len(req_skills))
 
@@ -141,7 +152,7 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
 		return myCandidates[0].MatchIndex
 	}
-	
+
 	//生成ID
 	var temp []int
 	for _, c := range myCandidates {
@@ -158,7 +169,7 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 		for skip_i, c := range myCandidates {
 			//生成子集ID
 			splited_strID := strings.Split(strID, "-")
-			splited_strID = append(splited_strID[:skip_i],splited_strID[skip_i+1:]...)
+			splited_strID = append(splited_strID[:skip_i], splited_strID[skip_i+1:]...)
 			str_subset_ID := strings.Join(splited_strID, "-")
 
 			if _, ok := tableComputed[str_subset_ID]; !ok {
@@ -266,7 +277,7 @@ func Equal(a, b []int) bool {
 func IntSliceToString(nums []int) string {
 	var outStr string
 	for i, num := range nums {
-		if 0==i {
+		if 0 == i {
 			outStr = strconv.Itoa(num)
 		} else {
 			outStr = outStr + "-" + strconv.Itoa(num)
