@@ -73,6 +73,7 @@ func main() {
 	for _, testCase := range testCases {
 		fmt.Printf("len(testCase.Req_skills)=%d, len(testCase.People)=%d\n", len(testCase.Req_skills), len(testCase.People))
 		fmt.Println(smallestSufficientTeam(testCase.Req_skills, testCase.People))
+		fmt.Println("Answer: ", testCase.Answer)
 	}
 }
 
@@ -143,20 +144,23 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 
-	var result []int
-	if depth == len_req_skills {
-		for _, c := range myCandidates {
-			//存入計算結果，滿足解答就 return
-			tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
-			if IsNonZero(c.MatchIndex) {
-				return []int{c.Uid}
+	result :=
+		func() []int {
+			if depth == len_req_skills {
+				for _, c := range myCandidates {
+					//存入計算結果，滿足解答就 return
+					tableComputed[strconv.Itoa(c.Uid)] = c.MatchIndex
+					if IsNonZero(c.MatchIndex) {
+						return []int{c.Uid}
+					}
+				}
+				return nil //代表這一層沒有答案出現
 			}
-		}
-		result = nil //代表這一層沒有答案出現
-	} else {
-		result = DFS_Match(myCandidates, len_req_skills, depth+1)
-	}
 
+			return DFS_Match(myCandidates, len_req_skills, depth+1)
+		}()
+
+	// 更深的層有結果了，此層免算
 	if nil != result {
 		return result
 	}
