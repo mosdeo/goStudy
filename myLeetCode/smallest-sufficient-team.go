@@ -52,7 +52,13 @@ func main() {
 		TestCase{
 			Req_skills: []string{"algorithms", "math", "java", "reactjs", "csharp", "aws"},
 			People:     [][]string{{"algorithms", "math", "java"}, {"algorithms", "math", "reactjs"}, {"java", "csharp", "aws"}, {"reactjs", "csharp"}, {"csharp", "math"}, {"aws", "java"}},
+			Answer:     []int{1, 2},
 		},
+		TestCase{
+			Req_skills: []string{"wmycibrjxh","wicacrldwneag","ndutqtjuzu","pgo","gxsskiz","rbrymc","erpevpmu","jboexi","vpfdcjwngzuf","w"},
+			People:     [][]string{{},{"ndutqtjuzu","pgo"},{"ndutqtjuzu"},{"pgo","rbrymc"},{"wicacrldwneag","ndutqtjuzu"},{},{"wicacrldwneag","rbrymc","erpevpmu"},{"w"},{"wmycibrjxh","wicacrldwneag","pgo","w"},{},{"w"},{"gxsskiz","erpevpmu","vpfdcjwngzuf"},{"wicacrldwneag"},{"vpfdcjwngzuf"},{"wmycibrjxh","erpevpmu"},{"ndutqtjuzu","pgo"},{"ndutqtjuzu","pgo"},{"wmycibrjxh","erpevpmu","jboexi"},{"wmycibrjxh","wicacrldwneag","jboexi"},{"wmycibrjxh","wicacrldwneag","rbrymc"},{"wicacrldwneag"},{"erpevpmu","vpfdcjwngzuf"},{"wmycibrjxh"},{"jboexi","w"},{"erpevpmu","jboexi","w"},{"w"},{"erpevpmu","jboexi"},{"jboexi"},{"wicacrldwneag"},{},{"jboexi","vpfdcjwngzuf"},{"wmycibrjxh","jboexi"},{"wicacrldwneag"},{},{"pgo"},{"wicacrldwneag"},{},{"wmycibrjxh","vpfdcjwngzuf"},{"wmycibrjxh"},{"pgo","vpfdcjwngzuf","w"},{"wicacrldwneag","jboexi"},{"wicacrldwneag","erpevpmu","vpfdcjwngzuf"},{"wicacrldwneag"},{"wmycibrjxh","pgo","erpevpmu","vpfdcjwngzuf"},{"w"},{"vpfdcjwngzuf","w"},{"wmycibrjxh","erpevpmu"},{"wicacrldwneag","pgo","jboexi"},{"wmycibrjxh","erpevpmu","vpfdcjwngzuf"},{"w"},{},{},{},{"pgo","jboexi"},{"wicacrldwneag"},{"wicacrldwneag","erpevpmu","jboexi"},{"wmycibrjxh","pgo"},{"wmycibrjxh","wicacrldwneag","gxsskiz"},{"erpevpmu"},{"pgo","rbrymc","erpevpmu","w"}},
+			Answer:     []int{},
+		}
 	}
 
 	for _, testCase := range testCases {
@@ -100,32 +106,34 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 	//剔除能力可以被其他人覆蓋的候選人
 	for i := 0; i < len(myCandidates); i++ {
+		//fmt.Printf("len(myCandidates)=%v, i=%v\n",len(myCandidates),i)
 		for j := i; j < len(myCandidates); j++ {
+			//fmt.Printf("len(myCandidates)=%v, j=%v\n",len(myCandidates),j)
 			OrResult := Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
 			i_EqRes := Equal(OrResult, myCandidates[i].MatchIndex)
 			j_EqRes := Equal(OrResult, myCandidates[j].MatchIndex)
 
 			//剔除不能改變結果的那一邊
 			if i_EqRes && !j_EqRes {
-				fmt.Println("")
-				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
-				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
-				fmt.Println("OrResult                   = ", OrResult)
-				fmt.Printf("Delete myCandidates[%2d]\n", j)
+				// fmt.Println("")
+				// fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
+				// fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
+				// fmt.Println("OrResult                   = ", OrResult)
+				// fmt.Printf("Delete myCandidates[%2d]\n", j)
 				myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
+				j--
 			} else if j_EqRes && !i_EqRes {
-				fmt.Println("")
-				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
-				fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
-				fmt.Println("OrResult                   = ", OrResult)
-				fmt.Printf("Delete myCandidates[%2d]\n", i)
+				// fmt.Println("")
+				// fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", i, myCandidates[i].MatchIndex)
+				// fmt.Printf("myCandidates[%2d].MatchIndex = %v\n", j, myCandidates[j].MatchIndex)
+				// fmt.Println("OrResult                   = ", OrResult)
+				// fmt.Printf("Delete myCandidates[%2d]\n", i)
 				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
+				//i--
 			}
-			fmt.Println("")
+			//fmt.Println("")
 		}
 	}
-
-	fmt.Println("len(myCandidates)=", len(myCandidates))
 
 	Recursive(myCandidates, len(req_skills))
 
