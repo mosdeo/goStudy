@@ -49,12 +49,16 @@ func main() {
 	// req_skills := []string{"java", "nodejs", "reactjs"}
 	// people := [][]string{{"java"}, {"nodejs"}, {"nodejs", "reactjs"}}
 
-	// req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
-	// people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
+	req_skills := []string{"cdkpfwkhlfbps", "hnvepiymrmb", "cqrdrqty", "pxivftxovnpf", "uefdllzzmvpaicyl", "idsyvyl"}
+	people := [][]string{{""}, {"hnvepiymrmb"}, {"uefdllzzmvpaicyl"}, {""}, {"hnvepiymrmb", "cqrdrqty"}, {"pxivftxovnpf"}, {"hnvepiymrmb", "pxivftxovnpf"}, {"hnvepiymrmb"}, {"cdkpfwkhlfbps"}, {"idsyvyl"}, {}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"cdkpfwkhlfbps", "uefdllzzmvpaicyl"}, {"pxivftxovnpf", "uefdllzzmvpaicyl"}, {""}, {"cqrdrqty"}, {""}, {"cqrdrqty", "pxivftxovnpf", "idsyvyl"}, {"hnvepiymrmb", "idsyvyl"}, {""}}
 	
-	req_skills := []string{"mmcmnwacnhhdd","vza","mrxyc"}
-	people := [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}}
+	// req_skills := []string{"mmcmnwacnhhdd","vza","mrxyc"}
+	// people := [][]string{{"mmcmnwacnhhdd"},{},{},{"vza","mrxyc"}}
 	
+	//req_skills := []string{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"}
+	//people := [][]string{{"hdbxcuzyzhliwv","dzsgleocfpl"},{"hdbxcuzyzhliwv","sdi","ylopoifzkacuwp","dzsgleocfpl"},{"bztg","ylopoifzkacuwp"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","bztg"},{"dzsgleocfpl"},{"uvwlzkmzgis"},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"dzsgleocfpl"},{"hdbxcuzyzhliwv"},{},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi"},{"bztg","dzsgleocfpl"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi","bztg","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","sdi"},{"hdbxcuzyzhliwv","ylopoifzkacuwp"},{"sdi","bztg","ylopoifzkacuwp","dzsgleocfpl"},{"dzsgleocfpl"},{"sdi","ylopoifzkacuwp"},{"hdbxcuzyzhliwv","uvwlzkmzgis","sdi"},{},{},{"ylopoifzkacuwp"},{},{"sdi","bztg"},{"bztg","dzsgleocfpl"},{"sdi","bztg"}}
+
+
 	fmt.Print(smallestSufficientTeam(req_skills, people))
 }
 
@@ -121,14 +125,9 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 	} else {
 		for skip_i, c := range myCandidates {
 			//生成子集ID
-			var temp []int
-			for i, c := range myCandidates {
-				if i != skip_i {
-					temp = append(temp, c.Uid)
-				}
-			}
-			sort.Sort(sort.Reverse(sort.IntSlice(temp)))
-			str_subset_ID := IntSliceToString(temp)
+			splited_strID := strings.Split(strID, "-")
+			splited_strID = append(splited_strID[:skip_i],splited_strID[skip_i+1:]...)
+			str_subset_ID := strings.Join(splited_strID, "-")
 
 			if _, ok := tableComputed[str_subset_ID]; !ok {
 				spentComputeTimes++
