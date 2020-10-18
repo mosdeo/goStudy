@@ -123,10 +123,10 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 			//剔除不能改變結果的那一邊
 			if i_EqRes && !j_EqRes {
 				myCandidates = append(myCandidates[:j], myCandidates[j+1:]...)
-				j = i
+				j = i // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
 			} else if j_EqRes && !i_EqRes {
 				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
-				//i暫時不會改變，不做減一
+				j = i // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
 			}
 		}
 	}
