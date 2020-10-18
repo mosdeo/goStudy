@@ -34,7 +34,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	var myCandidates candidates
 	for i, p := range people {
 		theCandidate := MatchSkills(req_skills, p)
-		if (0<len(theCandidate.MatchIndex)){
+		if (0<theCandidate.NumOfMatchs){
 			theCandidate.Uid = i
 			myCandidates = append(myCandidates, theCandidate)
 		}
