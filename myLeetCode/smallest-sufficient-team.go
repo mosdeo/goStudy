@@ -58,7 +58,7 @@ func main() {
 			Req_skills: []string{"wmycibrjxh","wicacrldwneag","ndutqtjuzu","pgo","gxsskiz","rbrymc","erpevpmu","jboexi","vpfdcjwngzuf","w"},
 			People:     [][]string{{},{"ndutqtjuzu","pgo"},{"ndutqtjuzu"},{"pgo","rbrymc"},{"wicacrldwneag","ndutqtjuzu"},{},{"wicacrldwneag","rbrymc","erpevpmu"},{"w"},{"wmycibrjxh","wicacrldwneag","pgo","w"},{},{"w"},{"gxsskiz","erpevpmu","vpfdcjwngzuf"},{"wicacrldwneag"},{"vpfdcjwngzuf"},{"wmycibrjxh","erpevpmu"},{"ndutqtjuzu","pgo"},{"ndutqtjuzu","pgo"},{"wmycibrjxh","erpevpmu","jboexi"},{"wmycibrjxh","wicacrldwneag","jboexi"},{"wmycibrjxh","wicacrldwneag","rbrymc"},{"wicacrldwneag"},{"erpevpmu","vpfdcjwngzuf"},{"wmycibrjxh"},{"jboexi","w"},{"erpevpmu","jboexi","w"},{"w"},{"erpevpmu","jboexi"},{"jboexi"},{"wicacrldwneag"},{},{"jboexi","vpfdcjwngzuf"},{"wmycibrjxh","jboexi"},{"wicacrldwneag"},{},{"pgo"},{"wicacrldwneag"},{},{"wmycibrjxh","vpfdcjwngzuf"},{"wmycibrjxh"},{"pgo","vpfdcjwngzuf","w"},{"wicacrldwneag","jboexi"},{"wicacrldwneag","erpevpmu","vpfdcjwngzuf"},{"wicacrldwneag"},{"wmycibrjxh","pgo","erpevpmu","vpfdcjwngzuf"},{"w"},{"vpfdcjwngzuf","w"},{"wmycibrjxh","erpevpmu"},{"wicacrldwneag","pgo","jboexi"},{"wmycibrjxh","erpevpmu","vpfdcjwngzuf"},{"w"},{},{},{},{"pgo","jboexi"},{"wicacrldwneag"},{"wicacrldwneag","erpevpmu","jboexi"},{"wmycibrjxh","pgo"},{"wmycibrjxh","wicacrldwneag","gxsskiz"},{"erpevpmu"},{"pgo","rbrymc","erpevpmu","w"}},
 			Answer:     []int{},
-		}
+		},
 	}
 
 	for _, testCase := range testCases {
