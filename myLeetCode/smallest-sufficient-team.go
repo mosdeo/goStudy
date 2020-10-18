@@ -34,8 +34,10 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	var myCandidates candidates
 	for i, p := range people {
 		theCandidate := MatchSkills(req_skills, p)
-		theCandidate.Uid = i
-		myCandidates = append(myCandidates, theCandidate)
+		if (0<len(theCandidate.MatchIndex)){
+			theCandidate.Uid = i
+			myCandidates = append(myCandidates, theCandidate)
+		}
 	}
 
 	SufficientExam(myCandidates, len(req_skills))
@@ -61,6 +63,8 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
+	fmt.Println("savedComputeTimes=", savedComputeTimes)
+	fmt.Println("spentComputeTimes=", spentComputeTimes)
 	return IntStringToIntSlice(samllestKey)
 }
 
@@ -75,6 +79,9 @@ func R(nums []int) {
 		}
 	}
 }
+
+var savedComputeTimes = 0
+var spentComputeTimes = 0
 
 func main() {
 	//nums := []int{0, 1, 2}
@@ -117,6 +124,8 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 		str_subset_ID := IntSliceToString(temp)
 
 		if _, ok := tableComputed[str_subset_ID]; !ok {
+			spentComputeTimes++
+
 			//安全複製子集
 			subset_myCandidates := make([]People, len(myCandidates))
 			copy(subset_myCandidates, myCandidates)
@@ -125,6 +134,8 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 			//計算子集
 			//為子集建立key, value
 			tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
+		} else {
+			savedComputeTimes++
 		}
 
 		if 0 == skip_i {
