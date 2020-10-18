@@ -121,6 +121,8 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	//剔除能力可以被其他人覆蓋的候選人，確保留下的候選人具有直觀上的不可取代性
 	for i := 0; i < len(myCandidates); i++ {
 		for j := i; j < len(myCandidates); j++ {
+			if i==j { continue }
+
 			OrResult := Or(myCandidates[i].MatchIndex, myCandidates[j].MatchIndex)
 			i_EqRes := Equal(OrResult, myCandidates[i].MatchIndex)
 			j_EqRes := Equal(OrResult, myCandidates[j].MatchIndex)
@@ -133,6 +135,12 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 				if j_EqRes {
 					myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
 				}
+				j, i = -1, 0 // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
+			}
+
+			//兩個都一樣，也要剔除一個
+			if i_EqRes && j_EqRes {
+				myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
 				j, i = -1, 0 // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
 			}
 		}
