@@ -128,7 +128,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 				if j_EqRes {
 					myCandidates = append(myCandidates[:i], myCandidates[i+1:]...)
 				}
-				j, i = 0, 0 // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
+				j, i = -1, 0 // 交叉對比的矩陣長寬同時改變，所以要回到原點再比較
 			}
 		}
 	}
