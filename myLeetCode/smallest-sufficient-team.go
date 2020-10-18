@@ -79,6 +79,7 @@ func main() {
 
 // 以上不進 LeetCode
 var spentComputeTimes = 0
+var savedComputeTimes = 0
 
 type People struct {
 	Uid         int
@@ -139,6 +140,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
 	fmt.Println("spentComputeTimes=", spentComputeTimes)
+	fmt.Println("savedComputeTimes=", savedComputeTimes)
 	return IntStringToIntSlice(samllestKey)
 }
 
@@ -167,17 +169,24 @@ func DFS_Match(myCandidates candidates, len_req_skills int, depth int) []int {
 
 	for _, c := range myCandidates {
 		for k, v := range tableComputed {
-			//生成合併排序key
+			//檢驗是否有重複key？
 			prevKey, currKey := IntStringToIntSlice(k), c.Uid
 			if containsInt(prevKey, currKey) {
 				continue //key 重複了，此圈免算
 			}
 
+			//生成合併排序key
 			strKey := func(prevKey []int, currKey int) string {
 				prevKey = append(prevKey, currKey)
 				sort.Sort(sort.IntSlice(prevKey))
 				return IntSliceToString(prevKey)
 			}(prevKey, currKey)
+
+			//檢查此key有沒有算過？
+			if _, ok := tableComputed[strKey]; ok {
+				savedComputeTimes++
+				continue //算過，此圈免算
+			}
 
 			//存入計算結果，滿足解答就 return
 			spentComputeTimes++
