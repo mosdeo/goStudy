@@ -13,27 +13,6 @@ type TestCase struct {
 	Asnwer []int
 }
 
-type People struct {
-	Uid         int
-	MatchIndex  []int
-	NumOfMatchs int
-}
-
-
-type candidates []People
-
-func (c candidates) Len() int {
-	return len(c)
-}
-func (c candidates) Swap(i, j int) {
-	c[i], c[j] = c[j], c[i]
-}
-func (c candidates) Less(i, j int) bool {
-	return c[i].NumOfMatchs < c[j].NumOfMatchs
-}
-
-var tableComputed map[string]([]int)
-
 func R(nums []int) {
 	fmt.Println(nums)
 	if 1 != len(nums) {
@@ -45,9 +24,6 @@ func R(nums []int) {
 		}
 	}
 }
-
-var savedComputeTimes = 0
-var spentComputeTimes = 0
 
 func main() {
 	//nums := []int{0, 1, 2}
@@ -77,9 +53,34 @@ func main() {
 	}
 
 	for _, testCase := range(testCases){
-		fmt.Print(smallestSufficientTeam(testCase.Req_skills, testCase.People))
+		fmt.Println(smallestSufficientTeam(testCase.Req_skills, testCase.People))
 	}
 }
+
+// 以上不進 LeetCode
+
+var savedComputeTimes = 0
+var spentComputeTimes = 0
+
+type People struct {
+	Uid         int
+	MatchIndex  []int
+	NumOfMatchs int
+}
+
+type candidates []People
+
+func (c candidates) Len() int {
+	return len(c)
+}
+func (c candidates) Swap(i, j int) {
+	c[i], c[j] = c[j], c[i]
+}
+func (c candidates) Less(i, j int) bool {
+	return c[i].NumOfMatchs < c[j].NumOfMatchs
+}
+
+var tableComputed map[string]([]int)
 
 func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	tableComputed = make(map[string][]int)
@@ -112,7 +113,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	
 	fmt.Println("len(myCandidates)=",len(myCandidates))
 
-	SufficientExam(myCandidates, len(req_skills))
+	Recursive(myCandidates, len(req_skills))
 
 	samllestKey := "---------------------------------------------------------------"
 	for k, v := range tableComputed {
@@ -131,7 +132,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	return IntStringToIntSlice(samllestKey)
 }
 
-func SufficientExam(myCandidates candidates, len_req_skills int) []int {
+func Recursive(myCandidates candidates, len_req_skills int) []int {
 	//如果遞迴到只剩下一個
 	if 1 == len(myCandidates) {
 		tableComputed[strconv.Itoa(myCandidates[0].Uid)] = myCandidates[0].MatchIndex
@@ -166,7 +167,7 @@ func SufficientExam(myCandidates candidates, len_req_skills int) []int {
 
 				//計算子集
 				//為子集建立key, value
-				tableComputed[str_subset_ID] = SufficientExam(subset_myCandidates, len_req_skills)
+				tableComputed[str_subset_ID] = Recursive(subset_myCandidates, len_req_skills)
 			} else {
 				savedComputeTimes++
 			}
