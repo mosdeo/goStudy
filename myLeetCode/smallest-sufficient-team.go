@@ -134,7 +134,7 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 	}
 	fmt.Printf("Cutted len(myCandidates)=%d\n", len(myCandidates))
 
-	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 2))
+	samllestKey := IntSliceToString(DFS_Match(myCandidates, len(req_skills), 0))
 
 	fmt.Println("samllestKey=", samllestKey)
 	fmt.Println("tableComputed[samllestKey]=", tableComputed[samllestKey])
@@ -279,15 +279,11 @@ func Equal(a, b []int) bool {
 }
 
 func IntSliceToString(nums []int) string {
-	var outStr string
-	for i, num := range nums {
-		if 0 == i {
-			outStr = strconv.Itoa(num)
-		} else {
-			outStr = outStr + "-" + strconv.Itoa(num)
-		}
+	var outStrSlice []string
+	for _, num := range nums {
+		outStrSlice = append(outStrSlice, strconv.Itoa(num))
 	}
-	return outStr
+	return strings.Join(outStrSlice, "-")
 }
 
 func IntStringToIntSlice(strOfInt string) []int {
