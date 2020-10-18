@@ -133,11 +133,15 @@ func smallestSufficientTeam(req_skills []string, people [][]string) []int {
 
 	Recursive(myCandidates, len(req_skills))
 
-	samllestKey := "---------------------------------------------------------------"
+	len_samllestKey := 0xFFFFFFF
+	samllestKey := ""
 	for k, v := range tableComputed {
 		// fmt.Println(k, v)
 		if IsNonZero(v) {
-			if len(samllestKey) > len(k) {
+			//比較key的長度，短的代表湊齊成員少，選短的保存
+			len_currentKey := len(strings.Split(k, "-"))
+			if len_samllestKey > len_currentKey {
+				len_samllestKey = len_currentKey
 				samllestKey = k
 			}
 		}
@@ -158,7 +162,7 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 	}
 
 	//生成ID
-	strID := func()string{
+	strID := func() string {
 		var temp []int
 		for _, c := range myCandidates {
 			temp = append(temp, c.Uid)
@@ -166,7 +170,7 @@ func Recursive(myCandidates candidates, len_req_skills int) []int {
 		sort.Sort(sort.IntSlice(temp))
 		return IntSliceToString(temp)
 	}()
-	
+
 	if v, ok := tableComputed[strID]; ok {
 		return v
 	} else {
