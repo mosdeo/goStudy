@@ -12,7 +12,14 @@ type TestCase struct {
 func main() {
 	var testCases = []TestCase{
 		TestCase{
+			Qus: []int{0},
+			Ans: 0,
+		},
+		TestCase{
 			Qus: []int{1},
+			Ans: 1,
+		}, TestCase{
+			Qus: []int{-2, 1},
 			Ans: 1,
 		},
 		TestCase{
@@ -29,6 +36,8 @@ func main() {
 		maxSubArray(testCase.Qus)
 		fmt.Println("Qus=", testCase.Qus)
 		fmt.Println("True Ans=", testCase.Ans)
+
+		//答案錯誤就暫停
 		if testCase.Ans != found_max {
 			fmt.Println("Mistake answer =", found_max)
 			break
@@ -38,7 +47,7 @@ func main() {
 
 // 以上程式碼不進 leetcode
 
-var tableComputed = make(map[int]map[int]int, 0)
+var tableComputed = make(map[int]map[int]int)
 var found_max int = -2147483647
 
 func maxSubArray(nums []int) int {
@@ -57,28 +66,25 @@ func BFS(nums []int, startPos int) {
 
 	for i := startPos; i < len(nums); i++ {
 		if 0 == startPos {
-			tableComputed[0][i] = SumIntSlice(nums[0 : i+1])
+			if 0 == i {
+				tableComputed[0][0] = nums[0]
+			} else {
+				tableComputed[0][i] = tableComputed[0][i-1] + nums[i]
+			}
 		} else {
 			tableComputed[startPos][i] = tableComputed[startPos-1][i] - nums[startPos-1]
-		}
-		if 0 == i%100 {
-			fmt.Printf("%d-%d = %d\n", startPos, i, tableComputed[startPos][i])
 		}
 
 		//檢驗是否為最大？
 		found_max = MaxInt(found_max, tableComputed[startPos][i])
 	}
 
+	// if 0 == startPos%1000 {
+	// 	fmt.Printf("%d-%d = %d\n", startPos, len(nums)-1, tableComputed[startPos][len(nums)-1])
+	// }
+
 	//短的和已經算完，接下來要算長的
 	BFS(nums, startPos+1)
-}
-
-func SumIntSlice(nums []int) int {
-	sum := 0
-	for _, n := range nums {
-		sum = sum + n
-	}
-	return sum
 }
 
 func MaxInt(lv int, rv int) int {
