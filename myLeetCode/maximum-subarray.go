@@ -38,13 +38,14 @@ func main() {
 	}
 
 	for _, testCase := range testCases {
-		maxSubArray(testCase.Qus)
+		fmt.Println("")
+		result := maxSubArray(testCase.Qus)
 		fmt.Println("Qus=", testCase.Qus)
 		fmt.Println("True Ans=", testCase.Ans)
 
 		//答案錯誤就暫停
-		if testCase.Ans != found_max {
-			fmt.Println("Mistake answer =", found_max)
+		if testCase.Ans != result {
+			fmt.Println("Mistake answer =", result)
 			break
 		}
 	}
@@ -52,23 +53,20 @@ func main() {
 
 // 以上程式碼不進 leetcode
 
-var tableComputed = make(map[int]map[int]int)
-var found_max int = -2147483647
+var tableComputed map[int]map[int]int
 
 func maxSubArray(nums []int) int {
-	if len(nums) == 1 {
-		found_max = nums[0]
-		return found_max
-	}
-
-	BFS(nums, 0)
-	return found_max
+	// 重新初始化，以免 test case 之間計算結果打架
+	tableComputed = make(map[int]map[int]int)
+	return BFS(nums, 0)
 }
 
-func BFS(nums []int, startPos int) {
+func BFS(nums []int, startPos int) int {
+	var found_max int = -2147483647
+
 	//上限
 	if len(nums) == startPos {
-		return
+		return found_max
 	}
 
 	//startPos就是本圈的計算長度起點
@@ -85,6 +83,8 @@ func BFS(nums []int, startPos int) {
 			tableComputed[startPos][i] = tableComputed[startPos-1][i] - nums[startPos-1]
 		}
 
+		//檢驗計算內容
+		//fmt.Printf("%d-%d = %d\n", startPos, i, tableComputed[startPos][i])
 		//檢驗是否為最大？
 		found_max = MaxInt(found_max, tableComputed[startPos][i])
 	}
@@ -94,7 +94,9 @@ func BFS(nums []int, startPos int) {
 	// }
 
 	//短的和已經算完，接下來要算長的
-	BFS(nums, startPos+1)
+	found_max = MaxInt(found_max, BFS(nums, startPos+1))
+
+	return found_max
 }
 
 func MaxInt(lv int, rv int) int {
