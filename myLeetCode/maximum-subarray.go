@@ -17,8 +17,9 @@ func main() {
 		fmt.Println("Ans=", found_max)
 		if 0 == i && 6 != found_max {
 			fmt.Println("Mistake answer =", found_max)
-			break
+
 		}
+		break
 	}
 }
 
@@ -37,7 +38,12 @@ func maxSubArray(nums []int, startPos int) {
 	tableComputed[startPos] = make(map[int]int)
 
 	for i := startPos; i < len(nums); i++ {
-		tableComputed[startPos][i] = SumIntSlice(nums[startPos : i+1])
+		if 0 == startPos {
+			tableComputed[startPos][i] = SumIntSlice(nums[startPos : i+1])
+		} else {
+			tableComputed[startPos][i] = tableComputed[startPos-1][i] - nums[startPos-1]
+		}
+
 		fmt.Printf("%d-%d = %d\n", startPos, i, tableComputed[startPos][i])
 
 		//檢驗是否為最大？
