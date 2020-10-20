@@ -18,9 +18,14 @@ func main() {
 		TestCase{
 			Qus: []int{1},
 			Ans: 1,
-		}, TestCase{
+		},
+		TestCase{
 			Qus: []int{-2, 1},
 			Ans: 1,
+		},
+		TestCase{
+			Qus: []int{-2, -1},
+			Ans: -1,
 		},
 		TestCase{
 			Qus: []int{-2, 1, -3, 4, -1, 2, 1, -5, 4},
@@ -51,6 +56,11 @@ var tableComputed = make(map[int]map[int]int)
 var found_max int = -2147483647
 
 func maxSubArray(nums []int) int {
+	if len(nums) == 1 {
+		found_max = nums[0]
+		return found_max
+	}
+
 	BFS(nums, 0)
 	return found_max
 }
