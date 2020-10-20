@@ -61,8 +61,9 @@ func BFS(nums []int, startPos int) {
 		} else {
 			tableComputed[startPos][i] = tableComputed[startPos-1][i] - nums[startPos-1]
 		}
-
-		fmt.Printf("%d-%d = %d\n", startPos, i, tableComputed[startPos][i])
+		if 0 == i%100 {
+			fmt.Printf("%d-%d = %d\n", startPos, i, tableComputed[startPos][i])
+		}
 
 		//檢驗是否為最大？
 		found_max = MaxInt(found_max, tableComputed[startPos][i])
@@ -78,16 +79,6 @@ func SumIntSlice(nums []int) int {
 		sum = sum + n
 	}
 	return sum
-}
-
-func MaxIntSlice(nums []int) int {
-	max := nums[0]
-	for _, n := range nums {
-		if max < n {
-			max = n
-		}
-	}
-	return max
 }
 
 func MaxInt(lv int, rv int) int {
