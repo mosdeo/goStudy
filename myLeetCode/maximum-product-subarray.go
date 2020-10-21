@@ -31,6 +31,10 @@ func main() {
 			Qus: []int{2, -5, -2, -4, 3},
 			Ans: 24,
 		},
+		TestCase{
+			Qus: []int{1, 0, -1, 2, 3, -5, -2},
+			Ans: 60,
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -60,16 +64,22 @@ func maxProduct(nums []int) int {
 
 	for _, n := range nums[1:] {
 
-		// 自己是0就更新
+		pdt_is_n := false
+
+		// 自己是0就更新，不是就連乘
 		if 0 == pdt {
 			pdt = n
-			first_neg_pdt = 1
+			pdt_is_n = true
 		} else {
 			pdt *= n
 		}
 
-		if 0 > pdt && 1 == first_neg_pdt {
+		//在不為零的連續段中，紀錄第一個負數積
+		//遇到0重置
+		if 0 > pdt && 1 == first_neg_pdt && !pdt_is_n {
 			first_neg_pdt = pdt
+		} else if 0 == n {
+			first_neg_pdt = 1
 		}
 
 		max = MaxInt(max, pdt)
