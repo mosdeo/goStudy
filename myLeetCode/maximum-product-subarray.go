@@ -27,6 +27,10 @@ func main() {
 			Qus: []int{-3, -1, -1},
 			Ans: 3,
 		},
+		TestCase{
+			Qus: []int{2, -5, -2, -4, 3},
+			Ans: 24,
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -39,7 +43,7 @@ func main() {
 		//答案錯誤就暫停
 		if testCase.Ans != result {
 			fmt.Println("Mistake answer =", result)
-			break
+			//break
 		}
 	}
 }
@@ -52,25 +56,29 @@ var computedTimes int
 func maxProduct(nums []int) int {
 	max, pdt := nums[0], nums[0]
 
+	first_neg_pdt := 1
+
 	for _, n := range nums[1:] {
 
 		// 自己是0就更新
-		if 0 >= pdt {
+		if 0 == pdt {
 			pdt = n
+			first_neg_pdt = 1
 		} else {
 			pdt *= n
 		}
 
-		if max < pdt {
-			max = pdt
+		if 0 > pdt && 1 == first_neg_pdt {
+			first_neg_pdt = pdt
 		}
 
 		max = MaxInt(max, pdt)
+		max = MaxInt(max, n)
 
-		fmt.Printf("n=%d, max=%d, pdt=%d\n", n, max, pdt)
+		fmt.Printf("n=%d, max=%d, pdt=%d, first_neg_pdt=%d\n", n, max, pdt, first_neg_pdt)
 	}
 
-	return max
+	return MaxInt(max, pdt/first_neg_pdt)
 }
 
 func MaxInt(lv int, rv int) int {
