@@ -44,7 +44,6 @@ func main() {
 	for _, testCase := range testCases {
 		fmt.Println("")
 		result := maxProduct(testCase.Qus)
-		fmt.Println("computedTimes=", computedTimes)
 		fmt.Println("Qus=", testCase.Qus)
 		fmt.Println("True Ans=", testCase.Ans)
 
@@ -58,45 +57,36 @@ func main() {
 
 // 以上程式碼不進 leetcode
 
-// var tableComputed map[int]map[int]int
-var computedTimes int
-
 func maxProduct(nums []int) int {
-	max, pdt := nums[0], nums[0]
-
-	first_neg_pdt := func() int {
+	max, pdt, first_neg_pdt := nums[0], nums[0], func() int {
 		if 0 > nums[0] {
 			return nums[0]
 		} else {
 			return 1
 		}
 	}()
-	pdt_is_n := false
 
 	for _, n := range nums[1:] {
-
 		// 自己是0就更新，不是就連乘
 		if 0 == pdt {
 			pdt = n
-			pdt_is_n = true
 		} else {
 			pdt *= n
-			pdt_is_n = false
 		}
 
-		//在不為零的連續段中，紀錄第一個負數積
-		//遇到0重置
+		//在沒有0的連續段中，紀錄第一個負數積
+		//遇0重置
 		if 0 > pdt && 1 == first_neg_pdt {
 			first_neg_pdt = pdt
 		} else if 0 == n {
 			first_neg_pdt = 1
 		}
 
-		if !pdt_is_n {
+		//計算目前積/第一個負數積(排除自己除自己的狀況)
+		if n != pdt {
 			max = MaxInt(max, pdt/first_neg_pdt)
 		}
 		max = MaxInt(max, pdt)
-		max = MaxInt(max, n)
 
 		fmt.Printf("n=%d, max=%d, pdt=%d, first_neg_pdt=%d\n", n, max, pdt, first_neg_pdt)
 	}
