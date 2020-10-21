@@ -64,7 +64,13 @@ var computedTimes int
 func maxProduct(nums []int) int {
 	max, pdt := nums[0], nums[0]
 
-	first_neg_pdt := 1
+	first_neg_pdt := func() int {
+		if 0 > nums[0] {
+			return nums[0]
+		} else {
+			return 1
+		}
+	}()
 	pdt_is_n := false
 
 	for _, n := range nums[1:] {
@@ -86,14 +92,13 @@ func maxProduct(nums []int) int {
 			first_neg_pdt = 1
 		}
 
+		if !pdt_is_n {
+			max = MaxInt(max, pdt/first_neg_pdt)
+		}
 		max = MaxInt(max, pdt)
 		max = MaxInt(max, n)
 
 		fmt.Printf("n=%d, max=%d, pdt=%d, first_neg_pdt=%d\n", n, max, pdt, first_neg_pdt)
-	}
-
-	if !pdt_is_n {
-		max = MaxInt(max, pdt/first_neg_pdt)
 	}
 
 	return max
