@@ -19,6 +19,14 @@ func main() {
 			Qus: []int{-2, 0, -1},
 			Ans: 0,
 		},
+		TestCase{
+			Qus: []int{3, -1, 4},
+			Ans: 4,
+		},
+		TestCase{
+			Qus: []int{-3, -1, -1},
+			Ans: 3,
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -38,34 +46,29 @@ func main() {
 
 // 以上程式碼不進 leetcode
 
-var tableComputed map[int]map[int]int
+// var tableComputed map[int]map[int]int
 var computedTimes int
 
 func maxProduct(nums []int) int {
-	max := -2147483647
+	max, pdt := nums[0], nums[0]
 
-	neg_continue_only_pdt := 1
-	pos_continue_only_pdt := 1
+	for _, n := range nums[1:] {
 
-	for _, n := range nums {
-
-		if 0 == n {
-			neg_continue_only_pdt = 1
-			pos_continue_only_pdt = 1
-		} else if 0 > n {
-			pos_continue_only_pdt = 1
-			neg_continue_only_pdt *= n
-		} else if 0 < n {
-			pos_continue_only_pdt *= n
-			neg_continue_only_pdt = 1
+		// 自己是0就更新
+		if 0 >= pdt {
+			pdt = n
+		} else {
+			pdt *= n
 		}
 
-		max = MaxInt(max, pos_continue_only_pdt)
-		max = MaxInt(max, neg_continue_only_pdt)
-	}
+		if max < pdt {
+			max = pdt
+		}
 
-	fmt.Println(pos_continue_only_pdt)
-	fmt.Println(neg_continue_only_pdt)
+		max = MaxInt(max, pdt)
+
+		fmt.Printf("n=%d, max=%d, pdt=%d\n", n, max, pdt)
+	}
 
 	return max
 }
