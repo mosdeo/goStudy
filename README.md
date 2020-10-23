@@ -8,6 +8,10 @@
 - ~~LeetCode Concurrency Go語言詳解~~ 寫了 5 篇，還沒寫完。目前有寫的已經放上 Blog(繁中)、知乎(簡中)、刊登在 WeChat 公眾號(簡中)。
 - Go語言 testing, benchmark, example 三位一體介紹
 
+### 2020.10.23
+
+- macOS 上面的 GOROOT 是「/usr/local/Cellar/go/1.15.3/**libexec**」，不是「xxx/go/1.15.3/**bin**」。
+
 ### 2020.01.20(Mon)
 
 - 了解 runtime.Gosched()，以及在 select-default 不做 time-delay or  runtime.Gosched() 可能會發生（或不發生）的卡死現象。
