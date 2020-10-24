@@ -18,6 +18,10 @@ var testCases = []TestCase{
 	TestCase{Qus: "9-", Ans: false},
 	TestCase{Qus: "0", Ans: true},
 	TestCase{Qus: "11", Ans: true},
+	TestCase{Qus: "1 ", Ans: true},
+	TestCase{Qus: ".1 ", Ans: true},
+	TestCase{Qus: "3.", Ans: true},
+	TestCase{Qus: ". 1", Ans: false},
 }
 
 func main() {
@@ -71,7 +75,7 @@ func isNumber(s string) bool {
 	}
 
 	//不可出現在尾
-	catnotlast := ".e_+- "
+	catnotlast := "e_+-"
 	for _, c := range catnotlast {
 		len := len(s)
 		if s[len-1:] == string(c) {
@@ -80,11 +84,16 @@ func isNumber(s string) bool {
 	}
 
 	//不可出現在頭
-	catnotfirst := ".e"
+	catnotfirst := "e"
 	for _, c := range catnotfirst {
 		if s[0:1] == string(c) {
 			return false
 		}
+	}
+
+	//有空格在中間
+	if strings.Contains(strings.Trim(s, " "), " ") {
+		return false
 	}
 
 	//有非法符號就 false
@@ -99,6 +108,21 @@ func isNumber(s string) bool {
 	}()
 	if strings.ContainsAny(s, illegalAlpha) {
 		return false
+	}
+
+	//e前後一定要有數字
+	e_index := strings.Index(s, "e")
+	if -1 != e_index {
+		if 3 <= len(s) {
+			if !strings.ContainsAny(s[e_index-1:e_index], str0123456789) {
+				return false
+			}
+			if !strings.ContainsAny(s[e_index+1:e_index+2], str0123456789) {
+				return false
+			}
+		} else {
+			return false
+		}
 	}
 
 	return true
