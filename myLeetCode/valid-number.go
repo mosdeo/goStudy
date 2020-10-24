@@ -12,10 +12,12 @@ type TestCase struct {
 }
 
 var testCases = []TestCase{
-	TestCase{
-		Qus: ".e1",
-		Ans: false,
-	},
+	TestCase{Qus: ".e1", Ans: false},
+	TestCase{Qus: "e9", Ans: false},
+	TestCase{Qus: "1e", Ans: false},
+	TestCase{Qus: "9-", Ans: false},
+	TestCase{Qus: "0", Ans: true},
+	TestCase{Qus: "11", Ans: true},
 }
 
 func main() {
@@ -37,35 +39,50 @@ func main() {
 		//答案錯誤就暫停
 		if testCase.Ans != result {
 			fmt.Println("Mistake answer =", result)
-			break
 		}
 	}
 }
 
 func isNumber(s string) bool {
-	
+	str0123456789 := func() string {
+		str := ""
+		for i := '0'; i <= '9'; i++ {
+			str += string(i)
+		}
+		return str
+	}()
+
+	//如果只有一個字，只能是數字
+	if 1 == len(s) {
+		return strings.ContainsAny(s, str0123456789)
+	}
+
+	//找不到數字就 false
+	if !strings.ContainsAny(s, str0123456789) {
+		return false
+	}
+
 	// 這些符號最多一個
 	most_one := ".e_+"
-	for _, c range most_one{
-		if 1 < strings.Count(s, c) {
+	for _, c := range most_one {
+		if 1 < strings.Count(s, string(c)) {
 			return false
 		}
 	}
 
 	//不可出現在尾
-	catnotlast := ".e_+ "
-	for _, c range catnotlast{
+	catnotlast := ".e_+- "
+	for _, c := range catnotlast {
 		len := len(s)
-		if s[len-1] !== c {
+		if s[len-1:] == string(c) {
 			return false
 		}
 	}
 
 	//不可出現在頭
-	catnotlast := ".e"
-	for _, c range catnotlast{
-		len := len(s)
-		if s[len-1] !== c {
+	catnotfirst := ".e"
+	for _, c := range catnotfirst {
+		if s[0:1] == string(c) {
 			return false
 		}
 	}
@@ -81,18 +98,6 @@ func isNumber(s string) bool {
 		return str
 	}()
 	if strings.ContainsAny(s, illegalAlpha) {
-		return false
-	}
-
-	//（e符號左邊）找不到數字就 false
-	str0123456789 := func() string {
-		str := ""
-		for i := '0'; i <= '9'; i++ {
-			str += string(i)
-		}
-		return str
-	}()
-	if !strings.ContainsAny(s, str0123456789) {
 		return false
 	}
 
