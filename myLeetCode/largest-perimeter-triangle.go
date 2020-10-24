@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 type TestCase struct {
@@ -36,7 +37,11 @@ func main() {
 
 	for _, testCase := range testCases {
 		fmt.Println("")
+		startTime := time.Now()
 		result := largestPerimeter(testCase.Qus)
+		endTime := time.Now()
+		fmt.Println("Spent time:", endTime.Sub(startTime))
+
 		if len(testCase.Qus) > 99 {
 			fmt.Println("len(Qus)=", len(testCase.Qus))
 		} else {
