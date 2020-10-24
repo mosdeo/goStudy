@@ -76,6 +76,7 @@ func largestPerimeter(A []int) int {
 				if !isTriangle(a, b, c) {
 					continue
 				}
+				fmt.Printf("i=%d, j=%d, k=%d\n", i, j, k)
 				return a + b + c
 			}
 			// if 0 != maxPerimeter {
