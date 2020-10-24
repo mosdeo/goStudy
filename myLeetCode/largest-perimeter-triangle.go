@@ -60,32 +60,20 @@ func main() {
 // 以上不進 leetcode
 
 func largestPerimeter(A []int) int {
-	maxPerimeter := 0
 
-	sort.Sort(sort.Reverse(sort.IntSlice(A)))
+	max, abc := 0, []int{A[0], A[1]}
 
-	for i, a := range A {
-		for j, b := range A {
-			if i == j {
-				continue
-			}
-			for k, c := range A {
-				if j == k || i == k {
-					continue
-				}
-				if !isTriangle(a, b, c) {
-					continue
-				}
-				fmt.Printf("i=%d, j=%d, k=%d\n", i, j, k)
-				return a + b + c
-			}
-			// if 0 != maxPerimeter {
-			// 	return maxPerimeter
-			// }
+	for i, n := range A[2:] {
+		abc = append(abc, n)
+		if 0 == i%100 || i == len(A)-3 {
+			sort.Sort(sort.Reverse(sort.IntSlice(abc)))
+		}
+		if isTriangle(abc[0], abc[1], abc[2]) {
+			max = MaxInt(max, abc[0]+abc[1]+abc[2])
 		}
 	}
 
-	return maxPerimeter
+	return max
 }
 
 func isTriangle(a, b, c int) bool {
@@ -103,6 +91,14 @@ func isTriangle(a, b, c int) bool {
 
 func MaxInt(a, b int) int {
 	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
+func MinInt(a, b int) int {
+	if a < b {
 		return a
 	} else {
 		return b
