@@ -78,25 +78,11 @@ func largestPerimeter(A []int) int {
 	endTime := time.Now()
 	fmt.Println("sort.Sort(sort.Reverse(sort.IntSlice(A))) spent time:", endTime.Sub(startTime))
 
-	stop := 0
-	if len(A) > 1000 {
-		stop = len(A) / 100
-	} else {
-		stop = len(A)
-	}
+	stop := len(A)
 
-	for i, a := range A[:stop] {
-		for j, b := range A[:stop] {
-			if i == j {
-				continue
-			}
-			for k, c := range A[:stop] {
-				if j == k || i == k || !isTriangle(a, b, c) {
-					continue
-				}
-				fmt.Printf("i=%d, j=%d, k=%d\n", i, j, k)
-				return a + b + c
-			}
+	for i, _ := range A[:stop-2] {
+		if isTriangle(A[i], A[i+1], A[i+2]) {
+			return A[i+0] + A[i+1] + A[i+2]
 		}
 	}
 	return 0
