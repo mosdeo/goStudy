@@ -14,8 +14,16 @@ type TestCase struct {
 func main() {
 	var testCases = []TestCase{
 		TestCase{
+			Qus: []int{1, 2, 1},
+			Ans: 0,
+		},
+		TestCase{
 			Qus: []int{2, 3, 4},
 			Ans: 9,
+		},
+		TestCase{
+			Qus: []int{3, 2, 3, 4},
+			Ans: 10,
 		},
 		TestCase{
 			Qus: []int{2, 6, 2},
@@ -41,11 +49,6 @@ func main() {
 
 	for _, testCase := range testCases {
 		fmt.Println("")
-		startTime := time.Now()
-		result := largestPerimeter(testCase.Qus)
-		endTime := time.Now()
-		fmt.Println("Spent time:", endTime.Sub(startTime))
-
 		if len(testCase.Qus) > 99 {
 			fmt.Println("len(Qus)=", len(testCase.Qus))
 		} else {
@@ -53,10 +56,15 @@ func main() {
 		}
 		fmt.Println("True Ans=", testCase.Ans)
 
+		startTime := time.Now()
+		result := largestPerimeter(testCase.Qus)
+		endTime := time.Now()
+		fmt.Println("Spent time:", endTime.Sub(startTime))
+
 		//答案錯誤就暫停
 		if testCase.Ans != result {
 			fmt.Println("Mistake answer =", result)
-			//break
+			break
 		}
 	}
 }
@@ -70,24 +78,36 @@ func largestPerimeter(A []int) int {
 	endTime := time.Now()
 	fmt.Println("sort.Sort(sort.Reverse(sort.IntSlice(A))) spent time:", endTime.Sub(startTime))
 
-	for i, a := range A {
-		for j, b := range A {
+	stop := 0
+	if len(A) > 1000 {
+		stop = len(A) / 100
+	} else {
+		stop = len(A)
+	}
+
+	for i, a := range A[:stop] {
+		for j, b := range A[:stop] {
 			if i == j {
 				continue
 			}
-			for k, c := range A {
-				if j == k || i == k {
+			for k, c := range A[:stop] {
+				if j == k || i == k || !isTriangle(a, b, c) {
 					continue
 				}
-				if !isTriangle(a, b, c) {
-					continue
-				}
-
+				fmt.Printf("i=%d, j=%d, k=%d\n", i, j, k)
 				return a + b + c
 			}
 		}
 	}
 	return 0
+}
+
+func MaxInt(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
 }
 
 func isTriangle(a, b, c int) bool {
@@ -101,12 +121,4 @@ func isTriangle(a, b, c int) bool {
 		return false
 	}
 	return true
-}
-
-func MaxInt(a, b int) int {
-	if a > b {
-		return a
-	} else {
-		return b
-	}
 }
