@@ -19,9 +19,19 @@ var testCases = []TestCase{
 	TestCase{Qus: "0", Ans: true},
 	TestCase{Qus: "11", Ans: true},
 	TestCase{Qus: "1 ", Ans: true},
+	TestCase{Qus: ". 1", Ans: false},
+	TestCase{Qus: "6+1", Ans: false},
+	TestCase{Qus: "-1.", Ans: true},
+	TestCase{Qus: "46.e3", Ans: true},
+	TestCase{Qus: "6e6.5", Ans: false},
 	TestCase{Qus: ".1 ", Ans: true},
 	TestCase{Qus: "3.", Ans: true},
-	TestCase{Qus: ". 1", Ans: false},
+	TestCase{Qus: " 005047e+6", Ans: true},
+	TestCase{Qus: "-1.e49046 ", Ans: true},
+	TestCase{Qus: "8..e4", Ans: false},
+	TestCase{Qus: ".2e81", Ans: true},
+	TestCase{Qus: "-e58 ", Ans: false},
+	TestCase{Qus: "+42e+76125", Ans: true},
 }
 
 func main() {
@@ -66,8 +76,14 @@ func isNumber(s string) bool {
 		return false
 	}
 
+	//降低處理情況複雜度
+	s = strings.ReplaceAll(s, "e+", "e")
+	s = strings.ReplaceAll(s, "e-", "e")
+	s = strings.ReplaceAll(s, ".e", "e")
+	s = strings.Trim(s, " ")
+
 	// 這些符號最多一個
-	most_one := ".e_+"
+	most_one := ".e-+"
 	for _, c := range most_one {
 		if 1 < strings.Count(s, string(c)) {
 			return false
@@ -75,7 +91,7 @@ func isNumber(s string) bool {
 	}
 
 	//不可出現在尾
-	catnotlast := "e_+-"
+	catnotlast := "e+-"
 	for _, c := range catnotlast {
 		len := len(s)
 		if s[len-1:] == string(c) {
@@ -91,9 +107,12 @@ func isNumber(s string) bool {
 		}
 	}
 
-	//有空格在中間
-	if strings.Contains(strings.Trim(s, " "), " ") {
-		return false
+	//不可出現在中間
+	catnotmiddle := "+- "
+	for _, c := range catnotmiddle {
+		if strings.Contains(strings.Trim(s, string(c)), string(c)) {
+			return false
+		}
 	}
 
 	//有非法符號就 false
@@ -110,17 +129,22 @@ func isNumber(s string) bool {
 		return false
 	}
 
-	//e前後一定要有數字
 	e_index := strings.Index(s, "e")
+
+	// 有發現 e 在字串中
 	if -1 != e_index {
-		if 3 <= len(s) {
-			if !strings.ContainsAny(s[e_index-1:e_index], str0123456789) {
-				return false
-			}
-			if !strings.ContainsAny(s[e_index+1:e_index+2], str0123456789) {
-				return false
-			}
-		} else {
+		//e前面一個字元不能是正負號，要有係數
+		if !strings.ContainsAny(s[e_index-1:e_index], str0123456789) {
+			return false
+		}
+
+		//判斷e後面的字串是否只有數字？
+		if "" != strings.Trim(s[e_index+1:], str0123456789) {
+			return false //數字截完不是空字串，有錯
+		}
+
+		//e前面是可以是小數點或數字
+		if "" != strings.Trim(s[:e_index], str0123456789+"+-.") {
 			return false
 		}
 	}
