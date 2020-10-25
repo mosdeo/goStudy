@@ -5,8 +5,12 @@
 ### ToDo
 
 - Channel: [range](https://colobu.com/2016/04/14/Golang-Channels/#Range), or-channel
-- ~~LeetCode Concurrency Go語言詳解~~ 寫了 5 篇，還沒寫完。目前有寫的已經放上 Blog(繁中)、知乎(簡中)、刊登在 WeChat 公眾號(簡中)。
 - Go語言 testing, benchmark, example 三位一體介紹
+
+### 2020.10.25
+
+- 改檔案名稱，刪除會造成 go test 錯誤的路徑空白符號。
+- 把文件路徑改為嚴格依照 GOPATH 的形式，vscode plug-in 才不會一直跳出錯誤訊息。
 
 ### 2020.10.23
 
