@@ -17,6 +17,12 @@ func main() {
 			c.HTML(200, "CVC.html", gin.H{})
 		})
 
+	router.POST("/",
+		func(c *gin.Context) {
+			c.HTML(200, "CVC.html", gin.H{})
+			fmt.Println(c.PostForm("Distance0"))
+		})
+
 	err := router.Run(":80")
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
