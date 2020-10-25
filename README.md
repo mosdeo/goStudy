@@ -1,4 +1,4 @@
-# LKY's Golang Study
+# LKY's Go Study
 
 <img align="right" src="go_learn.png">
 
