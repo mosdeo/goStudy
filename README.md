@@ -18,7 +18,7 @@
 
 ### 2020.01.20(Mon)
 
-- 了解 runtime.Gosched()，以及在 select-default 不做 time-delay or  runtime.Gosched() 可能會發生（或不發生）的卡死現象。
+- 了解 runtime.Gosched()，以及在 select-default 不做 time-delay or runtime.Gosched() 可能會發生（或不發生）的卡死現象。
 
 ### 2019.12.27(Fri)
 
