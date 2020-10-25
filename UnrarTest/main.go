@@ -8,10 +8,18 @@ import (
 )
 
 func main() {
+	var pwdDict = []string{"1234", "7777", "88888888"}
 	var defaultRar = archiver.NewRar()
-	defaultRar.Password = "1234"
-	// rarPath := "/Users/lky/Downloads/Unknown.rar"
-	rarPath := "/Users/lky/Downloads/password1234.rar"
-	err := defaultRar.Unarchive(rarPath, "./")
-	fmt.Println(err)
+	rarPath := "/Users/lky/Downloads/預言.rar"
+
+	for _, pwd := range pwdDict {
+		defaultRar.Password = pwd
+		err := defaultRar.Unarchive(rarPath, "./")
+		if nil != err {
+			fmt.Printf("Pwd not %s\n", pwd)
+		} else {
+			fmt.Printf("Pwd is %s\n", pwd)
+			break
+		}
+	}
 }
