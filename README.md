@@ -7,6 +7,10 @@
 - Channel: [range](https://colobu.com/2016/04/14/Golang-Channels/#Range), or-channel
 - Go語言 testing, benchmark, example 三位一體介紹
 
+### 2020.10.26
+
+- 照著[cy_hackathon_2017](https://github.com/op8867555/cy_hackathon_2017)的套路，用 Go+Gin 把後台的部分重寫了一遍，搞了兩天才能正確跑起來。這個部分移出到獨立的 repo 繼續做。
+
 ### 2020.10.25
 
 - 改檔案名稱，刪除會造成 go test 錯誤的路徑空白符號。
