@@ -58,7 +58,7 @@ func ask(c *gin.Context) {
 		u1 := uuid.Must(uuid.NewV4())
 		c.SetCookie("uuid", u1.String(), 3600, "/", "localhost", false, true)
 	}
-	data := c.Request.Form.Get("in")
+	data := c.Request.PostFormValue("in")
 	c.JSON(http.StatusOK, gin.H{"ip": ip, "uuid": uuidCookie, "data": data})
 	fmt.Printf("ip=%v, uuid=%v, data=%v\n", ip, uuidCookie, data)
 }
