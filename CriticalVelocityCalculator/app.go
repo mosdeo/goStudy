@@ -9,28 +9,6 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-// from flask import Flask, request, render_template
-// import logging
-// import logging.config
-// import yaml
-// from kh import predict
-
-// try:
-//     with open('logging.yml') as fd:
-//         conf = yaml.load(fd)
-//         logging.config.dictConfig(conf['logging'])
-// except OSError:
-//     conf = None
-
-// logger = logging.getLogger('app')
-// input_logger = logging.getLogger('app.input')
-
-// if conf:
-//     logger.info('logging.yml found, applying config')
-//     logger.debug(conf)
-// else:
-//     logger.info('logging.yml not found')
-
 func root(c *gin.Context) {
 	uuidCookie, _ := c.Cookie("uuid")
 	c.HTML(http.StatusOK, "index.html", gin.H{})
