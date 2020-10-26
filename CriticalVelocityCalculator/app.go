@@ -76,8 +76,8 @@ func ip(r *http.Request) string {
 // if __name__ == '__main__':
 func main() {
 	router := gin.Default()
-	router.Static("/assets", "./assets")
-	router.LoadHTMLGlob("static/*")
+	router.StaticFile("/app.js", "./static/app.js")
+	router.LoadHTMLFiles("static/index.html")
 
 	// @app.route('/')
 	router.GET("/", root)
