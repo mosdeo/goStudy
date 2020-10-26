@@ -43,3 +43,41 @@ func checkErr(err error) {
 		panic(err)
 	}
 }
+
+func CriticalVelocity(dinstance []int, raceTime []int)float32{
+	Avg := func(nums []int)float32{
+		var sum float32
+		for _, num := range nums {
+			sum += float32(num)
+		}
+		return sum/float32(len(nums))
+	}
+
+	//計算平均的最佳速度和距離
+	avgDistance := Avg(dinstance)
+	avgRaceTime := Avg(raceTime)
+
+	//(T-MT)
+	tAvgt := make([]float32, len(raceTime))
+	for i, _ := range raceTime {
+		tAvgt[i] = float32(raceTime[i]) - avgRaceTime
+	} 
+	
+	//(D-MD)
+	dAvgd := make([]float32, len(dinstance))
+	for i, _ := range dinstance {
+		tAvgt[i] = float32(dinstance[i]) - avgDistance
+	}
+	
+	//Sum((T-MT)(D-MD))/Sum((T－MT)^2)
+	//分子：numerator；分母：denominator
+	var numeratorCV, denominatorCV, CV, minPerKmCV float32
+	for i := range []int{0,1,2} {
+		numeratorCV += dAvgd[i]*tAvgt[i]
+		denominatorCV += tAvgt[i]*tAvgt[i]
+	}
+	CV = numeratorCV/denominatorCV
+	minPerKmCV = (1000/CV)/60
+
+	return minPerKmCV
+}
