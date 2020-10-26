@@ -38,7 +38,6 @@ func root(c *gin.Context) {
 }
 
 func ask(c *gin.Context) {
-	ip := ip(c.Request)
 	uuidCookie, err := c.Cookie("uuid")
 	if err != nil {
 		uuidCookie = "NotSet"
@@ -46,18 +45,8 @@ func ask(c *gin.Context) {
 		c.SetCookie("uuid", u1.String(), 3600, "/", "localhost", false, true)
 	}
 	data := c.Request.PostFormValue("in")
-	fmt.Printf("ip=%v, uuid=%v, data=%v\n", ip, uuidCookie, data)
+	fmt.Printf("ip=%v, uuid=%v, data=%v\n", c.ClientIP(), uuidCookie, data)
 	c.String(http.StatusOK, "Bot echo=[%v]", data)
-}
-
-// def ip():
-//     return request.environ.get('REMOTE_ADDR', request.remote_addr)
-func ip(r *http.Request) string {
-	forwarded := r.Header.Get("X-FORWARDED-FOR")
-	if forwarded != "" {
-		return forwarded
-	}
-	return r.RemoteAddr
 }
 
 func main() {
