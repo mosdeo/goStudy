@@ -9,8 +9,10 @@
 
 ### 2020.10.26
 
-- 中國大陸用 go get 幾乎都會 timeout，要改用「export GOPROXY=https://goproxy.cn」
 - 照著[cy_hackathon_2017](https://github.com/op8867555/cy_hackathon_2017)的套路，用 Go+Gin 把後台的部分重寫了一遍，搞了兩天才能正確跑起來。這個部分移出到獨立的 repo 繼續做。
+- go get 掃雷: 
+  1. 中國大陸用 go get 幾乎都會 timeout，要改用: ``export GOPROXY=https://goproxy.cn」``
+  2. 「cannot use path@version syntax in GOPATH mode」的對策：``export GO111MODULE=on`` 
 
 ### 2020.10.25
 
