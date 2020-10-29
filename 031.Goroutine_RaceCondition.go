@@ -20,7 +20,7 @@ func TrueRandom(max int) int {
 func RaceCondition() {
 	//	模擬應用中的計算延遲
 	var DoSomethingCalc = func() {
-		time.After(time.Millisecond * time.Duration(TrueRandom(99)))
+		<-time.After(time.Microsecond * time.Duration(TrueRandom(5)))
 	}
 
 	var data int
