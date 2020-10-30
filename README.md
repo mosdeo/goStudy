@@ -10,7 +10,7 @@
 ### 2020.10.30
 
 - 操作 DB 遇上錯誤「Error: Commands out of sync. Did you run multiple statements at once?」
-  - 原來是取得 result，並執行 result.Close()。原理是什麼？
+  - 原來是必須取得 result，並執行 result.Close()。原理是什麼？
 
 ### 2020.10.26
 
