@@ -39,6 +39,9 @@ func main() {
 	})
 	fmt.Println()
 
+	//找 Index
+	fmt.Printf("Boos at %d\n", From(words).IndexOf(func(item interface{}) bool { return item == "Boss" }))
+
 	//挑選出含有“o”的單字
 	var wordsConatinsAlphao = make([]string, 0)
 	From(words).Where(func(s interface{}) bool {
