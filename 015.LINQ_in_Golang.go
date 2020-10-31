@@ -12,9 +12,7 @@ func main() {
 	var words []string = []string{"Cat", "Dog", "People", "Cup", "Apple", "Boss", "Zoo", "X-ray", "Github"}
 
 	// LINQ 基本用法
-	fmt.Println(linq.Range(99, 3).Results()) //產生連續數列
-	// (下面這條有問題，要修改)
-	fmt.Println(linq.Range(100, -3).Results())                                    //產生連續數列
+	fmt.Println(linq.Range(99, 3).Results())                                      //產生連續數列
 	fmt.Println(linq.From(numbers).SumInts())                                     //加總
 	fmt.Println(linq.From(numbers).Average())                                     //平均
 	fmt.Println(linq.From(numbers).Min(), linq.From(numbers).Max())               //最大最小
