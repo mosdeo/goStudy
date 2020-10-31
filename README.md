@@ -7,6 +7,10 @@
 - Channel: [range](https://colobu.com/2016/04/14/Golang-Channels/#Range), or-channel
 - Go語言 testing, benchmark, example 三位一體介紹
 
+### 2020.10.31
+
+- 把 go-linq 更新到 v3.1，並修正一些原來不懂事脫褲子放屁的用法、增加 IndexOf 範例。
+
 ### 2020.10.30
 
 - 操作 DB 遇上錯誤「Error: Commands out of sync. Did you run multiple statements at once?」
